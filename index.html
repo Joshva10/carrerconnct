@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CareerConnect | Your Career Starts Here</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Inter,Arial,sans-serif;
+}
+
+html{scroll-behavior:smooth}
+
+body{
+    color:#fff;
+    background:#070b1a;
+    overflow-x:hidden;
+}
+
+/* ===== ANIMATED BACKGROUND ===== */
+
+body::before,
+body::after{
+    content:"";
+    position:fixed;
+    width:500px;
+    height:500px;
+    border-radius:50%;
+    filter:blur(100px);
+    opacity:.35;
+    z-index:-5;
+    animation:float 10s ease-in-out infinite alternate;
+}
+
+body::before{
+    background:#7c3aed;
+    top:-220px;
+    left:-180px;
+}
+
+body::after{
+    background:#06b6d4;
+    right:-180px;
+    bottom:-200px;
+    animation-delay:2s;
+}
+
+@keyframes float{
+    from{transform:translate(0,0) scale(1)}
+    to{transform:translate(80px,60px) scale(1.2)}
+}
+
+/* ===== NAVBAR ===== */
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(7,11,26,.72);
+    backdrop-filter:blur(20px);
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.nav{
+    max-width:1250px;
+    height:76px;
+    margin:auto;
+    padding:0 25px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    color:#fff;
+    text-decoration:none;
+    font-size:27px;
+    font-weight:900;
+}
+
+.logo span{
+    background:linear-gradient(90deg,#a78bfa,#22d3ee);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.links{
+    display:flex;
+    align-items:center;
+    gap:25px;
+}
+
+.links a{
+    color:#dbeafe;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.links a:hover{
+    color:#67e8f9;
+}
+
+.language{
+    background:#111827;
+    color:white;
+    border:1px solid #334155;
+    border-radius:9px;
+    padding:9px;
+}
+
+.login{
+    padding:10px 16px;
+    border:1px solid #8b5cf6;
+    border-radius:10px;
+}
+
+.signup{
+    padding:11px 18px;
+    border-radius:10px;
+    background:linear-gradient(135deg,#7c3aed,#0891b2);
+    box-shadow:0 0 25px rgba(124,58,237,.4);
+}
+
+/* ===== HERO ===== */
+
+.hero{
+    min-height:700px;
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    background:
+        radial-gradient(circle at 15% 30%,rgba(124,58,237,.32),transparent 30%),
+        radial-gradient(circle at 85% 25%,rgba(6,182,212,.25),transparent 30%),
+        linear-gradient(135deg,#080b1c,#101936 55%,#071b2d);
+}
+
+.hero-grid{
+    width:min(1200px,92%);
+    margin:auto;
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:70px;
+    align-items:center;
+}
+
+.tag{
+    display:inline-block;
+    padding:10px 17px;
+    border-radius:30px;
+    border:1px solid rgba(167,139,250,.4);
+    background:rgba(124,58,237,.13);
+    color:#c4b5fd;
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:25px;
+    box-shadow:0 0 25px rgba(124,58,237,.15);
+}
+
+.hero h1{
+    font-size:clamp(45px,6vw,76px);
+    line-height:1;
+    letter-spacing:-4px;
+    margin-bottom:25px;
+}
+
+.gradient{
+    background:linear-gradient(90deg,#c084fc,#818cf8,#22d3ee);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    color:#b8c3d9;
+    font-size:18px;
+    line-height:1.75;
+    max-width:650px;
+    margin-bottom:32px;
+}
+
+.buttons{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    text-decoration:none;
+    padding:15px 23px;
+    border-radius:13px;
+    font-weight:800;
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:translateY(-4px);
+}
+
+.primary{
+    color:white;
+    background:linear-gradient(135deg,#7c3aed,#2563eb,#0891b2);
+    box-shadow:0 12px 35px rgba(37,99,235,.3);
+}
+
+.secondary{
+    color:white;
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.18);
+}
+
+/* ===== HERO VISUAL ===== */
+
+.visual{
+    position:relative;
+}
+
+.glass{
+    padding:25px;
+    border-radius:28px;
+    background:rgba(255,255,255,.075);
+    border:1px solid rgba(255,255,255,.15);
+    backdrop-filter:blur(22px);
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.35),
+        inset 0 1px rgba(255,255,255,.12);
+    transform:rotate(2deg);
+}
+
+.glass-title{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:20px;
+}
+
+.live{
+    color:#4ade80;
+    font-size:12px;
+}
+
+.job-card{
+    padding:19px;
+    margin-bottom:13px;
+    border-radius:17px;
+    background:rgba(15,23,42,.72);
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.job-top{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.job-top strong{
+    font-size:15px;
+}
+
+.percent{
+    color:#4ade80;
+    font-weight:900;
+}
+
+.job-card small{
+    color:#94a3b8;
+    display:block;
+    margin-top:8px;
+}
+
+.bar{
+    height:7px;
+    background:#1e293b;
+    border-radius:20px;
+    margin-top:14px;
+    overflow:hidden;
+}
+
+.bar span{
+    display:block;
+    height:100%;
+    border-radius:20px;
+    background:linear-gradient(90deg,#8b5cf6,#06b6d4);
+}
+
+/* ===== SEARCH ===== */
+
+.search{
+    width:min(1100px,92%);
+    margin:-45px auto 0;
+    position:relative;
+    z-index:5;
+    padding:17px;
+    display:grid;
+    grid-template-columns:1fr 1fr auto;
+    gap:12px;
+    border-radius:20px;
+    background:rgba(17,24,39,.88);
+    backdrop-filter:blur(20px);
+    border:1px solid rgba(255,255,255,.1);
+    box-shadow:0 25px 60px rgba(0,0,0,.35);
+}
+
+.search input{
+    width:100%;
+    padding:15px;
+    border-radius:11px;
+    border:1px solid #334155;
+    background:#0f172a;
+    color:white;
+    outline:none;
+}
+
+.search button{
+    border:0;
+    padding:0 25px;
+    border-radius:11px;
+    color:white;
+    font-weight:800;
+    cursor:pointer;
+    background:linear-gradient(135deg,#7c3aed,#0891b2);
+}
+
+/* ===== GENERAL ===== */
+
+section{
+    padding:100px 20px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+}
+
+.heading{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.heading small{
+    color:#67e8f9;
+    font-weight:800;
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+
+.heading h2{
+    font-size:42px;
+    margin:12px 0;
+}
+
+.heading p{
+    color:#94a3b8;
+    max-width:650px;
+    margin:auto;
+    line-height:1.7;
+}
+
+/* ===== STATS ===== */
+
+.stats{
+    background:linear-gradient(90deg,#111827,#172554,#111827);
+    border-top:1px solid rgba(255,255,255,.06);
+    border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.stat-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+}
+
+.stat{
+    text-align:center;
+    padding:25px;
+    border-right:1px solid rgba(255,255,255,.08);
+}
+
+.stat:last-child{border:0}
+
+.stat h2{
+    font-size:35px;
+    background:linear-gradient(90deg,#c084fc,#22d3ee);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.stat p{
+    color:#94a3b8;
+    margin-top:7px;
+}
+
+/* ===== CATEGORIES ===== */
+
+.categories{
+    background:
+        radial-gradient(circle at 20% 30%,rgba(124,58,237,.12),transparent 25%),
+        #080c1d;
+}
+
+.category-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.category{
+    padding:27px;
+    border-radius:20px;
+    background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.025));
+    border:1px solid rgba(255,255,255,.09);
+    transition:.35s;
+}
+
+.category:hover{
+    transform:translateY(-8px);
+    border-color:#8b5cf6;
+    box-shadow:0 20px 45px rgba(124,58,237,.2);
+}
+
+.icon{
+    width:55px;
+    height:55px;
+    display:grid;
+    place-items:center;
+    border-radius:16px;
+    font-size:26px;
+    margin-bottom:18px;
+    background:linear-gradient(135deg,rgba(124,58,237,.25),rgba(6,182,212,.2));
+}
+
+.category h3{
+    margin-bottom:8px;
+}
+
+.category p{
+    color:#94a3b8;
+    font-size:14px;
+    line-height:1.5;
+}
+
+/* ===== FEATURES ===== */
+
+.feature-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.feature{
+    padding:30px;
+    border-radius:22px;
+    background:rgba(255,255,255,.055);
+    border:1px solid rgba(255,255,255,.08);
+    transition:.3s;
+}
+
+.feature:hover{
+    transform:translateY(-6px);
+    background:rgba(124,58,237,.09);
+    border-color:rgba(167,139,250,.45);
+}
+
+.feature-icon{
+    font-size:28px;
+    margin-bottom:17px;
+}
+
+.feature p{
+    color:#94a3b8;
+    line-height:1.6;
+    margin-top:10px;
+}
+
+/* ===== SPECIAL CTA ===== */
+
+.special{
+    background:
+        radial-gradient(circle at 10% 50%,rgba(124,58,237,.35),transparent 30%),
+        radial-gradient(circle at 90% 50%,rgba(6,182,212,.25),transparent 30%),
+        #0b1125;
+}
+
+.cta-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+}
+
+.cta{
+    padding:42px;
+    border-radius:28px;
+    border:1px solid rgba(255,255,255,.12);
+    background:rgba(255,255,255,.06);
+    backdrop-filter:blur(20px);
+}
+
+.cta h2{
+    font-size:30px;
+    margin-bottom:13px;
+}
+
+.cta p{
+    color:#aab6cb;
+    line-height:1.7;
+    margin-bottom:25px;
+}
+
+.white-btn{
+    display:inline-block;
+    padding:13px 18px;
+    border-radius:11px;
+    background:white;
+    color:#111827;
+    text-decoration:none;
+    font-weight:800;
+}
+
+/* ===== STEPS ===== */
+
+.steps{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+}
+
+.step{
+    text-align:center;
+}
+
+.number{
+    width:65px;
+    height:65px;
+    margin:0 auto 20px;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    font-size:22px;
+    font-weight:900;
+    background:linear-gradient(135deg,#7c3aed,#0891b2);
+    box-shadow:0 0 30px rgba(124,58,237,.35);
+}
+
+.step p{
+    color:#94a3b8;
+    line-height:1.6;
+    margin-top:10px;
+}
+
+/* ===== FOOTER ===== */
+
+footer{
+    padding:60px 20px 25px;
+    background:#040711;
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+.footer-grid{
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:35px;
+}
+
+.footer-grid h2 span{
+    color:#22d3ee;
+}
+
+.footer-grid h3{
+    margin-bottom:18px;
+}
+
+.footer-grid p{
+    color:#64748b;
+    line-height:1.7;
+}
+
+.footer-grid a{
+    display:block;
+    color:#94a3b8;
+    text-decoration:none;
+    margin-bottom:12px;
+}
+
+.footer-grid a:hover{
+    color:#67e8f9;
+}
+
+.copy{
+    max-width:1200px;
+    margin:40px auto 0;
+    padding-top:20px;
+    text-align:center;
+    border-top:1px solid #1e293b;
+    color:#64748b;
+}
+
+/* ===== MOBILE ===== */
+
+@media(max-width:900px){
+
+    .links a:not(.login):not(.signup){
+        display:none;
+    }
+
+    .hero-grid{
+        grid-template-columns:1fr;
+        text-align:center;
+    }
+
+    .hero p{
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .buttons{
+        justify-content:center;
+    }
+
+    .visual{
+        max-width:550px;
+        margin:auto;
+    }
+
+    .category-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .feature-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .stat-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:600px){
+
+    .nav{
+        padding:0 12px;
+    }
+
+    .logo{
+        font-size:21px;
+    }
+
+    .language{
+        display:none;
+    }
+
+    .hero{
+        min-height:650px;
+    }
+
+    .hero h1{
+        letter-spacing:-2px;
+    }
+
+    .glass{
+        transform:none;
+    }
+
+    .search{
+        grid-template-columns:1fr;
+        margin-top:-25px;
+    }
+
+    .search button{
+        padding:14px;
+    }
+
+    section{
+        padding:70px 16px;
+    }
+
+    .heading h2{
+        font-size:32px;
+    }
+
+    .category-grid,
+    .feature-grid,
+    .cta-grid,
+    .steps{
+        grid-template-columns:1fr;
+    }
+
+    .stat-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav>
+<div class="nav">
+
+<a href="index.html" class="logo">
+Career<span>Connect</span>
+</a>
+
+<div class="links">
+
+<a href="index.html">Home</a>
+<a href="jobs.html">Jobs</a>
+<a href="government.html">Government</a>
+<a href="support.html">Support</a>
+
+<select id="language" class="language">
+<option value="en">English</option>
+<option value="ta">தமிழ்</option>
+<option value="hi">हिन्दी</option>
+<option value="te">తెలుగు</option>
+<option value="kn">ಕನ್ನಡ</option>
+<option value="ml">മലയാളം</option>
+</select>
+
+<a href="login.html" class="login">Login</a>
+<a href="register.html" class="signup">Get Started</a>
+
+</div>
+</div>
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-grid">
+
+<div>
+
+<div class="tag">
+✦ AI-POWERED CAREER PLATFORM
+</div>
+
+<h1>
+Your Skills.<br>
+Your <span class="gradient">Future.</span>
+</h1>
+
+<p>
+Discover opportunities that match your qualification, skills,
+experience and location. CareerConnect connects job seekers,
+employers and government opportunities in one smart platform.
+</p>
+
+<div class="buttons">
+
+<a href="jobs.html" class="btn primary">
+🔎 Explore Jobs
+</a>
+
+<a href="register.html" class="btn secondary">
+🚀 Build My Profile
+</a>
+
+</div>
+
+</div>
+
+
+<div class="visual">
+
+<div class="glass">
+
+<div class="glass-title">
+<strong>🤖 AI Match Center</strong>
+<span class="live">● LIVE</span>
+</div>
+
+<div class="job-card">
+
+<div class="job-top">
+<strong>Software Developer</strong>
+<span class="percent">92%</span>
+</div>
+
+<small>📍 Chennai • Full Time</small>
+
+<div class="bar">
+<span style="width:92%"></span>
+</div>
+
+</div>
+
+
+<div class="job-card">
+
+<div class="job-top">
+<strong>Data Analyst</strong>
+<span class="percent">87%</span>
+</div>
+
+<small>📍 Tamil Nadu • Private</small>
+
+<div class="bar">
+<span style="width:87%"></span>
+</div>
+
+</div>
+
+
+<div class="job-card">
+
+<div class="job-top">
+<strong>Government Opportunity</strong>
+<span class="percent">81%</span>
+</div>
+
+<small>🇮🇳 Recruitment Opportunity</small>
+
+<div class="bar">
+<span style="width:81%"></span>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+</section>
+
+
+<!-- SEARCH -->
+
+<div class="search">
+
+<input id="jobSearch"
+placeholder="🔎 Job title, skill or keyword">
+
+<input id="locationSearch"
+placeholder="📍 City, district or state">
+
+<button onclick="searchJobs()">
+Search Jobs
+</button>
+
+</div>
+
+
+<!-- STATS -->
+
+<section class="stats">
+
+<div class="container">
+
+<div class="stat-grid">
+
+<div class="stat">
+<h2>100+</h2>
+<p>Job Opportunities</p>
+</div>
+
+<div class="stat">
+<h2>AI</h2>
+<p>Smart Matching</p>
+</div>
+
+<div class="stat">
+<h2>All India</h2>
+<p>Location Search</p>
+</div>
+
+<div class="stat">
+<h2>24/7</h2>
+<p>Career Access</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- CATEGORIES -->
+
+<section class="categories">
+
+<div class="container">
+
+<div class="heading">
+<small>Explore Careers</small>
+<h2>Opportunities for Every Skill</h2>
+<p>
+From technology to skilled trades, hospitality to government,
+find opportunities across different industries.
+</p>
+</div>
+
+
+<div class="category-grid">
+
+<div class="category">
+<div class="icon">💻</div>
+<h3>IT & Software</h3>
+<p>Developers, analysts, testers and technology careers.</p>
+</div>
+
+<div class="category">
+<div class="icon">🏗️</div>
+<h3>Construction</h3>
+<p>Engineers, painters, workers and construction roles.</p>
+</div>
+
+<div class="category">
+<div class="icon">🍽️</div>
+<h3>Hospitality</h3>
+<p>Hotel, catering, kitchen and service opportunities.</p>
+</div>
+
+<div class="category">
+<div class="icon">🚚</div>
+<h3>Delivery & Driving</h3>
+<p>Drivers, logistics and delivery opportunities.</p>
+</div>
+
+<div class="category">
+<div class="icon">🏥</div>
+<h3>Healthcare</h3>
+<p>Healthcare and medical support careers.</p>
+</div>
+
+<div class="category">
+<div class="icon">🔧</div>
+<h3>Skilled Trades</h3>
+<p>Electricians, plumbers, mechanics and technicians.</p>
+</div>
+
+<div class="category">
+<div class="icon">📊</div>
+<h3>Business & Finance</h3>
+<p>Sales, accounting, administration and finance jobs.</p>
+</div>
+
+<div class="category">
+<div class="icon">🇮🇳</div>
+<h3>Government Jobs</h3>
+<p>Recruitment notifications and government opportunities.</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- FEATURES -->
+
+<section>
+
+<div class="container">
+
+<div class="heading">
+<small>Powerful Features</small>
+<h2>Everything You Need to Grow</h2>
+<p>
+CareerConnect combines smart matching, job discovery,
+applications and career management.
+</p>
+</div>
+
+
+<div class="feature-grid">
+
+<div class="feature">
+<div class="feature-icon">🤖</div>
+<h3>AI Job Matching</h3>
+<p>
+Find opportunities based on your qualification, skills,
+experience and preferred location.
+</p>
+</div>
+
+<div class="feature">
+<div class="feature-icon">📄</div>
+<h3>Career Profile</h3>
+<p>
+Create a professional profile and showcase your skills,
+experience and qualifications.
+</p>
+</div>
+
+<div class="feature">
+<div class="feature-icon">🎯</div>
+<h3>Match Percentage</h3>
+<p>
+Understand how closely each opportunity matches your profile.
+</p>
+</div>
+
+<div class="feature">
+<div class="feature-icon">📍</div>
+<h3>Location Search</h3>
+<p>
+Search opportunities by city, district and state.
+</p>
+</div>
+
+<div class="feature">
+<div class="feature-icon">📋</div>
+<h3>Application Tracker</h3>
+<p>
+Track your applications from Applied to Selected.
+</p>
+</div>
+
+<div class="feature">
+<div class="feature-icon">🔔</div>
+<h3>Career Notifications</h3>
+<p>
+Stay updated with relevant job and recruitment opportunities.
+</p>
+</div>
+
+</div>
+</div>
+</section>
+
+
+<!-- HOW IT WORKS -->
+
+<section class="special">
+
+<div class="container">
+
+<div class="heading">
+<small>Simple & Smart</small>
+<h2>How CareerConnect Works</h2>
+</div>
+
+
+<div class="steps">
+
+<div class="step">
+
+<div class="number">1</div>
+
+<h3>Create Your Profile</h3>
+
+<p>
+Add qualification, skills, experience and preferred location.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="number">2</div>
+
+<h3>Discover Opportunities</h3>
+
+<p>
+Explore jobs and see how closely they match your profile.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="number">3</div>
+
+<h3>Apply & Track</h3>
+
+<p>
+Apply for jobs and track your application progress.
+</p>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- CTA -->
+
+<section>
+
+<div class="container">
+
+<div class="cta-grid">
+
+<div class="cta">
+
+<h2>🚀 Looking for Your Next Job?</h2>
+
+<p>
+Build your CareerConnect profile and discover opportunities
+that match your skills and career goals.
+</p>
+
+<a href="register.html" class="white-btn">
+Create Job Seeker Account →
+</a>
+
+</div>
+
+
+<div class="cta">
+
+<h2>🏢 Hiring Talent?</h2>
+
+<p>
+Post your vacancies and connect with suitable candidates
+through CareerConnect.
+</p>
+
+<a href="register.html" class="white-btn">
+Register as Employer →
+</a>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<div class="footer-grid">
+
+<div>
+
+<h2>
+Career<span>Connect</span>
+</h2>
+
+<p>
+An AI-powered career platform connecting job seekers,
+employers and opportunities.
+</p>
+
+</div>
+
+
+<div>
+
+<h3>Explore</h3>
+
+<a href="jobs.html">Find Jobs</a>
+<a href="government.html">Government Jobs</a>
+<a href="register.html">Create Profile</a>
+
+</div>
+
+
+<div>
+
+<h3>Account</h3>
+
+<a href="login.html">Login</a>
+<a href="register.html">Register</a>
+<a href="dashboard.html">Dashboard</a>
+<a href="applications.html">Applications</a>
+
+</div>
+
+
+<div>
+
+<h3>Support</h3>
+
+<a href="support.html">Support Center</a>
+<a href="support.html">Report Problem</a>
+<a href="support.html">FAQs</a>
+
+</div>
+
+</div>
+
+
+<div class="copy">
+© 2026 CareerConnect • Smart Careers. Better Opportunities.
+</div>
+
+</footer>
+
+
+<script>
+
+function searchJobs(){
+
+    const job =
+        document.getElementById("jobSearch").value.trim();
+
+    const location =
+        document.getElementById("locationSearch").value.trim();
+
+    let url = "jobs.html?";
+
+    if(job){
+        url += "search=" + encodeURIComponent(job) + "&";
+    }
+
+    if(location){
+        url += "location=" + encodeURIComponent(location);
+    }
+
+    window.location.href = url;
+}
+
+
+/* Language persistence */
+
+const language =
+    document.getElementById("language");
+
+const saved =
+    localStorage.getItem("careerconnect_language");
+
+if(saved){
+    language.value = saved;
+}
+
+language.addEventListener("change",function(){
+
+    localStorage.setItem(
+        "careerconnect_language",
+        this.value
+    );
+
+});
+
+</script>
+
+</body>
+</html>

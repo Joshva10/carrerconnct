@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - CareerConnect</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #eef4ff, #f8faff);
+            display: flex;
+            flex-direction: column;
+            color: #172033;
+        }
+
+        header {
+            background: white;
+            padding: 16px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .home-link {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .language-select {
+            padding: 9px 12px;
+            border: 1px solid #dbe3f0;
+            border-radius: 8px;
+            background: white;
+            color: #334155;
+            outline: none;
+            cursor: pointer;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 680px;
+            background: white;
+            border-radius: 24px;
+            padding: 38px;
+            box-shadow: 0 15px 45px rgba(37, 99, 235, 0.12);
+        }
+
+        .login-heading {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .login-heading h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .login-heading p {
+            color: #64748b;
+            font-size: 15px;
+        }
+
+        /* ACCOUNT TYPE */
+
+        .account-type {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .account-btn {
+            border: 2px solid #dbe3f0;
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            color: #334155;
+            transition: 0.2s;
+        }
+
+        .account-btn:hover {
+            border-color: #2563eb;
+        }
+
+        .account-btn.active {
+            border-color: #2563eb;
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        .account-icon {
+            display: block;
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+
+        .selected-message {
+            text-align: center;
+            margin-bottom: 18px;
+            padding: 11px;
+            border-radius: 10px;
+            background: #eff6ff;
+            color: #1d4ed8;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* METHOD TABS */
+
+        .method-tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 22px;
+        }
+
+        .method-btn {
+            padding: 12px;
+            border: 1px solid #dbe3f0;
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #334155;
+        }
+
+        .method-btn.active {
+            border-color: #2563eb;
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        /* FORM */
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #334155;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            outline: none;
+            font-size: 15px;
+            background: #f8fafc;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.08);
+        }
+
+        .password-box {
+            position: relative;
+        }
+
+        .password-box input {
+            padding-right: 75px;
+        }
+
+        .show-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            color: #2563eb;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* OPTIONS */
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 5px 0 22px;
+            font-size: 14px;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            color: #64748b;
+            font-weight: normal;
+            margin: 0;
+        }
+
+        .remember input {
+            width: auto;
+        }
+
+        .forgot {
+            color: #2563eb;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        /* LOGIN BUTTON */
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .login-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .login-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        /* MESSAGE */
+
+        .message {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .message.error {
+            display: block;
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .message.success {
+            display: block;
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        /* REGISTER */
+
+        .create-account {
+            text-align: center;
+            margin-top: 24px;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .create-account a {
+            color: #2563eb;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .employer-register {
+            display: none;
+            text-align: center;
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 10px;
+            background: #f8fafc;
+            font-size: 14px;
+        }
+
+        .employer-register.show {
+            display: block;
+        }
+
+        .employer-register a {
+            color: #2563eb;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .login-note {
+            margin-top: 20px;
+            padding: 14px;
+            border-radius: 12px;
+            background: #f8fafc;
+            color: #64748b;
+            font-size: 13px;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            header {
+                padding: 15px 20px;
+            }
+
+            .header-right {
+                gap: 8px;
+            }
+
+            .home-link {
+                display: none;
+            }
+
+            .login-card {
+                padding: 25px 20px;
+            }
+
+            .login-heading h1 {
+                font-size: 27px;
+            }
+
+            .account-type {
+                grid-template-columns: 1fr;
+            }
+
+            .options {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .language-select {
+                max-width: 110px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <a href="/" class="logo">
+        CareerConnect
+    </a>
+
+    <div class="header-right">
+
+        <select
+            id="languageSelect"
+            class="language-select"
+            onchange="changeLanguage(this.value)">
+
+            <option value="en">English</option>
+            <option value="ta">தமிழ்</option>
+            <option value="hi">हिन्दी</option>
+            <option value="te">తెలుగు</option>
+            <option value="kn">ಕನ್ನಡ</option>
+            <option value="ml">മലയാളം</option>
+            <option value="mr">मराठी</option>
+            <option value="bn">বাংলা</option>
+            <option value="gu">ગુજરાતી</option>
+            <option value="pa">ਪੰਜਾਬੀ</option>
+
+        </select>
+
+        <a href="/" class="home-link" data-i18n="home">
+            Home
+        </a>
+
+    </div>
+
+</header>
+
+<main>
+
+<div class="login-card">
+
+    <div class="login-heading">
+
+        <h1 id="loginTitle">
+            Login
+        </h1>
+
+        <p id="loginSubtitle">
+            Use your registered email or mobile number.
+        </p>
+
+    </div>
+
+
+    <!-- ACCOUNT TYPE -->
+
+    <div class="account-type">
+
+        <button
+            type="button"
+            class="account-btn active"
+            id="jobSeekerBtn"
+            onclick="selectAccountType('job_seeker')">
+
+            <span class="account-icon">👤</span>
+
+            <span data-i18n="jobSeeker">
+                Job Seeker
+            </span>
+
+        </button>
+
+
+        <button
+            type="button"
+            class="account-btn"
+            id="employerBtn"
+            onclick="selectAccountType('employer')">
+
+            <span class="account-icon">🏢</span>
+
+            <span data-i18n="employer">
+                Employer
+            </span>
+
+        </button>
+
+    </div>
+
+
+    <div
+        id="selectedMessage"
+        class="selected-message">
+
+        👤 Job Seeker Login
+
+    </div>
+
+
+    <!-- EMAIL / MOBILE -->
+
+    <div class="method-tabs">
+
+        <button
+            type="button"
+            id="emailTab"
+            class="method-btn active"
+            onclick="selectMethod('email')">
+
+            📧 Email
+
+        </button>
+
+
+        <button
+            type="button"
+            id="mobileTab"
+            class="method-btn"
+            onclick="selectMethod('mobile')">
+
+            📱 Mobile
+
+        </button>
+
+    </div>
+
+
+    <!-- LOGIN FORM -->
+
+    <form id="loginForm">
+
+        <div class="form-group">
+
+            <label id="loginLabel">
+                Email Address
+            </label>
+
+            <input
+                type="text"
+                id="loginValue"
+                placeholder="Enter your email address"
+                autocomplete="username"
+                required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Password
+            </label>
+
+            <div class="password-box">
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required>
+
+                <button
+                    type="button"
+                    class="show-password"
+                    onclick="togglePassword()"
+                    id="showPasswordBtn">
+
+                    Show
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="options">
+
+            <label class="remember">
+
+                <input
+                    type="checkbox"
+                    id="rememberMe">
+
+                Remember me
+
+            </label>
+
+
+            <a
+                href="/forgot-password"
+                class="forgot">
+
+                Forgot Password?
+
+            </a>
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="login-btn"
+            id="loginBtn">
+
+            Login
+
+        </button>
+
+
+        <div
+            id="message"
+            class="message">
+        </div>
+
+    </form>
+
+
+    <!-- REGISTER -->
+
+    <div class="create-account">
+
+        <span data-i18n="noAccount">
+            Don't have an account?
+        </span>
+
+        <a href="/register.html">
+            Create Account
+        </a>
+
+    </div>
+
+
+    <!-- EMPLOYER REGISTER -->
+
+    <div
+        id="employerRegister"
+        class="employer-register">
+
+        New employer?
+
+        <a href="/register.html?type=employer">
+            Register as Employer
+        </a>
+
+    </div>
+
+
+    <div
+        class="login-note"
+        id="loginNote">
+
+        Job seekers can search jobs, apply online,
+        save jobs and track applications.
+
+    </div>
+
+</div>
+
+</main>
+
+
+<footer>
+
+    © 2026 CareerConnect
+
+</footer>
+
+
+<script>
+
+    let selectedAccountType = "job_seeker";
+
+    let selectedMethod = "email";
+
+
+    /* ----------------------------------
+       LANGUAGE
+    ---------------------------------- */
+
+    const translations = {
+
+        en: {
+            home: "Home",
+            jobSeeker: "Job Seeker",
+            employer: "Employer",
+            login: "Login",
+            employerLogin: "Employer Login",
+            subtitle: "Use your registered email or mobile number.",
+            employerSubtitle:
+                "Login to manage your company, jobs and applicants.",
+            email: "Email",
+            mobile: "Mobile",
+            emailAddress: "Email Address",
+            mobileNumber: "Mobile Number",
+            password: "Password",
+            emailPlaceholder: "Enter your email address",
+            mobilePlaceholder: "Enter your mobile number",
+            passwordPlaceholder: "Enter your password",
+            remember: "Remember me",
+            forgot: "Forgot Password?",
+            create: "Create Account",
+            noAccount: "Don't have an account?",
+            employerRegister: "Register as Employer",
+            employerNew: "New employer?",
+            seekerNote:
+                "Job seekers can search jobs, apply online, save jobs and track applications.",
+            employerNote:
+                "Employers can post jobs, manage applications and find suitable job seekers.",
+            show: "Show",
+            hide: "Hide"
+        },
+
+        ta: {
+            home: "முகப்பு",
+            jobSeeker: "வேலை தேடுபவர்",
+            employer: "முதலாளி",
+            login: "உள்நுழைவு",
+            employerLogin: "முதலாளி உள்நுழைவு",
+            subtitle: "உங்கள் பதிவு செய்யப்பட்ட Email அல்லது Mobile எண்ணைப் பயன்படுத்தவும்.",
+            employerSubtitle: "உங்கள் நிறுவனம், வேலைகள் மற்றும் விண்ணப்பதாரர்களை நிர்வகிக்க உள்நுழையவும்.",
+            email: "Email",
+            mobile: "Mobile",
+            emailAddress: "Email முகவரி",
+            mobileNumber: "Mobile எண்",
+            password: "கடவுச்சொல்",
+            emailPlaceholder: "Email முகவரியை உள்ளிடவும்",
+            mobilePlaceholder: "Mobile எண்ணை உள்ளிடவும்",
+            passwordPlaceholder: "கடவுச்சொல்லை உள்ளிடவும்",
+            remember: "என்னை நினைவில் வைத்துக்கொள்",
+            forgot: "கடவுச்சொல் மறந்துவிட்டதா?",
+            create: "கணக்கு உருவாக்கவும்",
+            noAccount: "கணக்கு இல்லையா?",
+            employerRegister: "முதலாளியாக பதிவு செய்யவும்",
+            employerNew: "புதிய முதலாளியா?",
+            seekerNote: "வேலைகளை தேடவும், விண்ணப்பிக்கவும், சேமிக்கவும் மற்றும் விண்ணப்பங்களை கண்காணிக்கவும்.",
+            employerNote: "வேலைகளை பதிவு செய்யவும், விண்ணப்பங்களை நிர்வகிக்கவும் மற்றும் வேலை தேடுபவர்களை கண்டறியவும்.",
+            show: "காட்டு",
+            hide: "மறை"
+        },
+
+        hi: {
+            home: "होम",
+            jobSeeker: "नौकरी खोजने वाला",
+            employer: "नियोक्ता",
+            login: "लॉगिन",
+            employerLogin: "नियोक्ता लॉगिन",
+            subtitle: "अपने पंजीकृत ईमेल या मोबाइल नंबर का उपयोग करें।",
+            employerSubtitle: "अपनी कंपनी, नौकरियों और आवेदकों को प्रबंधित करने के लिए लॉगिन करें।",
+            email: "ईमेल",
+            mobile: "मोबाइल",
+            emailAddress: "ईमेल पता",
+            mobileNumber: "मोबाइल नंबर",
+            password: "पासवर्ड",
+            emailPlaceholder: "ईमेल पता दर्ज करें",
+            mobilePlaceholder: "मोबाइल नंबर दर्ज करें",
+            passwordPlaceholder: "पासवर्ड दर्ज करें",
+            remember: "मुझे याद रखें",
+            forgot: "पासवर्ड भूल गए?",
+            create: "खाता बनाएं",
+            noAccount: "खाता नहीं है?",
+            employerRegister: "नियोक्ता के रूप में पंजीकरण करें",
+            employerNew: "नए नियोक्ता हैं?",
+            seekerNote: "नौकरी खोजें, आवेदन करें, सेव करें और आवेदन ट्रैक करें।",
+            employerNote: "नौकरी पोस्ट करें, आवेदन प्रबंधित करें और उम्मीदवार खोजें।",
+            show: "दिखाएं",
+            hide: "छिपाएं"
+        }
+
+    };
+
+
+    function changeLanguage(language) {
+
+        localStorage.setItem(
+            "careerconnect_language",
+            language
+        );
+
+        applyLanguage(language);
+    }
+
+
+    function applyLanguage(language) {
+
+        const t =
+            translations[language] ||
+            translations.en;
+
+
+        document.querySelectorAll("[data-i18n]")
+            .forEach(function(element) {
+
+                const key =
+                    element.getAttribute("data-i18n");
+
+                if (t[key]) {
+                    element.textContent = t[key];
+                }
+
+            });
+
+
+        updateDynamicText(t);
+    }
+
+
+    function updateDynamicText(t) {
+
+        const title =
+            document.getElementById("loginTitle");
+
+        const subtitle =
+            document.getElementById("loginSubtitle");
+
+        const label =
+            document.getElementById("loginLabel");
+
+        const input =
+            document.getElementById("loginValue");
+
+        const password =
+            document.getElementById("password");
+
+        const remember =
+            document.querySelector(".remember");
+
+        const forgot =
+            document.querySelector(".forgot");
+
+        const note =
+            document.getElementById("loginNote");
+
+        const employerRegister =
+            document.getElementById("employerRegister");
+
+
+        if (selectedAccountType === "employer") {
+
+            title.textContent =
+                t.employerLogin;
+
+            subtitle.textContent =
+                t.employerSubtitle;
+
+            note.textContent =
+                t.employerNote;
+
+            employerRegister.classList.add("show");
+
+        } else {
+
+            title.textContent =
+                t.login;
+
+            subtitle.textContent =
+                t.subtitle;
+
+            note.textContent =
+                t.seekerNote;
+
+            employerRegister.classList.remove("show");
+        }
+
+
+        if (selectedMethod === "email") {
+
+            label.textContent =
+                t.emailAddress;
+
+            input.placeholder =
+                t.emailPlaceholder;
+
+        } else {
+
+            label.textContent =
+                t.mobileNumber;
+
+            input.placeholder =
+                t.mobilePlaceholder;
+        }
+
+
+        password.placeholder =
+            t.passwordPlaceholder;
+
+        remember.lastChild.textContent =
+            " " + t.remember;
+
+        forgot.textContent =
+            t.forgot;
+
+
+        document.getElementById(
+            "showPasswordBtn"
+        ).textContent = t.show;
+    }
+
+
+    function loadSavedLanguage() {
+
+        const saved =
+            localStorage.getItem(
+                "careerconnect_language"
+            ) || "en";
+
+        document.getElementById(
+            "languageSelect"
+        ).value = saved;
+
+        applyLanguage(saved);
+    }
+
+
+    /* ----------------------------------
+       ACCOUNT TYPE
+    ---------------------------------- */
+
+    function selectAccountType(type) {
+
+        selectedAccountType = type;
+
+        const jobSeekerBtn =
+            document.getElementById("jobSeekerBtn");
+
+        const employerBtn =
+            document.getElementById("employerBtn");
+
+        const selectedMessage =
+            document.getElementById("selectedMessage");
+
+        const employerRegister =
+            document.getElementById("employerRegister");
+
+
+        if (type === "employer") {
+
+            employerBtn.classList.add("active");
+
+            jobSeekerBtn.classList.remove("active");
+
+            selectedMessage.textContent =
+                "🏢 Employer Login";
+
+            employerRegister.classList.add("show");
+
+        } else {
+
+            jobSeekerBtn.classList.add("active");
+
+            employerBtn.classList.remove("active");
+
+            selectedMessage.textContent =
+                "👤 Job Seeker Login";
+
+            employerRegister.classList.remove("show");
+        }
+
+
+        const language =
+            localStorage.getItem(
+                "careerconnect_language"
+            ) || "en";
+
+        applyLanguage(language);
+    }
+
+
+    /* ----------------------------------
+       LOGIN METHOD
+    ---------------------------------- */
+
+    function selectMethod(method) {
+
+        selectedMethod = method;
+
+        const emailTab =
+            document.getElementById("emailTab");
+
+        const mobileTab =
+            document.getElementById("mobileTab");
+
+        const input =
+            document.getElementById("loginValue");
+
+
+        if (method === "mobile") {
+
+            mobileTab.classList.add("active");
+
+            emailTab.classList.remove("active");
+
+            input.type = "tel";
+
+            input.inputMode = "numeric";
+
+            input.maxLength = 10;
+
+        } else {
+
+            emailTab.classList.add("active");
+
+            mobileTab.classList.remove("active");
+
+            input.type = "email";
+
+            input.removeAttribute("inputmode");
+
+            input.removeAttribute("maxlength");
+        }
+
+
+        input.value = "";
+
+        const language =
+            localStorage.getItem(
+                "careerconnect_language"
+            ) || "en";
+
+        applyLanguage(language);
+
+        input.focus();
+    }
+
+
+    /* ----------------------------------
+       PASSWORD
+    ---------------------------------- */
+
+    function togglePassword() {
+
+        const password =
+            document.getElementById("password");
+
+        const button =
+            document.getElementById("showPasswordBtn");
+
+        const language =
+            localStorage.getItem(
+                "careerconnect_language"
+            ) || "en";
+
+        const t =
+            translations[language] ||
+            translations.en;
+
+
+        if (password.type === "password") {
+
+            password.type = "text";
+
+            button.textContent =
+                t.hide;
+
+        } else {
+
+            password.type = "password";
+
+            button.textContent =
+                t.show;
+        }
+    }
+
+
+    /* ----------------------------------
+       MESSAGE
+    ---------------------------------- */
+
+    function showMessage(text, type) {
+
+        const message =
+            document.getElementById("message");
+
+        message.textContent = text;
+
+        message.className =
+            "message " + type;
+    }
+
+
+    /* ----------------------------------
+       LOGIN
+    ---------------------------------- */
+
+    document.getElementById("loginForm")
+        .addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+
+                const loginValue =
+                    document.getElementById(
+                        "loginValue"
+                    ).value.trim();
+
+
+                const password =
+                    document.getElementById(
+                        "password"
+                    ).value;
+
+
+                const rememberMe =
+                    document.getElementById(
+                        "rememberMe"
+                    ).checked;
+
+
+                const loginBtn =
+                    document.getElementById(
+                        "loginBtn"
+                    );
+
+
+                if (!loginValue || !password) {
+
+                    showMessage(
+                        "Please enter your login details.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                if (
+                    selectedMethod === "mobile" &&
+                    !/^[0-9]{10}$/.test(loginValue)
+                ) {
+
+                    showMessage(
+                        "Please enter a valid 10-digit mobile number.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                loginBtn.disabled = true;
+
+                loginBtn.textContent =
+                    "Logging in...";
+
+
+                try {
+
+                    let response;
+
+
+                    /* EMAIL */
+
+                    if (selectedMethod === "email") {
+
+                        response =
+                            await fetch(
+                                "/login",
+                                {
+                                    method: "POST",
+
+                                    headers: {
+                                        "Content-Type":
+                                            "application/json"
+                                    },
+
+                                    body: JSON.stringify({
+                                        email: loginValue,
+                                        password: password
+                                    })
+                                }
+                            );
+
+                    }
+
+
+                    /* MOBILE */
+
+                    else {
+
+                        response =
+                            await fetch(
+                                "/login",
+                                {
+                                    method: "POST",
+
+                                    headers: {
+                                        "Content-Type":
+                                            "application/json"
+                                    },
+
+                                    body: JSON.stringify({
+                                        mobile: loginValue,
+                                        password: password
+                                    })
+                                }
+                            );
+                    }
+
+
+                    const data =
+                        await response.json();
+
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            data.detail ||
+                            data.message ||
+                            "Invalid login details."
+                        );
+                    }
+
+
+                    const user =
+                        data.user || data;
+
+
+                    const actualUserType =
+                        user.user_type ||
+                        data.user_type ||
+                        "job_seeker";
+
+
+                    /*
+                       Save logged-in user
+                    */
+
+                    localStorage.setItem(
+                        "careerconnect_user",
+                        JSON.stringify(user)
+                    );
+
+
+                    if (rememberMe) {
+
+                        localStorage.setItem(
+                            "careerconnect_remember",
+                            "true"
+                        );
+
+                    } else {
+
+                        localStorage.removeItem(
+                            "careerconnect_remember"
+                        );
+                    }
+
+
+                    /* EMPLOYER */
+
+                    if (
+                        selectedAccountType ===
+                        "employer"
+                    ) {
+
+                        if (
+                            actualUserType !==
+                            "employer"
+                        ) {
+
+                            showMessage(
+                                "This account is not registered as an Employer. Please select Job Seeker or use an Employer account.",
+                                "error"
+                            );
+
+                            loginBtn.disabled = false;
+
+                            loginBtn.textContent =
+                                "Login";
+
+                            return;
+                        }
+
+
+                        showMessage(
+                            "Employer login successful. Opening Employer Dashboard...",
+                            "success"
+                        );
+
+
+                        setTimeout(
+                            function() {
+
+                                window.location.href =
+                                    "/employer.html";
+
+                            },
+                            700
+                        );
+
+
+                        return;
+                    }
+
+
+                    /* JOB SEEKER */
+
+                    if (
+                        actualUserType ===
+                        "employer"
+                    ) {
+
+                        showMessage(
+                            "This is an Employer account. Please select Employer Login.",
+                            "error"
+                        );
+
+                        loginBtn.disabled = false;
+
+                        loginBtn.textContent =
+                            "Login";
+
+                        return;
+                    }
+
+
+                    showMessage(
+                        "Login successful. Opening your dashboard...",
+                        "success"
+                    );
+
+
+                    setTimeout(
+                        function() {
+
+                            window.location.href =
+                                "/dashboard.html";
+
+                        },
+                        700
+                    );
+
+                }
+
+                catch (error) {
+
+                    console.error(error);
+
+                    showMessage(
+                        error.message ||
+                        "Unable to connect to CareerConnect server.",
+                        "error"
+                    );
+
+                    loginBtn.disabled = false;
+
+                    loginBtn.textContent =
+                        "Login";
+                }
+
+            }
+        );
+
+
+    /* ----------------------------------
+       URL ACCOUNT TYPE
+    ---------------------------------- */
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    if (
+        params.get("type") ===
+        "employer"
+    ) {
+
+        selectAccountType(
+            "employer"
+        );
+    }
+
+
+    /* ----------------------------------
+       ENTER KEY NAVIGATION
+    ---------------------------------- */
+
+    const formInputs =
+        document.querySelectorAll(
+            "#loginForm input"
+        );
+
+
+    formInputs.forEach(
+        function(input, index) {
+
+            input.addEventListener(
+                "keydown",
+                function(event) {
+
+                    if (
+                        event.key ===
+                        "Enter"
+                    ) {
+
+                        event.preventDefault();
+
+                        const next =
+                            formInputs[index + 1];
+
+                        if (next) {
+
+                            next.focus();
+
+                        } else {
+
+                            document.getElementById(
+                                "loginBtn"
+                            ).click();
+                        }
+                    }
+                }
+            );
+        }
+    );
+
+
+    /* ----------------------------------
+       LOAD LANGUAGE
+    ---------------------------------- */
+
+    loadSavedLanguage();
+
+</script>
+
+</body>
+</html>

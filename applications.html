@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+    My Applications - CareerConnect
+</title>
+
+<style>
+
+:root{
+    --primary:#4f46e5;
+    --green:#16a34a;
+    --orange:#ea580c;
+    --red:#dc2626;
+    --dark:#0f172a;
+    --muted:#64748b;
+    --bg:#f5f7fb;
+    --white:#fff;
+    --border:#e2e8f0;
+    --soft:#eef2ff;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:var(--bg);
+    color:var(--dark);
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+nav{
+    background:#111827;
+    color:#fff;
+    padding:15px 5%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:800;
+}
+
+.nav-links{
+    display:flex;
+    gap:9px;
+    flex-wrap:wrap;
+}
+
+.nav-links a,
+.nav-links button{
+    background:#fff;
+    color:#111827;
+    border:0;
+    padding:9px 13px;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+main{
+    max-width:1200px;
+    margin:30px auto;
+    padding:0 18px;
+}
+
+.hero{
+    background:linear-gradient(135deg,#4f46e5,#7c3aed);
+    color:#fff;
+    padding:28px;
+    border-radius:22px;
+}
+
+.hero h1{
+    margin:0 0 8px;
+}
+
+.hero p{
+    margin:0;
+    opacity:.9;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(170px,1fr));
+    gap:14px;
+    margin:20px 0;
+}
+
+.card{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:18px;
+    box-shadow:0 7px 24px rgba(15,23,42,.05);
+}
+
+.stat-number{
+    font-size:28px;
+    font-weight:800;
+}
+
+.muted{
+    color:var(--muted);
+}
+
+.filters{
+    display:grid;
+    grid-template-columns:
+        2fr 1fr 1fr 1fr;
+    gap:10px;
+    margin:18px 0;
+}
+
+input,
+select{
+    width:100%;
+    padding:11px 12px;
+    border:1px solid #cbd5e1;
+    border-radius:10px;
+    font:inherit;
+    background:#fff;
+}
+
+.application{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:18px;
+    margin-bottom:14px;
+}
+
+.top{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.title{
+    font-size:21px;
+    font-weight:800;
+    margin-bottom:5px;
+}
+
+.badge{
+    padding:7px 10px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:800;
+    background:#eef2ff;
+    color:#3730a3;
+}
+
+.info{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(180px,1fr));
+    gap:10px;
+    margin:15px 0;
+}
+
+.info-box{
+    background:#f8fafc;
+    border-radius:12px;
+    padding:11px;
+}
+
+.timeline{
+    display:flex;
+    justify-content:space-between;
+    gap:5px;
+    margin:20px 0;
+    overflow-x:auto;
+}
+
+.step{
+    min-width:100px;
+    text-align:center;
+}
+
+.dot{
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    background:#cbd5e1;
+    margin:0 auto 6px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    font-size:12px;
+    font-weight:800;
+}
+
+.step.done .dot{
+    background:var(--green);
+}
+
+.step.current .dot{
+    background:var(--primary);
+}
+
+.line{
+    flex:1;
+    height:3px;
+    background:#cbd5e1;
+    margin-top:13px;
+}
+
+.line.done{
+    background:var(--green);
+}
+
+.actions{
+    display:flex;
+    gap:9px;
+    flex-wrap:wrap;
+    margin-top:15px;
+}
+
+.btn{
+    padding:10px 14px;
+    border:0;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:700;
+}
+
+.primary{
+    background:var(--primary);
+    color:#fff;
+}
+
+.light{
+    background:var(--soft);
+    color:#3730a3;
+}
+
+.danger{
+    background:var(--red);
+    color:#fff;
+}
+
+.success{
+    background:var(--green);
+    color:#fff;
+}
+
+.notice{
+    padding:12px 15px;
+    border-radius:10px;
+    margin:15px 0;
+    display:none;
+    font-weight:700;
+}
+
+.empty{
+    text-align:center;
+    padding:35px;
+    color:var(--muted);
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.55);
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:20;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:100%;
+    max-width:700px;
+    max-height:90vh;
+    overflow:auto;
+    background:#fff;
+    border-radius:18px;
+    padding:22px;
+}
+
+.close{
+    float:right;
+    border:0;
+    background:#f1f5f9;
+    padding:7px 10px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+footer{
+    text-align:center;
+    padding:35px 15px;
+    color:var(--muted);
+}
+
+@media(max-width:800px){
+
+    .filters{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+
+@media(max-width:550px){
+
+    .filters{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:27px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<nav>
+
+<div class="logo">
+CareerConnect
+</div>
+
+<div class="nav-links">
+
+<a href="index.html">
+Home
+</a>
+
+<a href="dashboard.html">
+Dashboard
+</a>
+
+<a href="jobs.html">
+Jobs
+</a>
+
+<a href="profile.html">
+Profile
+</a>
+
+<a href="government.html">
+Government
+</a>
+
+<a href="support.html">
+Support
+</a>
+
+<button onclick="logout()">
+Logout
+</button>
+
+</div>
+
+</nav>
+
+
+<main>
+
+
+<div class="hero">
+
+<h1>
+📋 My Applications
+</h1>
+
+<p>
+Track every job application from Applied to Selected.
+</p>
+
+</div>
+
+
+<div
+    id="notice"
+    class="notice"
+></div>
+
+
+<div class="stats">
+
+<div class="card">
+<div class="muted">
+Total Applications
+</div>
+<div
+    id="totalCount"
+    class="stat-number"
+>
+0
+</div>
+</div>
+
+
+<div class="card">
+<div class="muted">
+Under Review
+</div>
+<div
+    id="reviewCount"
+    class="stat-number"
+>
+0
+</div>
+</div>
+
+
+<div class="card">
+<div class="muted">
+Shortlisted
+</div>
+<div
+    id="shortCount"
+    class="stat-number"
+>
+0
+</div>
+</div>
+
+
+<div class="card">
+<div class="muted">
+Interview
+</div>
+<div
+    id="interviewCount"
+    class="stat-number"
+>
+0
+</div>
+</div>
+
+
+<div class="card">
+<div class="muted">
+Selected
+</div>
+<div
+    id="selectedCount"
+    class="stat-number"
+>
+0
+</div>
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="filters">
+
+<input
+    id="searchInput"
+    placeholder="🔎 Search job or company"
+>
+
+<select id="statusInput">
+
+<option value="">
+All Status
+</option>
+
+<option>
+Applied
+</option>
+
+<option>
+Under Review
+</option>
+
+<option>
+Shortlisted
+</option>
+
+<option>
+Interview
+</option>
+
+<option>
+Selected
+</option>
+
+<option>
+Rejected
+</option>
+
+<option>
+Withdrawn
+</option>
+
+</select>
+
+
+<select id="sortInput">
+
+<option value="newest">
+Newest First
+</option>
+
+<option value="oldest">
+Oldest First
+</option>
+
+</select>
+
+
+<button
+    class="btn primary"
+    onclick="loadApplications()"
+>
+Refresh
+</button>
+
+</div>
+
+</div>
+
+
+<div
+    id="applicationsContainer"
+>
+    <div class="card empty">
+        Loading applications...
+    </div>
+</div>
+
+
+</main>
+
+
+<footer>
+
+© 2026 CareerConnect ·
+Smart Jobs. Better Careers.
+
+</footer>
+
+
+
+<div
+    id="modal"
+    class="modal"
+>
+
+<div class="modal-box">
+
+<button
+    class="close"
+    onclick="closeModal()"
+>
+✕
+</button>
+
+<h2>
+Application Details
+</h2>
+
+<div id="modalContent"></div>
+
+</div>
+
+</div>
+
+
+
+<script>
+
+
+const API =
+    "http://127.0.0.1:8000";
+
+
+let user = null;
+
+let applications = [];
+
+
+try{
+
+    user =
+        JSON.parse(
+            localStorage.getItem(
+                "careerconnect_user"
+            ) || "null"
+        );
+
+}catch(error){
+
+    user = null;
+
+}
+
+
+if(!user){
+
+    location.href =
+        "login.html";
+
+}
+
+
+
+function esc(value){
+
+    return String(
+        value ?? ""
+    ).replace(
+        /[&<>"']/g,
+        function(char){
+
+            return {
+
+                "&":"&amp;",
+                "<":"&lt;",
+                ">":"&gt;",
+                '"':"&quot;",
+                "'":"&#39;"
+
+            }[char];
+
+        }
+    );
+
+}
+
+
+
+function showNotice(
+    text,
+    success=true
+){
+
+    const box =
+        document.getElementById(
+            "notice"
+        );
+
+    box.style.display =
+        "block";
+
+    box.textContent =
+        text;
+
+    box.style.background =
+        success
+        ? "#dcfce7"
+        : "#fee2e2";
+
+    box.style.color =
+        success
+        ? "#166534"
+        : "#991b1b";
+
+
+    setTimeout(
+        function(){
+
+            box.style.display =
+                "none";
+
+        },
+        3500
+    );
+
+}
+
+
+
+function statusClass(
+    status
+){
+
+    return String(
+        status || ""
+    )
+    .toLowerCase()
+    .replace(
+        /\s+/g,
+        "-"
+    );
+
+}
+
+
+
+const steps = [
+
+    "Applied",
+    "Under Review",
+    "Shortlisted",
+    "Interview",
+    "Selected"
+
+];
+
+
+
+function renderTimeline(
+    status
+){
+
+    if(
+        status === "Rejected" ||
+        status === "Withdrawn"
+    ){
+
+        return `
+
+        <div class="timeline">
+
+            <div class="step done">
+
+                <div class="dot">
+                    ✓
+                </div>
+
+                <div>
+                    Applied
+                </div>
+
+            </div>
+
+            <div class="line"></div>
+
+            <div class="step current">
+
+                <div class="dot">
+                    !
+                </div>
+
+                <div>
+                    ${esc(status)}
+                </div>
+
+            </div>
+
+        </div>
+
+        `;
+
+    }
+
+
+    const current =
+        steps.indexOf(status);
+
+
+    return `
+
+    <div class="timeline">
+
+        ${
+            steps.map(
+                function(step,index){
+
+                    const done =
+                        index < current;
+
+                    const active =
+                        index === current;
+
+
+                    return `
+
+                    <div
+                        class="step
+                        ${
+                            done
+                            ? "done"
+                            : ""
+                        }
+                        ${
+                            active
+                            ? "current"
+                            : ""
+                        }"
+                    >
+
+                        <div class="dot">
+
+                            ${
+                                done ||
+                                active
+                                ? "✓"
+                                : index + 1
+                            }
+
+                        </div>
+
+                        <div>
+                            ${step}
+                        </div>
+
+                    </div>
+
+                    ${
+                        index < steps.length - 1
+                        ? `
+
+                            <div
+                                class="line
+                                ${
+                                    index < current
+                                    ? "done"
+                                    : ""
+                                }"
+                            ></div>
+
+                        `
+                        : ""
+                    }
+
+                    `;
+
+                }
+            ).join("")
+        }
+
+    </div>
+
+    `;
+
+}
+
+
+
+function getFilteredApplications(){
+
+    const search =
+        document.getElementById(
+            "searchInput"
+        ).value
+        .toLowerCase()
+        .trim();
+
+
+    const status =
+        document.getElementById(
+            "statusInput"
+        ).value;
+
+
+    const sort =
+        document.getElementById(
+            "sortInput"
+        ).value;
+
+
+    const result =
+        applications.filter(
+            function(item){
+
+                const job =
+                    item.job || {};
+
+
+                const text =
+                    (
+                        item.job_title ||
+                        job.title ||
+                        ""
+                    )
+                    + " "
+                    +
+                    (
+                        item.company ||
+                        job.company ||
+                        ""
+                    );
+
+
+                const searchOk =
+                    !search ||
+                    text
+                        .toLowerCase()
+                        .includes(search);
+
+
+                const statusOk =
+                    !status ||
+                    item.status === status;
+
+
+                return (
+                    searchOk &&
+                    statusOk
+                );
+
+            }
+        );
+
+
+    result.sort(
+        function(a,b){
+
+            const da =
+                new Date(
+                    a.applied_at || 0
+                );
+
+            const db =
+                new Date(
+                    b.applied_at || 0
+                );
+
+
+            return sort === "oldest"
+                ? da - db
+                : db - da;
+
+        }
+    );
+
+
+    return result;
+
+}
+
+
+
+function renderApplications(){
+
+    const list =
+        getFilteredApplications();
+
+
+    const container =
+        document.getElementById(
+            "applicationsContainer"
+        );
+
+
+    if(!list.length){
+
+        container.innerHTML = `
+
+            <div class="card empty">
+
+                No applications found.
+
+                <br><br>
+
+                <a
+                    href="jobs.html"
+                    class="btn primary"
+                >
+                    🔎 Find Jobs
+                </a>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        list.map(
+            function(item){
+
+                const job =
+                    item.job || {};
+
+
+                const title =
+                    item.job_title ||
+                    job.title ||
+                    "Job";
+
+
+                const company =
+                    item.company ||
+                    job.company ||
+                    "Company";
+
+
+                const location =
+                    [
+                        item.city ||
+                        job.city,
+
+                        item.district ||
+                        job.district,
+
+                        item.state ||
+                        job.state
+                    ]
+                    .filter(Boolean)
+                    .join(", ") ||
+                    "Location not specified";
+
+
+                const applied =
+                    item.applied_at
+                    ? new Date(
+                        item.applied_at
+                    ).toLocaleString()
+                    : "Date not available";
+
+
+                return `
+
+                <div class="application">
+
+                    <div class="top">
+
+                        <div>
+
+                            <div class="title">
+                                ${esc(title)}
+                            </div>
+
+                            <div class="muted">
+                                🏢 ${esc(company)}
+                            </div>
+
+                        </div>
+
+
+                        <div class="badge">
+                            ${esc(item.status)}
+                        </div>
+
+                    </div>
+
+
+                    <div class="info">
+
+                        <div class="info-box">
+
+                            <strong>
+                                📍 Location
+                            </strong>
+
+                            <div class="muted">
+                                ${esc(location)}
+                            </div>
+
+                        </div>
+
+
+                        <div class="info-box">
+
+                            <strong>
+                                💼 Job Type
+                            </strong>
+
+                            <div class="muted">
+                                ${esc(
+                                    job.job_type ||
+                                    "Not specified"
+                                )}
+                            </div>
+
+                        </div>
+
+
+                        <div class="info-box">
+
+                            <strong>
+                                📅 Applied
+                            </strong>
+
+                            <div class="muted">
+                                ${esc(applied)}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    ${
+                        renderTimeline(
+                            item.status
+                        )
+                    }
+
+
+                    <div class="actions">
+
+                        <button
+                            class="btn primary"
+                            onclick="viewApplication(
+                                ${item.id}
+                            )"
+                        >
+                            👁 View Details
+                        </button>
+
+
+                        ${
+                            item.status !== "Withdrawn" &&
+                            item.status !== "Rejected" &&
+                            item.status !== "Selected"
+
+                            ? `
+
+                            <button
+                                class="btn danger"
+                                onclick="withdrawApplication(
+                                    ${item.id}
+                                )"
+                            >
+                                Withdraw
+                            </button>
+
+                            `
+                            : ""
+                        }
+
+                        ${
+                            job.source_url
+
+                            ? `
+
+                            <a
+                                class="btn light"
+                                href="${esc(
+                                    job.source_url
+                                )}"
+                                target="_blank"
+                            >
+                                Original Apply Link
+                            </a>
+
+                            `
+                            : ""
+                        }
+
+                    </div>
+
+                </div>
+
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+
+function updateStats(){
+
+    document.getElementById(
+        "totalCount"
+    ).textContent =
+        applications.length;
+
+
+    document.getElementById(
+        "reviewCount"
+    ).textContent =
+        applications.filter(
+            a =>
+                a.status ===
+                "Under Review"
+        ).length;
+
+
+    document.getElementById(
+        "shortCount"
+    ).textContent =
+        applications.filter(
+            a =>
+                a.status ===
+                "Shortlisted"
+        ).length;
+
+
+    document.getElementById(
+        "interviewCount"
+    ).textContent =
+        applications.filter(
+            a =>
+                a.status ===
+                "Interview"
+        ).length;
+
+
+    document.getElementById(
+        "selectedCount"
+    ).textContent =
+        applications.filter(
+            a =>
+                a.status ===
+                "Selected"
+        ).length;
+
+}
+
+
+
+async function loadApplications(){
+
+    try{
+
+        const response =
+            await fetch(
+                `${API}/applications/user/${user.id}`
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(!response.ok){
+
+            throw new Error(
+                data.detail ||
+                "Unable to load applications."
+            );
+
+        }
+
+
+        applications =
+            data.applications ||
+            [];
+
+
+        updateStats();
+        renderApplications();
+
+
+    }catch(error){
+
+        document.getElementById(
+            "applicationsContainer"
+        ).innerHTML = `
+
+            <div class="card empty">
+
+                ❌ ${esc(error.message)}
+
+                <br><br>
+
+                Make sure the CareerConnect
+                server is running.
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+
+async function viewApplication(
+    id
+){
+
+    try{
+
+        const response =
+            await fetch(
+                `${API}/applications/${id}`
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(!response.ok){
+
+            throw new Error(
+                data.detail ||
+                "Unable to load application."
+            );
+
+        }
+
+
+        const item =
+            data.application;
+
+
+        const job =
+            item.job || {};
+
+
+        document.getElementById(
+            "modalContent"
+        ).innerHTML = `
+
+            <div class="info">
+
+                <div class="info-box">
+
+                    <strong>
+                        Job
+                    </strong>
+
+                    <div class="muted">
+                        ${esc(
+                            item.job_title ||
+                            job.title ||
+                            "Job"
+                        )}
+                    </div>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <strong>
+                        Company
+                    </strong>
+
+                    <div class="muted">
+                        ${esc(
+                            item.company ||
+                            job.company ||
+                            "Company"
+                        )}
+                    </div>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <strong>
+                        Status
+                    </strong>
+
+                    <div class="muted">
+                        ${esc(item.status)}
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <h3>
+                Application Timeline
+            </h3>
+
+            ${renderTimeline(item.status)}
+
+
+            <h3>
+                Cover Letter
+            </h3>
+
+            <p class="muted">
+
+                ${
+                    esc(
+                        item.cover_letter ||
+                        "No cover letter provided."
+                    )
+                }
+
+            </p>
+
+
+            <h3>
+                Message
+            </h3>
+
+            <p class="muted">
+
+                ${
+                    esc(
+                        item.message ||
+                        "No additional message."
+                    )
+                }
+
+            </p>
+
+
+            <div class="actions">
+
+                <a
+                    href="jobs.html"
+                    class="btn primary"
+                >
+                    🔎 More Jobs
+                </a>
+
+            </div>
+
+        `;
+
+
+        document.getElementById(
+            "modal"
+        ).classList.add(
+            "show"
+        );
+
+
+    }catch(error){
+
+        showNotice(
+            error.message,
+            false
+        );
+
+    }
+
+}
+
+
+
+function closeModal(){
+
+    document.getElementById(
+        "modal"
+    ).classList.remove(
+        "show"
+    );
+
+}
+
+
+
+async function withdrawApplication(
+    id
+){
+
+    if(
+        !confirm(
+            "Are you sure you want to withdraw this application?"
+        )
+    ){
+
+        return;
+
+    }
+
+
+    try{
+
+        const response =
+            await fetch(
+                `${API}/applications/${id}`,
+                {
+                    method:"DELETE"
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(!response.ok){
+
+            throw new Error(
+                data.detail ||
+                "Unable to withdraw."
+            );
+
+        }
+
+
+        showNotice(
+            "Application withdrawn successfully."
+        );
+
+
+        loadApplications();
+
+
+    }catch(error){
+
+        showNotice(
+            error.message,
+            false
+        );
+
+    }
+
+}
+
+
+
+document.getElementById(
+    "searchInput"
+).addEventListener(
+    "input",
+    renderApplications
+);
+
+
+document.getElementById(
+    "statusInput"
+).addEventListener(
+    "change",
+    renderApplications
+);
+
+
+document.getElementById(
+    "sortInput"
+).addEventListener(
+    "change",
+    renderApplications
+);
+
+
+function logout(){
+
+    localStorage.removeItem(
+        "careerconnect_user"
+    );
+
+    location.href =
+        "index.html";
+
+}
+
+
+loadApplications();
+
+</script>
+
+</body>
+
+</html>

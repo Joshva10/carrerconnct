@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - CareerConnect</title>
+
+    <style>
+        *{
+            box-sizing:border-box;
+            margin:0;
+            padding:0;
+            font-family:Arial,Helvetica,sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            background:
+                radial-gradient(circle at top left,#dbeafe 0,#f8fbff 35%,#eef2ff 100%);
+            color:#1f2937;
+        }
+
+        a{
+            text-decoration:none;
+            color:inherit;
+        }
+
+        button,
+        input,
+        select{
+            font:inherit;
+        }
+
+        .navbar{
+            background:#ffffff;
+            border-bottom:1px solid #e5e7eb;
+            padding:15px 6%;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:20px;
+        }
+
+        .logo{
+            font-size:25px;
+            font-weight:800;
+            color:#2563eb;
+        }
+
+        .nav-links{
+            display:flex;
+            gap:22px;
+            align-items:center;
+        }
+
+        .nav-links a{
+            color:#4b5563;
+            font-weight:600;
+        }
+
+        .nav-links a:hover{
+            color:#2563eb;
+        }
+
+        .nav-right{
+            display:flex;
+            align-items:center;
+            gap:10px;
+        }
+
+        .lang{
+            border:1px solid #d1d5db;
+            background:#fff;
+            padding:8px 10px;
+            border-radius:8px;
+        }
+
+        .btn{
+            border:none;
+            border-radius:9px;
+            padding:11px 17px;
+            cursor:pointer;
+            font-weight:700;
+        }
+
+        .btn-primary{
+            background:#2563eb;
+            color:#fff;
+        }
+
+        .btn-primary:hover{
+            background:#1d4ed8;
+        }
+
+        .btn-light{
+            background:#eef2ff;
+            color:#3730a3;
+        }
+
+        .page{
+            width:92%;
+            max-width:1150px;
+            margin:35px auto;
+            display:grid;
+            grid-template-columns:1fr 1.05fr;
+            gap:25px;
+            align-items:stretch;
+        }
+
+        .left{
+            background:linear-gradient(135deg,#1d4ed8,#2563eb,#0ea5e9);
+            color:white;
+            border-radius:22px;
+            padding:38px;
+            min-height:650px;
+            box-shadow:0 18px 45px rgba(37,99,235,.20);
+        }
+
+        .left h1{
+            font-size:40px;
+            line-height:1.15;
+            margin-bottom:15px;
+        }
+
+        .left p{
+            line-height:1.65;
+            opacity:.95;
+            font-size:17px;
+        }
+
+        .benefits{
+            margin-top:28px;
+            display:flex;
+            flex-direction:column;
+            gap:14px;
+        }
+
+        .benefit{
+            display:flex;
+            gap:12px;
+            align-items:flex-start;
+            padding:14px;
+            border:1px solid rgba(255,255,255,.20);
+            background:rgba(255,255,255,.10);
+            border-radius:13px;
+        }
+
+        .icon{
+            width:35px;
+            height:35px;
+            border-radius:10px;
+            background:rgba(255,255,255,.18);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            flex-shrink:0;
+        }
+
+        .benefit h3{
+            font-size:15px;
+            margin-bottom:3px;
+        }
+
+        .benefit p{
+            font-size:13px;
+            line-height:1.45;
+        }
+
+        .right{
+            background:#fff;
+            border:1px solid #e5e7eb;
+            border-radius:22px;
+            padding:32px;
+            box-shadow:0 18px 45px rgba(15,23,42,.08);
+        }
+
+        .right h2{
+            font-size:30px;
+            margin-bottom:7px;
+        }
+
+        .subtitle{
+            color:#6b7280;
+            line-height:1.5;
+            margin-bottom:22px;
+        }
+
+        .account-types{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:10px;
+            margin-bottom:18px;
+        }
+
+        .account-option{
+            border:1px solid #dbe3f0;
+            border-radius:12px;
+            padding:13px;
+            cursor:pointer;
+            background:#fff;
+        }
+
+        .account-option.active{
+            border-color:#2563eb;
+            background:#eff6ff;
+        }
+
+        .account-option input{
+            display:none;
+        }
+
+        .account-title{
+            font-weight:800;
+            color:#111827;
+            margin-bottom:4px;
+        }
+
+        .account-desc{
+            color:#6b7280;
+            font-size:12px;
+            line-height:1.4;
+        }
+
+        .form{
+            display:flex;
+            flex-direction:column;
+            gap:14px;
+        }
+
+        .field{
+            display:flex;
+            flex-direction:column;
+            gap:7px;
+        }
+
+        .field label{
+            font-size:14px;
+            font-weight:700;
+            color:#374151;
+        }
+
+        .field input{
+            width:100%;
+            padding:12px 13px;
+            border:1px solid #d1d5db;
+            border-radius:10px;
+            outline:none;
+            background:#fff;
+        }
+
+        .field input:focus{
+            border-color:#2563eb;
+            box-shadow:0 0 0 3px rgba(37,99,235,.08);
+        }
+
+        .password-wrap{
+            position:relative;
+        }
+
+        .password-wrap input{
+            padding-right:76px;
+        }
+
+        .show-btn{
+            position:absolute;
+            right:8px;
+            top:50%;
+            transform:translateY(-50%);
+            border:none;
+            background:#eef2ff;
+            color:#3730a3;
+            padding:6px 9px;
+            border-radius:7px;
+            cursor:pointer;
+            font-size:12px;
+            font-weight:700;
+        }
+
+        .terms{
+            display:flex;
+            gap:9px;
+            align-items:flex-start;
+            color:#6b7280;
+            font-size:13px;
+            line-height:1.45;
+        }
+
+        .terms input{
+            margin-top:3px;
+        }
+
+        .terms a{
+            color:#2563eb;
+            font-weight:700;
+        }
+
+        .submit-btn{
+            width:100%;
+            padding:13px;
+            font-size:16px;
+        }
+
+        .status{
+            display:none;
+            padding:12px 13px;
+            border-radius:10px;
+            font-size:14px;
+            line-height:1.45;
+        }
+
+        .success{
+            display:block;
+            background:#ecfdf5;
+            border:1px solid #a7f3d0;
+            color:#065f46;
+        }
+
+        .error{
+            display:block;
+            background:#fef2f2;
+            border:1px solid #fecaca;
+            color:#991b1b;
+        }
+
+        .login-text{
+            text-align:center;
+            margin-top:18px;
+            color:#6b7280;
+            font-size:14px;
+        }
+
+        .login-text a{
+            color:#2563eb;
+            font-weight:800;
+        }
+
+        .footer{
+            text-align:center;
+            color:#64748b;
+            padding:0 20px 30px;
+            font-size:13px;
+        }
+
+        .loading{
+            opacity:.75;
+            pointer-events:none;
+        }
+
+        @media(max-width:900px){
+            .page{
+                grid-template-columns:1fr;
+            }
+
+            .left{
+                min-height:auto;
+            }
+        }
+
+        @media(max-width:700px){
+            .navbar{
+                flex-wrap:wrap;
+            }
+
+            .nav-links{
+                order:3;
+                width:100%;
+                overflow:auto;
+            }
+
+            .nav-right{
+                margin-left:auto;
+            }
+
+            .left h1{
+                font-size:32px;
+            }
+        }
+
+        @media(max-width:520px){
+            .page{
+                width:94%;
+                margin:20px auto;
+            }
+
+            .left,
+            .right{
+                padding:23px;
+                border-radius:18px;
+            }
+
+            .account-types{
+                grid-template-columns:1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <a href="/" class="logo">CareerConnect</a>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/jobs.html">Jobs</a>
+        <a href="/government.html">Government</a>
+        <a href="/support.html">Support</a>
+    </div>
+
+    <div class="nav-right">
+
+        <select id="languageSelect" class="lang">
+            <option value="English">English</option>
+            <option value="Tamil">தமிழ்</option>
+            <option value="Hindi">हिन्दी</option>
+            <option value="Telugu">తెలుగు</option>
+            <option value="Kannada">ಕನ್ನಡ</option>
+            <option value="Malayalam">മലയാളം</option>
+            <option value="Marathi">मराठी</option>
+            <option value="Bengali">বাংলা</option>
+        </select>
+
+        <a href="/login.html" class="btn btn-light">
+            Login
+        </a>
+
+    </div>
+
+</nav>
+
+
+<div class="page">
+
+    <!-- LEFT SIDE -->
+    <section class="left">
+
+        <h1>
+            Join CareerConnect
+        </h1>
+
+        <p>
+            Create your account and connect with job opportunities,
+            employers, government notifications and career tools.
+        </p>
+
+        <div class="benefits">
+
+            <div class="benefit">
+                <div class="icon">🔎</div>
+
+                <div>
+                    <h3>Find Jobs</h3>
+
+                    <p>
+                        Search jobs by qualification, skills,
+                        location and category.
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="benefit">
+                <div class="icon">🤖</div>
+
+                <div>
+                    <h3>AI Job Matching</h3>
+
+                    <p>
+                        Get job matches based on your profile
+                        and skills.
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="benefit">
+                <div class="icon">📄</div>
+
+                <div>
+                    <h3>Resume Tools</h3>
+
+                    <p>
+                        Upload your resume and use career
+                        improvement features.
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="benefit">
+                <div class="icon">🏛️</div>
+
+                <div>
+                    <h3>Government Jobs</h3>
+
+                    <p>
+                        Explore government recruitment and
+                        exam notifications.
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="benefit">
+                <div class="icon">💼</div>
+
+                <div>
+                    <h3>Employer Tools</h3>
+
+                    <p>
+                        Employers can post jobs and discover
+                        matching job seekers.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- RIGHT SIDE -->
+    <section class="right">
+
+        <h2>Create Account</h2>
+
+        <p class="subtitle">
+            Fill in your details to start using CareerConnect.
+        </p>
+
+
+        <div class="account-types">
+
+            <label
+                class="account-option active"
+                id="seekerOption"
+            >
+                <input
+                    type="radio"
+                    name="accountType"
+                    value="job_seeker"
+                    checked
+                    onchange="selectAccountType('job_seeker')"
+                >
+
+                <div class="account-title">
+                    👤 Job Seeker
+                </div>
+
+                <div class="account-desc">
+                    Find jobs, apply online and track applications.
+                </div>
+            </label>
+
+
+            <label
+                class="account-option"
+                id="employerOption"
+            >
+                <input
+                    type="radio"
+                    name="accountType"
+                    value="employer"
+                    onchange="selectAccountType('employer')"
+                >
+
+                <div class="account-title">
+                    🏢 Employer
+                </div>
+
+                <div class="account-desc">
+                    Post jobs and find suitable candidates.
+                </div>
+            </label>
+
+        </div>
+
+
+        <form
+            class="form"
+            id="registerForm"
+            onsubmit="registerUser(event)"
+        >
+
+            <div class="field">
+
+                <label for="fullName">
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="fullName"
+                    placeholder="Enter your full name"
+                    autocomplete="name"
+                    required
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label for="email">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    autocomplete="email"
+                    required
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label for="mobile">
+                    Mobile Number
+                </label>
+
+                <input
+                    type="tel"
+                    id="mobile"
+                    placeholder="Enter your mobile number"
+                    autocomplete="tel"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <div class="password-wrap">
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Create a password"
+                        autocomplete="new-password"
+                        minlength="6"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="show-btn"
+                        onclick="togglePassword('password',this)"
+                    >
+                        Show
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="field">
+
+                <label for="confirmPassword">
+                    Confirm Password
+                </label>
+
+                <div class="password-wrap">
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Re-enter your password"
+                        autocomplete="new-password"
+                        minlength="6"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="show-btn"
+                        onclick="togglePassword('confirmPassword',this)"
+                    >
+                        Show
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <label class="terms">
+
+                <input
+                    type="checkbox"
+                    id="terms"
+                    required
+                >
+
+                <span>
+                    I agree to use CareerConnect responsibly and
+                    confirm that the information I provide is accurate.
+                    See <a href="/support.html">Support</a> for help.
+                </span>
+
+            </label>
+
+
+            <div
+                id="status"
+                class="status"
+            ></div>
+
+
+            <button
+                class="btn btn-primary submit-btn"
+                id="registerButton"
+                type="submit"
+            >
+                Create Account
+            </button>
+
+        </form>
+
+
+        <div class="login-text">
+            Already have an account?
+            <a href="/login.html">Login here</a>
+        </div>
+
+    </section>
+
+</div>
+
+
+<div class="footer">
+    © 2026 CareerConnect
+</div>
+
+
+<script>
+
+    const API = "http://127.0.0.1:8000";
+
+
+    let selectedAccountType = "job_seeker";
+
+
+    function selectAccountType(type){
+
+        selectedAccountType = type;
+
+
+        const seeker =
+            document.getElementById("seekerOption");
+
+        const employer =
+            document.getElementById("employerOption");
+
+
+        seeker.classList.remove("active");
+        employer.classList.remove("active");
+
+
+        if(type === "job_seeker"){
+            seeker.classList.add("active");
+        }else{
+            employer.classList.add("active");
+        }
+
+    }
+
+
+    function togglePassword(inputId,button){
+
+        const input =
+            document.getElementById(inputId);
+
+
+        if(input.type === "password"){
+
+            input.type = "text";
+
+            button.textContent = "Hide";
+
+        }else{
+
+            input.type = "password";
+
+            button.textContent = "Show";
+
+        }
+
+    }
+
+
+    function showStatus(message,type){
+
+        const status =
+            document.getElementById("status");
+
+
+        status.className =
+            `status ${type}`;
+
+
+        status.textContent =
+            message;
+
+
+        status.style.display = "block";
+
+    }
+
+
+    async function registerUser(event){
+
+        event.preventDefault();
+
+
+        const fullName =
+            document.getElementById("fullName")
+                .value
+                .trim();
+
+
+        const email =
+            document.getElementById("email")
+                .value
+                .trim()
+                .toLowerCase();
+
+
+        const mobile =
+            document.getElementById("mobile")
+                .value
+                .trim();
+
+
+        const password =
+            document.getElementById("password")
+                .value;
+
+
+        const confirmPassword =
+            document.getElementById("confirmPassword")
+                .value;
+
+
+        const terms =
+            document.getElementById("terms")
+                .checked;
+
+
+        const button =
+            document.getElementById("registerButton");
+
+
+        if(fullName.length < 2){
+
+            showStatus(
+                "Please enter your full name.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        if(password.length < 6){
+
+            showStatus(
+                "Password must contain at least 6 characters.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        if(password !== confirmPassword){
+
+            showStatus(
+                "Passwords do not match.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        if(!terms){
+
+            showStatus(
+                "Please agree before creating your account.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        button.disabled = true;
+        button.classList.add("loading");
+        button.textContent = "Creating Account...";
+
+
+        try{
+
+            const response =
+                await fetch(`${API}/register`,{
+
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:JSON.stringify({
+
+                        full_name:fullName,
+
+                        email:email,
+
+                        mobile:mobile || null,
+
+                        password:password,
+
+                        user_type:
+                            selectedAccountType
+
+                    })
+
+                });
+
+
+            const data =
+                await response.json();
+
+
+            if(!response.ok){
+
+                throw new Error(
+                    data.detail ||
+                    "Registration failed."
+                );
+
+            }
+
+
+            const registeredUser =
+                data.user ||
+                null;
+
+
+            if(registeredUser){
+
+                localStorage.setItem(
+                    "careerconnect_user",
+                    JSON.stringify(
+                        registeredUser
+                    )
+                );
+
+            }
+
+
+            showStatus(
+                "Registration successful! Redirecting to login...",
+                "success"
+            );
+
+
+            setTimeout(() => {
+
+                window.location.href =
+                    "/login.html";
+
+            },1200);
+
+
+        }catch(error){
+
+            console.error(error);
+
+
+            showStatus(
+                error.message ||
+                "Unable to create account. Please try again.",
+                "error"
+            );
+
+
+            button.disabled = false;
+            button.classList.remove("loading");
+            button.textContent = "Create Account";
+
+        }
+
+    }
+
+
+    function setupLanguage(){
+
+        const select =
+            document.getElementById("languageSelect");
+
+
+        const saved =
+            localStorage.getItem(
+                "careerconnect_language"
+            );
+
+
+        if(saved){
+            select.value = saved;
+        }
+
+
+        select.addEventListener(
+            "change",
+            () => {
+
+                localStorage.setItem(
+                    "careerconnect_language",
+                    select.value
+                );
+
+            }
+        );
+
+    }
+
+
+    setupLanguage();
+
+</script>
+
+</body>
+</html>

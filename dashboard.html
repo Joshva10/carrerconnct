@@ -1,0 +1,1882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - CareerConnect</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f5f7fb;
+      color: #1f2937;
+    }
+
+    header {
+      height: 70px;
+      background: #ffffff;
+      border-bottom: 1px solid #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6%;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .logo {
+      color: #2563eb;
+      text-decoration: none;
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    nav a {
+      color: #374151;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      color: #2563eb;
+    }
+
+    .logout-btn {
+      border: 1px solid #fecaca;
+      background: #fff;
+      color: #dc2626;
+      padding: 9px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+
+    .welcome {
+      background: linear-gradient(135deg, #1d4ed8, #2563eb);
+      color: #fff;
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 23px;
+    }
+
+    .welcome h1 {
+      font-size: 31px;
+      margin-bottom: 8px;
+    }
+
+    .welcome p {
+      font-size: 14px;
+      line-height: 1.7;
+      opacity: .94;
+    }
+
+    .profile-status {
+      margin-top: 18px;
+      max-width: 500px;
+    }
+
+    .profile-status-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      margin-bottom: 7px;
+    }
+
+    .profile-progress {
+      height: 8px;
+      background: rgba(255,255,255,.2);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .profile-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: #fff;
+      border-radius: 20px;
+      transition: .3s;
+    }
+
+    .quick-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .quick-btn {
+      text-decoration: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: bold;
+      background: #fff;
+      color: #2563eb;
+    }
+
+    .quick-btn.secondary {
+      background: rgba(255,255,255,.14);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,.35);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      margin-bottom: 23px;
+    }
+
+    .stat {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 6px 20px rgba(15,23,42,.04);
+    }
+
+    .stat-label {
+      color: #6b7280;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      color: #111827;
+      font-size: 27px;
+      font-weight: bold;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(15,23,42,.04);
+      padding: 23px;
+    }
+
+    .card h2 {
+      color: #111827;
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+
+    .card-subtitle {
+      color: #6b7280;
+      font-size: 13px;
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    .recommended-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .job-card {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .job-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .job-title {
+      color: #111827;
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    .company {
+      color: #2563eb;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .location {
+      color: #6b7280;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+
+    .match-badge {
+      min-width: 60px;
+      text-align: center;
+      background: #eff6ff;
+      color: #1d4ed8;
+      border-radius: 9px;
+      padding: 7px;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .match-label {
+      display: block;
+      font-size: 8px;
+      font-weight: normal;
+      margin-top: 2px;
+    }
+
+    .job-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 11px;
+    }
+
+    .tag {
+      background: #f3f4f6;
+      color: #4b5563;
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 10px;
+    }
+
+    .job-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .small-btn {
+      text-decoration: none;
+      border: 1px solid #bfdbfe;
+      background: #eff6ff;
+      color: #2563eb;
+      padding: 8px 11px;
+      border-radius: 7px;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    .applications-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .application-row {
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 13px;
+    }
+
+    .application-row-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .application-title {
+      color: #111827;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .application-company {
+      color: #2563eb;
+      font-size: 11px;
+      margin-top: 3px;
+    }
+
+    .application-date {
+      color: #9ca3af;
+      font-size: 10px;
+      margin-top: 5px;
+    }
+
+    .status {
+      border-radius: 999px;
+      padding: 6px 9px;
+      font-size: 9px;
+      font-weight: bold;
+      white-space: nowrap;
+      height: fit-content;
+    }
+
+    .status-applied {
+      color: #2563eb;
+      background: #eff6ff;
+    }
+
+    .status-review {
+      color: #c2410c;
+      background: #fff7ed;
+    }
+
+    .status-shortlisted {
+      color: #047857;
+      background: #ecfdf5;
+    }
+
+    .status-interview {
+      color: #7c3aed;
+      background: #f5f3ff;
+    }
+
+    .status-selected {
+      color: #15803d;
+      background: #dcfce7;
+    }
+
+    .status-rejected {
+      color: #dc2626;
+      background: #fef2f2;
+    }
+
+    .status-withdrawn {
+      color: #4b5563;
+      background: #f3f4f6;
+    }
+
+    .profile-card {
+      margin-bottom: 20px;
+    }
+
+    .profile-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 11px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .profile-item:last-child {
+      border-bottom: none;
+    }
+
+    .profile-label {
+      color: #9ca3af;
+      font-size: 11px;
+    }
+
+    .profile-value {
+      color: #374151;
+      font-size: 12px;
+      font-weight: 600;
+      text-align: right;
+      max-width: 65%;
+      word-break: break-word;
+    }
+
+    .notifications {
+      display: grid;
+      gap: 10px;
+    }
+
+    .notification {
+      border-left: 3px solid #2563eb;
+      background: #f8fbff;
+      border-radius: 0 8px 8px 0;
+      padding: 11px 12px;
+    }
+
+    .notification.unread {
+      background: #eff6ff;
+    }
+
+    .notification-title {
+      color: #111827;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 3px;
+    }
+
+    .notification-message {
+      color: #6b7280;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .notification-date {
+      color: #9ca3af;
+      font-size: 9px;
+      margin-top: 5px;
+    }
+
+    .empty {
+      padding: 25px 10px;
+      text-align: center;
+      color: #6b7280;
+      font-size: 12px;
+    }
+
+    .empty h3 {
+      color: #374151;
+      margin-bottom: 5px;
+      font-size: 15px;
+    }
+
+    .view-all {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      color: #2563eb;
+      font-size: 12px;
+      font-weight: bold;
+      margin-top: 14px;
+    }
+
+    .message {
+      display: none;
+      padding: 11px 13px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      font-size: 13px;
+    }
+
+    .message.error {
+      display: block;
+      color: #b91c1c;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+    }
+
+    .message.info {
+      display: block;
+      color: #1d4ed8;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+    }
+
+    @media (max-width: 1050px) {
+      .stats {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      nav {
+        display: none;
+      }
+
+      .page {
+        padding: 23px 14px 45px;
+      }
+
+      .welcome {
+        padding: 25px 20px;
+      }
+
+      .welcome h1 {
+        font-size: 27px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .job-top,
+      .application-row-top {
+        flex-direction: column;
+      }
+
+      .match-badge {
+        width: 70px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+
+  <a href="index.html" class="logo">CareerConnect</a>
+
+  <nav>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="profile.html">Profile</a>
+    <a href="jobs.html">Jobs</a>
+    <a href="applications.html">Applications</a>
+    <a href="government.html">Government Jobs</a>
+    <a href="support.html">Support</a>
+
+    <button class="logout-btn" onclick="logout()">
+      Logout
+    </button>
+  </nav>
+
+</header>
+
+
+<main class="page">
+
+  <div id="pageMessage" class="message"></div>
+
+
+  <section class="welcome">
+
+    <h1 id="welcomeTitle">
+      Welcome to CareerConnect!
+    </h1>
+
+    <p id="welcomeText">
+      Find opportunities that match your skills, qualification,
+      experience and preferred location.
+    </p>
+
+
+    <div class="profile-status">
+
+      <div class="profile-status-top">
+        <span>Profile Completion</span>
+        <span id="completionText">0%</span>
+      </div>
+
+      <div class="profile-progress">
+        <div
+          id="completionBar"
+          class="profile-progress-bar"
+        ></div>
+      </div>
+
+    </div>
+
+
+    <div class="quick-actions">
+
+      <a href="jobs.html" class="quick-btn">
+        Find Jobs
+      </a>
+
+      <a href="profile.html" class="quick-btn secondary">
+        Update Profile
+      </a>
+
+      <a href="applications.html" class="quick-btn secondary">
+        Track Applications
+      </a>
+
+      <a href="government.html" class="quick-btn secondary">
+        Government Jobs
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <section class="stats">
+
+    <div class="stat">
+      <div class="stat-label">Profile Completion</div>
+      <div class="stat-value" id="statCompletion">0%</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-label">Total Applications</div>
+      <div class="stat-value" id="statApplications">0</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-label">Under Review</div>
+      <div class="stat-value" id="statReview">0</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-label">Shortlisted</div>
+      <div class="stat-value" id="statShortlisted">0</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-label">Selected</div>
+      <div class="stat-value" id="statSelected">0</div>
+    </div>
+
+  </section>
+
+
+  <div class="main-grid">
+
+
+    <!-- LEFT -->
+
+    <section>
+
+      <div class="card">
+
+        <h2>
+          Recommended Jobs
+        </h2>
+
+        <p class="card-subtitle">
+          Jobs matched with your CareerConnect profile.
+        </p>
+
+
+        <div
+          id="recommendedJobs"
+          class="recommended-list"
+        ></div>
+
+
+        <a
+          href="jobs.html"
+          class="view-all"
+        >
+          View All Jobs →
+        </a>
+
+      </div>
+
+
+      <br>
+
+
+      <div class="card">
+
+        <h2>
+          Recent Applications
+        </h2>
+
+        <p class="card-subtitle">
+          See your latest application activity.
+        </p>
+
+
+        <div
+          id="recentApplications"
+          class="applications-list"
+        ></div>
+
+
+        <a
+          href="applications.html"
+          class="view-all"
+        >
+          View All Applications →
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- RIGHT -->
+
+    <aside>
+
+
+      <div class="card profile-card">
+
+        <h2>
+          My Profile
+        </h2>
+
+        <p class="card-subtitle">
+          Your current career information.
+        </p>
+
+
+        <div class="profile-item">
+
+          <span class="profile-label">
+            Name
+          </span>
+
+          <span
+            id="profileName"
+            class="profile-value"
+          >
+            -
+          </span>
+
+        </div>
+
+
+        <div class="profile-item">
+
+          <span class="profile-label">
+            Qualification
+          </span>
+
+          <span
+            id="profileQualification"
+            class="profile-value"
+          >
+            -
+          </span>
+
+        </div>
+
+
+        <div class="profile-item">
+
+          <span class="profile-label">
+            Skills
+          </span>
+
+          <span
+            id="profileSkills"
+            class="profile-value"
+          >
+            -
+          </span>
+
+        </div>
+
+
+        <div class="profile-item">
+
+          <span class="profile-label">
+            Experience
+          </span>
+
+          <span
+            id="profileExperience"
+            class="profile-value"
+          >
+            -
+          </span>
+
+        </div>
+
+
+        <div class="profile-item">
+
+          <span class="profile-label">
+            Location
+          </span>
+
+          <span
+            id="profileLocation"
+            class="profile-value"
+          >
+            -
+          </span>
+
+        </div>
+
+
+        <div class="profile-item">
+
+          <span class="profile-label">
+            Expected Salary
+          </span>
+
+          <span
+            id="profileSalary"
+            class="profile-value"
+          >
+            -
+          </span>
+
+        </div>
+
+
+        <a
+          href="profile.html"
+          class="view-all"
+        >
+          Edit Profile →
+        </a>
+
+      </div>
+
+
+      <div class="card">
+
+        <h2>
+          Notifications
+        </h2>
+
+        <p class="card-subtitle">
+          Important updates from CareerConnect.
+        </p>
+
+
+        <div
+          id="notifications"
+          class="notifications"
+        ></div>
+
+
+        <a
+          href="support.html"
+          class="view-all"
+        >
+          Need Help? →
+        </a>
+
+      </div>
+
+    </aside>
+
+  </div>
+
+</main>
+
+
+<script>
+
+  const API = window.location.origin;
+
+  let currentUser = null;
+  let applications = [];
+  let recommendedJobs = [];
+  let notifications = [];
+
+
+  function getStoredUser() {
+
+    try {
+
+      return JSON.parse(
+        localStorage.getItem("careerconnect_user")
+      );
+
+    } catch (error) {
+
+      return null;
+
+    }
+
+  }
+
+
+  function escapeHtml(value) {
+
+    if (
+      value === null ||
+      value === undefined
+    ) {
+      return "";
+    }
+
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+  }
+
+
+  function logout() {
+
+    localStorage.removeItem(
+      "careerconnect_user"
+    );
+
+    window.location.href =
+      "login.html";
+
+  }
+
+
+  function showMessage(text, type) {
+
+    const box =
+      document.getElementById("pageMessage");
+
+    box.textContent = text;
+    box.className =
+      "message " + type;
+
+  }
+
+
+  function formatDate(value) {
+
+    if (!value) {
+      return "-";
+    }
+
+    const date =
+      new Date(value);
+
+    if (isNaN(date.getTime())) {
+      return String(value);
+    }
+
+    return date.toLocaleDateString(
+      "en-IN",
+      {
+        day: "2-digit",
+        month: "short",
+        year: "numeric"
+      }
+    );
+
+  }
+
+
+  function normalizeStatus(status) {
+
+    if (!status) {
+      return "Applied";
+    }
+
+    const value =
+      String(status)
+        .trim()
+        .toLowerCase();
+
+    if (
+      value === "under_review" ||
+      value === "under review"
+    ) {
+      return "Under Review";
+    }
+
+    if (value === "shortlisted") {
+      return "Shortlisted";
+    }
+
+    if (value === "interview") {
+      return "Interview";
+    }
+
+    if (value === "selected") {
+      return "Selected";
+    }
+
+    if (value === "rejected") {
+      return "Rejected";
+    }
+
+    if (value === "withdrawn") {
+      return "Withdrawn";
+    }
+
+    return "Applied";
+
+  }
+
+
+  function statusClass(status) {
+
+    const value =
+      normalizeStatus(status);
+
+    if (value === "Under Review") {
+      return "status-review";
+    }
+
+    if (value === "Shortlisted") {
+      return "status-shortlisted";
+    }
+
+    if (value === "Interview") {
+      return "status-interview";
+    }
+
+    if (value === "Selected") {
+      return "status-selected";
+    }
+
+    if (value === "Rejected") {
+      return "status-rejected";
+    }
+
+    if (value === "Withdrawn") {
+      return "status-withdrawn";
+    }
+
+    return "status-applied";
+
+  }
+
+
+  function getJobTitle(job) {
+
+    return (
+      job.title ||
+      job.job_title ||
+      "Job Opportunity"
+    );
+
+  }
+
+
+  function getCompany(job) {
+
+    return (
+      job.company ||
+      job.organization ||
+      "Company"
+    );
+
+  }
+
+
+  function getLocation(job) {
+
+    return [
+      job.city,
+      job.district,
+      job.state
+    ]
+    .filter(Boolean)
+    .join(", ") ||
+    "Location not specified";
+
+  }
+
+
+  function getMatch(job) {
+
+    return Number(
+      job.match_percentage ||
+      job.match_score ||
+      job.match ||
+      0
+    );
+
+  }
+
+
+  function calculateCompletion(user) {
+
+    const fields = [
+
+      user.full_name,
+      user.email,
+      user.mobile,
+      user.qualification,
+      user.skills,
+      user.experience,
+      user.location,
+      user.state,
+      user.salary,
+      user.job_categories
+
+    ];
+
+
+    let filled = 0;
+
+
+    fields.forEach(function(value) {
+
+      if (
+        value !== null &&
+        value !== undefined &&
+        String(value).trim() !== ""
+      ) {
+
+        filled++;
+
+      }
+
+    });
+
+
+    const percentage =
+      Math.round(
+        (filled / fields.length) * 100
+      );
+
+
+    document.getElementById(
+      "completionText"
+    ).textContent =
+      percentage + "%";
+
+    document.getElementById(
+      "completionBar"
+    ).style.width =
+      percentage + "%";
+
+    document.getElementById(
+      "statCompletion"
+    ).textContent =
+      percentage + "%";
+
+
+    return percentage;
+
+  }
+
+
+  function displayProfile(user) {
+
+    document.getElementById(
+      "welcomeTitle"
+    ).textContent =
+      "Welcome, " +
+      (
+        user.full_name ||
+        "CareerConnect User"
+      ) +
+      "!";
+
+
+    document.getElementById(
+      "profileName"
+    ).textContent =
+      user.full_name ||
+      "-";
+
+
+    document.getElementById(
+      "profileQualification"
+    ).textContent =
+      user.qualification ||
+      "Not added";
+
+
+    document.getElementById(
+      "profileSkills"
+    ).textContent =
+      user.skills ||
+      "Not added";
+
+
+    document.getElementById(
+      "profileExperience"
+    ).textContent =
+      user.experience ||
+      "Fresher / Not added";
+
+
+    document.getElementById(
+      "profileLocation"
+    ).textContent =
+      user.location ||
+      user.state ||
+      "Not added";
+
+
+    document.getElementById(
+      "profileSalary"
+    ).textContent =
+      user.salary ||
+      "Not added";
+
+
+    calculateCompletion(user);
+
+  }
+
+
+  async function loadProfile() {
+
+    try {
+
+      const response =
+        await fetch(
+          API +
+          "/profile/" +
+          currentUser.id
+        );
+
+
+      const data =
+        await response.json();
+
+
+      if (!response.ok) {
+        throw new Error(
+          data.detail ||
+          "Profile could not be loaded."
+        );
+      }
+
+
+      const user =
+        data.user ||
+        data;
+
+
+      if (user && user.id) {
+
+        currentUser =
+          user;
+
+        localStorage.setItem(
+          "careerconnect_user",
+          JSON.stringify(user)
+        );
+
+      }
+
+
+      displayProfile(currentUser);
+
+
+    } catch (error) {
+
+      displayProfile(currentUser);
+
+    }
+
+  }
+
+
+  async function loadApplications() {
+
+    try {
+
+      const response =
+        await fetch(
+          API +
+          "/applications/user/" +
+          currentUser.id
+        );
+
+
+      const data =
+        await response.json();
+
+
+      if (!response.ok) {
+        throw new Error(
+          data.detail ||
+          "Could not load applications."
+        );
+      }
+
+
+      if (Array.isArray(data)) {
+
+        applications = data;
+
+      } else if (
+        data &&
+        Array.isArray(data.applications)
+      ) {
+
+        applications =
+          data.applications;
+
+      } else {
+
+        applications = [];
+
+      }
+
+
+      updateApplicationStats();
+      renderRecentApplications();
+
+
+    } catch (error) {
+
+      applications = [];
+
+      updateApplicationStats();
+      renderRecentApplications();
+
+    }
+
+  }
+
+
+  function updateApplicationStats() {
+
+    let review = 0;
+    let shortlisted = 0;
+    let selected = 0;
+
+
+    applications.forEach(function(app) {
+
+      const status =
+        normalizeStatus(app.status);
+
+
+      if (status === "Under Review") {
+        review++;
+      }
+
+      if (
+        status === "Shortlisted" ||
+        status === "Interview"
+      ) {
+        shortlisted++;
+      }
+
+      if (status === "Selected") {
+        selected++;
+      }
+
+    });
+
+
+    document.getElementById(
+      "statApplications"
+    ).textContent =
+      applications.length;
+
+    document.getElementById(
+      "statReview"
+    ).textContent =
+      review;
+
+    document.getElementById(
+      "statShortlisted"
+    ).textContent =
+      shortlisted;
+
+    document.getElementById(
+      "statSelected"
+    ).textContent =
+      selected;
+
+  }
+
+
+  function renderRecentApplications() {
+
+    const container =
+      document.getElementById(
+        "recentApplications"
+      );
+
+
+    if (!applications.length) {
+
+      container.innerHTML = `
+        <div class="empty">
+          <h3>No applications yet</h3>
+          <p>Apply for a suitable job to start tracking your applications.</p>
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    const latest =
+      [...applications]
+      .sort(function(a, b) {
+
+        return new Date(
+          b.applied_at ||
+          b.created_at ||
+          0
+        ) -
+        new Date(
+          a.applied_at ||
+          a.created_at ||
+          0
+        );
+
+      })
+      .slice(0, 5);
+
+
+    container.innerHTML =
+      latest.map(function(app) {
+
+        const job =
+          app.job ||
+          {};
+
+        const title =
+          app.job_title ||
+          job.title ||
+          "Job Opportunity";
+
+        const company =
+          app.company ||
+          job.company ||
+          "Company";
+
+        const status =
+          normalizeStatus(app.status);
+
+
+        return `
+          <div class="application-row">
+
+            <div class="application-row-top">
+
+              <div>
+
+                <div class="application-title">
+                  ${escapeHtml(title)}
+                </div>
+
+                <div class="application-company">
+                  ${escapeHtml(company)}
+                </div>
+
+                <div class="application-date">
+                  Applied:
+                  ${escapeHtml(
+                    formatDate(
+                      app.applied_at ||
+                      app.created_at
+                    )
+                  )}
+                </div>
+
+              </div>
+
+              <span class="status ${statusClass(status)}">
+                ${escapeHtml(status)}
+              </span>
+
+            </div>
+
+          </div>
+        `;
+
+      }).join("");
+
+  }
+
+
+  async function loadRecommendedJobs() {
+
+    try {
+
+      let endpoint =
+        API +
+        "/jobs/matched/" +
+        currentUser.id;
+
+
+      let response =
+        await fetch(endpoint);
+
+
+      if (!response.ok) {
+
+        response =
+          await fetch(
+            API + "/jobs"
+          );
+
+      }
+
+
+      const data =
+        await response.json();
+
+
+      if (
+        Array.isArray(data)
+      ) {
+
+        recommendedJobs =
+          data;
+
+      } else if (
+        data &&
+        Array.isArray(data.jobs)
+      ) {
+
+        recommendedJobs =
+          data.jobs;
+
+      } else {
+
+        recommendedJobs = [];
+
+      }
+
+
+      /*
+        Show only a small dashboard preview.
+        Full job list remains on jobs.html.
+      */
+
+      recommendedJobs =
+        [...recommendedJobs]
+        .sort(function(a, b) {
+
+          return getMatch(b) -
+                 getMatch(a);
+
+        })
+        .slice(0, 6);
+
+
+      renderRecommendedJobs();
+
+
+    } catch (error) {
+
+      recommendedJobs = [];
+
+      renderRecommendedJobs();
+
+    }
+
+  }
+
+
+  function renderRecommendedJobs() {
+
+    const container =
+      document.getElementById(
+        "recommendedJobs"
+      );
+
+
+    if (!recommendedJobs.length) {
+
+      container.innerHTML = `
+        <div class="empty">
+          <h3>No recommendations available</h3>
+          <p>
+            Complete your profile to get better job matches.
+          </p>
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    container.innerHTML =
+      recommendedJobs.map(function(job) {
+
+        const match =
+          getMatch(job);
+
+
+        return `
+          <div class="job-card">
+
+            <div class="job-top">
+
+              <div>
+
+                <div class="job-title">
+                  ${escapeHtml(
+                    getJobTitle(job)
+                  )}
+                </div>
+
+                <div class="company">
+                  ${escapeHtml(
+                    getCompany(job)
+                  )}
+                </div>
+
+                <div class="location">
+                  📍 ${escapeHtml(
+                    getLocation(job)
+                  )}
+                </div>
+
+              </div>
+
+
+              <div class="match-badge">
+
+                ${
+                  match > 0
+                  ? escapeHtml(match)
+                  : "-"
+                }%
+
+                <span class="match-label">
+                  AI Match
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="job-info">
+
+              ${
+                job.category
+                ?
+                `
+                  <span class="tag">
+                    ${escapeHtml(job.category)}
+                  </span>
+                `
+                :
+                ""
+              }
+
+              ${
+                job.job_type
+                ?
+                `
+                  <span class="tag">
+                    ${escapeHtml(job.job_type)}
+                  </span>
+                `
+                :
+                ""
+              }
+
+              ${
+                job.salary
+                ?
+                `
+                  <span class="tag">
+                    ${escapeHtml(job.salary)}
+                  </span>
+                `
+                :
+                ""
+              }
+
+              ${
+                job.qualification
+                ?
+                `
+                  <span class="tag">
+                    ${escapeHtml(job.qualification)}
+                  </span>
+                `
+                :
+                ""
+              }
+
+            </div>
+
+
+            <div class="job-actions">
+
+              <a
+                href="jobs.html"
+                class="small-btn"
+              >
+                View Job
+              </a>
+
+            </div>
+
+          </div>
+        `;
+
+      }).join("");
+
+  }
+
+
+  async function loadNotifications() {
+
+    try {
+
+      const response =
+        await fetch(
+          API +
+          "/notifications/" +
+          currentUser.id
+        );
+
+
+      const data =
+        await response.json();
+
+
+      if (!response.ok) {
+
+        throw new Error(
+          data.detail ||
+          "Could not load notifications."
+        );
+
+      }
+
+
+      if (Array.isArray(data)) {
+
+        notifications =
+          data;
+
+      } else if (
+        data &&
+        Array.isArray(data.notifications)
+      ) {
+
+        notifications =
+          data.notifications;
+
+      } else {
+
+        notifications = [];
+
+      }
+
+
+      renderNotifications();
+
+
+    } catch (error) {
+
+      notifications = [];
+
+      renderNotifications();
+
+    }
+
+  }
+
+
+  function renderNotifications() {
+
+    const container =
+      document.getElementById(
+        "notifications"
+      );
+
+
+    if (!notifications.length) {
+
+      container.innerHTML = `
+        <div class="empty">
+          <h3>No new notifications</h3>
+          <p>New job and application updates will appear here.</p>
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    const latest =
+      [...notifications]
+      .sort(function(a, b) {
+
+        return new Date(
+          b.created_at || 0
+        ) -
+        new Date(
+          a.created_at || 0
+        );
+
+      })
+      .slice(0, 6);
+
+
+    container.innerHTML =
+      latest.map(function(item) {
+
+        return `
+          <div class="notification ${
+            item.is_read === false
+              ? "unread"
+              : ""
+          }">
+
+            <div class="notification-title">
+              ${escapeHtml(
+                item.title ||
+                "CareerConnect Update"
+              )}
+            </div>
+
+            <div class="notification-message">
+              ${escapeHtml(
+                item.message ||
+                ""
+              )}
+            </div>
+
+            <div class="notification-date">
+              ${escapeHtml(
+                formatDate(
+                  item.created_at
+                )
+              )}
+            </div>
+
+          </div>
+        `;
+
+      }).join("");
+
+  }
+
+
+  async function initDashboard() {
+
+    currentUser =
+      getStoredUser();
+
+
+    if (
+      !currentUser ||
+      !currentUser.id
+    ) {
+
+      window.location.href =
+        "login.html";
+
+      return;
+
+    }
+
+
+    /*
+      Employer should use employer dashboard.
+    */
+
+    if (
+      currentUser.user_type ===
+      "employer"
+    ) {
+
+      window.location.href =
+        "employer.html";
+
+      return;
+
+    }
+
+
+    displayProfile(
+      currentUser
+    );
+
+
+    await Promise.all([
+      loadProfile(),
+      loadApplications(),
+      loadRecommendedJobs(),
+      loadNotifications()
+    ]);
+
+  }
+
+
+  initDashboard();
+
+</script>
+
+</body>
+</html>

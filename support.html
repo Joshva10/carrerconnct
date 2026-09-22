@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - CareerConnect</title>
+
+    <style>
+        *{
+            box-sizing:border-box;
+            margin:0;
+            padding:0;
+            font-family:Arial,Helvetica,sans-serif;
+        }
+
+        body{
+            background:#f5f7fb;
+            color:#1f2937;
+        }
+
+        a{
+            text-decoration:none;
+            color:inherit;
+        }
+
+        button,
+        input,
+        textarea,
+        select{
+            font:inherit;
+        }
+
+        .navbar{
+            background:#fff;
+            border-bottom:1px solid #e5e7eb;
+            padding:15px 6%;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:20px;
+            position:sticky;
+            top:0;
+            z-index:1000;
+        }
+
+        .logo{
+            font-size:25px;
+            font-weight:800;
+            color:#2563eb;
+            white-space:nowrap;
+        }
+
+        .nav-links{
+            display:flex;
+            gap:22px;
+            align-items:center;
+        }
+
+        .nav-links a{
+            color:#4b5563;
+            font-weight:600;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active{
+            color:#2563eb;
+        }
+
+        .nav-right{
+            display:flex;
+            gap:10px;
+            align-items:center;
+        }
+
+        .lang{
+            padding:8px 10px;
+            border:1px solid #d1d5db;
+            border-radius:8px;
+            background:#fff;
+        }
+
+        .btn{
+            border:none;
+            border-radius:9px;
+            padding:11px 16px;
+            cursor:pointer;
+            font-weight:700;
+        }
+
+        .btn-primary{
+            background:#2563eb;
+            color:#fff;
+        }
+
+        .btn-primary:hover{
+            background:#1d4ed8;
+        }
+
+        .btn-light{
+            background:#eef2ff;
+            color:#3730a3;
+        }
+
+        .hero{
+            background:linear-gradient(135deg,#1e40af,#2563eb,#0ea5e9);
+            color:white;
+            padding:55px 6%;
+        }
+
+        .hero-content{
+            max-width:1150px;
+            margin:auto;
+        }
+
+        .hero h1{
+            font-size:42px;
+            margin-bottom:12px;
+        }
+
+        .hero p{
+            max-width:760px;
+            line-height:1.6;
+            font-size:18px;
+            opacity:.95;
+        }
+
+        .container{
+            width:88%;
+            max-width:1200px;
+            margin:30px auto;
+        }
+
+        .grid{
+            display:grid;
+            grid-template-columns:1.15fr .85fr;
+            gap:20px;
+        }
+
+        .card{
+            background:#fff;
+            border:1px solid #e5e7eb;
+            border-radius:16px;
+            padding:22px;
+            box-shadow:0 8px 25px rgba(15,23,42,.05);
+        }
+
+        .card h2{
+            margin-bottom:8px;
+        }
+
+        .muted{
+            color:#6b7280;
+            line-height:1.55;
+        }
+
+        .chat-box{
+            height:430px;
+            display:flex;
+            flex-direction:column;
+        }
+
+        .messages{
+            flex:1;
+            overflow:auto;
+            padding:12px 2px;
+            display:flex;
+            flex-direction:column;
+            gap:10px;
+            margin-top:10px;
+        }
+
+        .message{
+            max-width:85%;
+            padding:11px 13px;
+            border-radius:13px;
+            line-height:1.45;
+            font-size:14px;
+        }
+
+        .bot{
+            align-self:flex-start;
+            background:#eff6ff;
+            color:#1e3a8a;
+        }
+
+        .user{
+            align-self:flex-end;
+            background:#2563eb;
+            color:#fff;
+        }
+
+        .chat-input{
+            display:flex;
+            gap:8px;
+            margin-top:12px;
+        }
+
+        .chat-input input{
+            flex:1;
+            border:1px solid #d1d5db;
+            border-radius:10px;
+            padding:11px 12px;
+            outline:none;
+        }
+
+        .chat-input input:focus{
+            border-color:#2563eb;
+        }
+
+        .quick-buttons{
+            display:flex;
+            gap:8px;
+            flex-wrap:wrap;
+            margin-top:12px;
+        }
+
+        .quick-buttons button{
+            padding:8px 11px;
+            border:1px solid #dbeafe;
+            background:#f8fbff;
+            color:#1d4ed8;
+            border-radius:999px;
+            cursor:pointer;
+            font-size:13px;
+            font-weight:600;
+        }
+
+        .form{
+            margin-top:15px;
+        }
+
+        .field{
+            margin-bottom:13px;
+        }
+
+        .field label{
+            display:block;
+            margin-bottom:6px;
+            color:#374151;
+            font-weight:700;
+            font-size:14px;
+        }
+
+        .field input,
+        .field select,
+        .field textarea{
+            width:100%;
+            border:1px solid #d1d5db;
+            border-radius:10px;
+            padding:11px 12px;
+            outline:none;
+            background:#fff;
+        }
+
+        .field textarea{
+            min-height:130px;
+            resize:vertical;
+        }
+
+        .field input:focus,
+        .field select:focus,
+        .field textarea:focus{
+            border-color:#2563eb;
+        }
+
+        .faq-list{
+            display:flex;
+            flex-direction:column;
+            gap:10px;
+            margin-top:15px;
+        }
+
+        .faq-item{
+            border:1px solid #e5e7eb;
+            border-radius:12px;
+            overflow:hidden;
+            background:#fff;
+        }
+
+        .faq-question{
+            width:100%;
+            text-align:left;
+            border:none;
+            background:#fff;
+            padding:15px;
+            font-weight:700;
+            cursor:pointer;
+            display:flex;
+            justify-content:space-between;
+            gap:10px;
+        }
+
+        .faq-answer{
+            display:none;
+            padding:0 15px 15px;
+            color:#6b7280;
+            line-height:1.55;
+        }
+
+        .faq-item.open .faq-answer{
+            display:block;
+        }
+
+        .contact-grid{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:16px;
+            margin-top:15px;
+        }
+
+        .contact-card{
+            background:#fff;
+            border:1px solid #e5e7eb;
+            border-radius:14px;
+            padding:20px;
+        }
+
+        .contact-card h3{
+            margin-bottom:8px;
+        }
+
+        .contact-card p{
+            color:#6b7280;
+            line-height:1.5;
+        }
+
+        .status{
+            margin-top:12px;
+            padding:11px 12px;
+            border-radius:10px;
+            display:none;
+            font-size:14px;
+            line-height:1.45;
+        }
+
+        .success{
+            background:#ecfdf5;
+            border:1px solid #a7f3d0;
+            color:#065f46;
+        }
+
+        .error{
+            background:#fef2f2;
+            border:1px solid #fecaca;
+            color:#991b1b;
+        }
+
+        .footer{
+            margin-top:50px;
+            background:#111827;
+            color:#d1d5db;
+            padding:35px 6%;
+        }
+
+        .footer-inner{
+            max-width:1200px;
+            margin:auto;
+            display:flex;
+            justify-content:space-between;
+            gap:20px;
+            flex-wrap:wrap;
+        }
+
+        .toast{
+            position:fixed;
+            right:20px;
+            bottom:20px;
+            background:#111827;
+            color:white;
+            padding:13px 16px;
+            border-radius:10px;
+            display:none;
+            z-index:3000;
+            box-shadow:0 10px 25px rgba(0,0,0,.18);
+        }
+
+        @media(max-width:900px){
+            .grid{
+                grid-template-columns:1fr;
+            }
+
+            .contact-grid{
+                grid-template-columns:1fr;
+            }
+        }
+
+        @media(max-width:760px){
+            .navbar{
+                flex-wrap:wrap;
+            }
+
+            .nav-links{
+                order:3;
+                width:100%;
+                overflow:auto;
+            }
+
+            .nav-right{
+                margin-left:auto;
+            }
+
+            .hero h1{
+                font-size:32px;
+            }
+        }
+
+        @media(max-width:520px){
+            .container{
+                width:92%;
+            }
+
+            .chat-input{
+                flex-direction:column;
+            }
+
+            .chat-input button{
+                width:100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <a href="/" class="logo">CareerConnect</a>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/jobs.html">Jobs</a>
+        <a href="/government.html">Government</a>
+        <a href="/support.html" class="active">Support</a>
+    </div>
+
+    <div class="nav-right">
+
+        <select id="languageSelect" class="lang">
+            <option value="English">English</option>
+            <option value="Tamil">தமிழ்</option>
+            <option value="Hindi">हिन्दी</option>
+            <option value="Telugu">తెలుగు</option>
+            <option value="Kannada">ಕನ್ನಡ</option>
+            <option value="Malayalam">മലയാളം</option>
+            <option value="Marathi">मराठी</option>
+            <option value="Bengali">বাংলা</option>
+        </select>
+
+        <a href="/login.html" class="btn btn-primary">Login</a>
+
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>CareerConnect Support</h1>
+
+        <p>
+            Get help with job search, applications, profile, resume,
+            employer features, government notifications and other
+            CareerConnect services.
+        </p>
+    </div>
+</section>
+
+<div class="container">
+
+    <div class="grid">
+
+        <!-- CHAT -->
+        <div class="card chat-box">
+
+            <h2>Support Chat</h2>
+
+            <p class="muted">
+                Ask a question about CareerConnect.
+            </p>
+
+            <div id="messages" class="messages">
+
+                <div class="message bot">
+                    Hi! 👋 Welcome to CareerConnect Support.
+                    How can I help you?
+                </div>
+
+            </div>
+
+            <div class="quick-buttons">
+
+                <button onclick="quickMessage('How do I apply for a job?')">
+                    How to apply?
+                </button>
+
+                <button onclick="quickMessage('How do I upload my resume?')">
+                    Resume help
+                </button>
+
+                <button onclick="quickMessage('How do I save a job?')">
+                    Save job
+                </button>
+
+                <button onclick="quickMessage('I have a problem with my account')">
+                    Account problem
+                </button>
+
+            </div>
+
+            <div class="chat-input">
+
+                <input
+                    id="chatInput"
+                    placeholder="Type your question..."
+                    onkeydown="handleChatKey(event)"
+                >
+
+                <button
+                    class="btn btn-primary"
+                    onclick="sendChat()"
+                >
+                    Send
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- REPORT PROBLEM -->
+        <div class="card">
+
+            <h2>Report a Problem</h2>
+
+            <p class="muted">
+                Tell us what went wrong. Your report will be stored
+                in the CareerConnect support system.
+            </p>
+
+            <form class="form" onsubmit="submitProblem(event)">
+
+                <div class="field">
+
+                    <label>Problem Type</label>
+
+                    <select id="problemType" required>
+
+                        <option value="">
+                            Select problem
+                        </option>
+
+                        <option>Login Problem</option>
+                        <option>Registration Problem</option>
+                        <option>Profile Problem</option>
+                        <option>Resume Upload Problem</option>
+                        <option>Job Search Problem</option>
+                        <option>Application Problem</option>
+                        <option>Government Job Problem</option>
+                        <option>Employer Problem</option>
+                        <option>Other</option>
+
+                    </select>
+
+                </div>
+
+                <div class="field">
+
+                    <label>Subject</label>
+
+                    <input
+                        id="problemSubject"
+                        placeholder="Example: Unable to apply for a job"
+                        required
+                    >
+
+                </div>
+
+                <div class="field">
+
+                    <label>Description</label>
+
+                    <textarea
+                        id="problemDescription"
+                        placeholder="Explain the problem..."
+                        required
+                    ></textarea>
+
+                </div>
+
+                <button class="btn btn-primary" type="submit">
+                    Submit Report
+                </button>
+
+            </form>
+
+            <div id="reportStatus" class="status"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- FAQ -->
+    <div class="card" style="margin-top:20px;">
+
+        <h2>Frequently Asked Questions</h2>
+
+        <p class="muted">
+            Find quick answers to common CareerConnect questions.
+        </p>
+
+        <div class="faq-list">
+
+            <div class="faq-item">
+
+                <button
+                    class="faq-question"
+                    onclick="toggleFaq(this)"
+                >
+                    How do I apply for a job?
+                    <span>+</span>
+                </button>
+
+                <div class="faq-answer">
+                    Open the Jobs page, choose a suitable job and click
+                    the Apply button. Complete the application details
+                    and submit the application.
+                </div>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <button
+                    class="faq-question"
+                    onclick="toggleFaq(this)"
+                >
+                    How does AI job matching work?
+                    <span>+</span>
+                </button>
+
+                <div class="faq-answer">
+                    CareerConnect compares your profile information,
+                    skills, qualification, experience, location and
+                    job preferences with available jobs and calculates
+                    a matching percentage.
+                </div>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <button
+                    class="faq-question"
+                    onclick="toggleFaq(this)"
+                >
+                    How can I upload my resume?
+                    <span>+</span>
+                </button>
+
+                <div class="faq-answer">
+                    Open your Profile page and use the Resume Upload
+                    section. PDF and DOCX resume files can be analyzed
+                    when the required extraction packages are installed.
+                </div>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <button
+                    class="faq-question"
+                    onclick="toggleFaq(this)"
+                >
+                    How can I track my application?
+                    <span>+</span>
+                </button>
+
+                <div class="faq-answer">
+                    Open Applications from your dashboard. You can view
+                    the application status such as Applied, Under Review,
+                    Shortlisted, Interview and Selected.
+                </div>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <button
+                    class="faq-question"
+                    onclick="toggleFaq(this)"
+                >
+                    Are government jobs verified?
+                    <span>+</span>
+                </button>
+
+                <div class="faq-answer">
+                    Always verify government recruitment information
+                    through the official recruitment department or
+                    official notification before applying.
+                </div>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <button
+                    class="faq-question"
+                    onclick="toggleFaq(this)"
+                >
+                    How can employers find candidates?
+                    <span>+</span>
+                </button>
+
+                <div class="faq-answer">
+                    Employers can use the employer dashboard to find
+                    job seekers and view AI-based candidate matching
+                    against their posted jobs.
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- CONTACT -->
+    <div style="margin-top:30px;">
+
+        <h2>Contact Us</h2>
+
+        <p class="muted" style="margin-top:7px;">
+            Use these support channels for CareerConnect assistance.
+        </p>
+
+        <div class="contact-grid">
+
+            <div class="contact-card">
+
+                <h3>💬 Online Support</h3>
+
+                <p>
+                    Use the Support Chat above for common questions
+                    and platform guidance.
+                </p>
+
+            </div>
+
+
+            <div class="contact-card">
+
+                <h3>📧 Email Support</h3>
+
+                <p>
+                    support@careerconnect.example
+                </p>
+
+            </div>
+
+
+            <div class="contact-card">
+
+                <h3>📞 Contact Support</h3>
+
+                <p>
+                    Support contact details can be connected to
+                    your actual service later.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer class="footer">
+
+    <div class="footer-inner">
+
+        <div>
+            <strong style="font-size:20px;">
+                CareerConnect
+            </strong>
+
+            <p style="margin-top:8px;">
+                Job search, career growth and recruitment platform.
+            </p>
+        </div>
+
+        <div>
+            <a href="/jobs.html">Jobs</a>
+            &nbsp; | &nbsp;
+            <a href="/government.html">Government</a>
+            &nbsp; | &nbsp;
+            <a href="/support.html">Support</a>
+        </div>
+
+    </div>
+
+</footer>
+
+<div id="toast" class="toast"></div>
+
+
+<script>
+
+    const API = "http://127.0.0.1:8000";
+
+    const user =
+        JSON.parse(
+            localStorage.getItem("careerconnect_user") || "null"
+        );
+
+
+    function escapeHtml(value){
+
+        if(
+            value === null ||
+            value === undefined
+        ){
+            return "";
+        }
+
+        return String(value)
+            .replace(/&/g,"&amp;")
+            .replace(/</g,"&lt;")
+            .replace(/>/g,"&gt;")
+            .replace(/"/g,"&quot;")
+            .replace(/'/g,"&#039;");
+    }
+
+
+    function showToast(message){
+
+        const toast =
+            document.getElementById("toast");
+
+        toast.textContent = message;
+
+        toast.style.display = "block";
+
+        setTimeout(() => {
+
+            toast.style.display = "none";
+
+        },2500);
+    }
+
+
+    function addMessage(text,type){
+
+        const messages =
+            document.getElementById("messages");
+
+        const div =
+            document.createElement("div");
+
+        div.className =
+            `message ${type}`;
+
+        div.innerHTML =
+            escapeHtml(text);
+
+        messages.appendChild(div);
+
+        messages.scrollTop =
+            messages.scrollHeight;
+    }
+
+
+    function quickMessage(text){
+
+        document.getElementById("chatInput").value =
+            text;
+
+        sendChat();
+    }
+
+
+    function handleChatKey(event){
+
+        if(event.key === "Enter"){
+            event.preventDefault();
+            sendChat();
+        }
+    }
+
+
+    async function sendChat(){
+
+        const input =
+            document.getElementById("chatInput");
+
+        const message =
+            input.value.trim();
+
+        if(!message){
+            return;
+        }
+
+        addMessage(message,"user");
+
+        input.value = "";
+
+        try{
+
+            const response =
+                await fetch(`${API}/support/chat`,{
+
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:JSON.stringify({
+
+                        user_id:
+                            user ? user.id : null,
+
+                        message:message
+
+                    })
+
+                });
+
+
+            const data =
+                await response.json();
+
+
+            if(!response.ok){
+                throw new Error(
+                    data.detail ||
+                    "Support chat unavailable"
+                );
+            }
+
+
+            const reply =
+                data.reply ||
+                data.message ||
+                "Our support team received your message.";
+
+
+            addMessage(reply,"bot");
+
+
+        }catch(error){
+
+            console.error(error);
+
+            const fallback =
+                getFallbackReply(message);
+
+            addMessage(fallback,"bot");
+
+        }
+
+    }
+
+
+    function getFallbackReply(message){
+
+        const text =
+            message.toLowerCase();
+
+
+        if(
+            text.includes("apply") ||
+            text.includes("application")
+        ){
+            return "Open Jobs, select a suitable job and use the Apply button. Your submitted applications can be tracked from Applications.";
+        }
+
+
+        if(
+            text.includes("resume")
+        ){
+            return "Open Profile and use the Resume Upload section. After uploading, you can use Resume Analysis when supported.";
+        }
+
+
+        if(
+            text.includes("login") ||
+            text.includes("password")
+        ){
+            return "Please check your email and password. You can also use Forgot Password from the Login page.";
+        }
+
+
+        if(
+            text.includes("save") &&
+            text.includes("job")
+        ){
+            return "Open a job from the Jobs page and use Save Job. Saved jobs can be viewed from your dashboard or jobs area.";
+        }
+
+
+        if(
+            text.includes("government") ||
+            text.includes("exam")
+        ){
+            return "Open Government Jobs to search recruitment notifications. Always verify important details using the official notification.";
+        }
+
+
+        if(
+            text.includes("employer")
+        ){
+            return "Employers can use the Employer Dashboard to post jobs, manage applicants and search job seekers.";
+        }
+
+
+        return "Thanks for contacting CareerConnect Support. Please describe the exact issue, and our support system can record it for follow-up.";
+
+    }
+
+
+    async function submitProblem(event){
+
+        event.preventDefault();
+
+
+        if(!user){
+
+            alert(
+                "Please login first to report a problem."
+            );
+
+            window.location.href =
+                "/login.html";
+
+            return;
+        }
+
+
+        const type =
+            document.getElementById("problemType")
+                .value;
+
+        const subject =
+            document.getElementById("problemSubject")
+                .value
+                .trim();
+
+        const description =
+            document.getElementById("problemDescription")
+                .value
+                .trim();
+
+
+        const status =
+            document.getElementById("reportStatus");
+
+
+        status.style.display = "block";
+
+        status.className =
+            "status";
+
+
+        try{
+
+            const response =
+                await fetch(`${API}/support`,{
+
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:JSON.stringify({
+
+                        user_id:user.id,
+
+                        subject:
+                            `[${type}] ${subject}`,
+
+                        message:description,
+
+                        category:type
+
+                    })
+
+                });
+
+
+            const data =
+                await response.json();
+
+
+            if(!response.ok){
+                throw new Error(
+                    data.detail ||
+                    "Unable to submit report"
+                );
+            }
+
+
+            status.className =
+                "status success";
+
+
+            status.textContent =
+                "Problem reported successfully. Thank you for contacting CareerConnect Support.";
+
+
+            document.getElementById("problemSubject")
+                .value = "";
+
+            document.getElementById("problemDescription")
+                .value = "";
+
+            document.getElementById("problemType")
+                .value = "";
+
+
+            showToast(
+                "Support report submitted."
+            );
+
+
+        }catch(error){
+
+            console.error(error);
+
+
+            status.className =
+                "status error";
+
+
+            status.textContent =
+                error.message ||
+                "Unable to submit report. Please try again.";
+
+        }
+
+    }
+
+
+    function toggleFaq(button){
+
+        const item =
+            button.parentElement;
+
+        item.classList.toggle("open");
+
+        const span =
+            button.querySelector("span");
+
+        span.textContent =
+            item.classList.contains("open")
+                ? "−"
+                : "+";
+
+    }
+
+
+    function setupLanguage(){
+
+        const select =
+            document.getElementById("languageSelect");
+
+
+        const saved =
+            localStorage.getItem(
+                "careerconnect_language"
+            );
+
+
+        if(saved){
+            select.value = saved;
+        }
+
+
+        select.addEventListener(
+            "change",
+            () => {
+
+                localStorage.setItem(
+                    "careerconnect_language",
+                    select.value
+                );
+
+            }
+        );
+
+    }
+
+
+    setupLanguage();
+
+</script>
+
+</body>
+</html>

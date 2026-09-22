@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Profile - CareerConnect</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Inter,Segoe UI,Arial,sans-serif;
+    min-height:100vh;
+    color:#eef2ff;
+    background:
+        radial-gradient(circle at 10% 10%,rgba(124,58,237,.28),transparent 30%),
+        radial-gradient(circle at 90% 20%,rgba(6,182,212,.20),transparent 28%),
+        linear-gradient(135deg,#070b1f,#101735 55%,#080d20);
+}
+
+nav{
+    height:72px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 6%;
+    border-bottom:1px solid rgba(255,255,255,.1);
+    background:rgba(7,11,31,.75);
+    backdrop-filter:blur(18px);
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:800;
+    background:linear-gradient(90deg,#a78bfa,#22d3ee);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+nav a{
+    color:#cbd5e1;
+    text-decoration:none;
+    margin-left:22px;
+    font-size:14px;
+}
+
+nav a:hover{
+    color:white;
+}
+
+.container{
+    width:92%;
+    max-width:1200px;
+    margin:35px auto 70px;
+}
+
+.hero{
+    padding:35px;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:28px;
+    background:rgba(255,255,255,.06);
+    backdrop-filter:blur(20px);
+    box-shadow:0 25px 70px rgba(0,0,0,.25);
+    margin-bottom:25px;
+}
+
+.badge{
+    display:inline-block;
+    padding:7px 13px;
+    border-radius:30px;
+    background:rgba(139,92,246,.15);
+    border:1px solid rgba(139,92,246,.3);
+    color:#c4b5fd;
+    font-size:13px;
+    margin-bottom:15px;
+}
+
+h1{
+    font-size:38px;
+    margin-bottom:10px;
+}
+
+.hero p{
+    color:#aeb9d0;
+    line-height:1.7;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
+}
+
+.card{
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:24px;
+    background:rgba(255,255,255,.055);
+    backdrop-filter:blur(18px);
+    padding:25px;
+    box-shadow:0 18px 55px rgba(0,0,0,.18);
+}
+
+.card.full{
+    grid-column:1/-1;
+}
+
+.card h2{
+    font-size:21px;
+    margin-bottom:8px;
+}
+
+.card-sub{
+    color:#94a3b8;
+    font-size:14px;
+    margin-bottom:20px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.field{
+    margin-bottom:5px;
+}
+
+.field.full{
+    grid-column:1/-1;
+}
+
+label{
+    display:block;
+    color:#cbd5e1;
+    font-size:13px;
+    margin-bottom:7px;
+}
+
+input,textarea,select{
+    width:100%;
+    padding:13px 14px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.12);
+    background:rgba(5,10,28,.65);
+    color:white;
+    outline:none;
+}
+
+textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+input:focus,textarea:focus,select:focus{
+    border-color:#8b5cf6;
+    box-shadow:0 0 0 3px rgba(139,92,246,.12);
+}
+
+button{
+    border:0;
+    border-radius:12px;
+    padding:12px 18px;
+    font-weight:700;
+    cursor:pointer;
+    color:white;
+    background:linear-gradient(135deg,#7c3aed,#2563eb);
+    margin-top:12px;
+}
+
+button:hover{
+    transform:translateY(-1px);
+    opacity:.95;
+}
+
+.secondary{
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.12);
+}
+
+.success{
+    color:#86efac;
+}
+
+.error{
+    color:#fca5a5;
+}
+
+.info{
+    color:#93c5fd;
+}
+
+.status{
+    margin-top:12px;
+    min-height:20px;
+    font-size:14px;
+}
+
+/* PROFILE SCORE */
+
+.score-wrap{
+    display:flex;
+    align-items:center;
+    gap:25px;
+}
+
+.circle{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:conic-gradient(#8b5cf6 0deg,#22d3ee 270deg,rgba(255,255,255,.08) 270deg);
+    position:relative;
+}
+
+.circle::after{
+    content:"";
+    position:absolute;
+    width:92px;
+    height:92px;
+    border-radius:50%;
+    background:#101735;
+}
+
+.circle span{
+    position:relative;
+    z-index:2;
+    font-size:25px;
+    font-weight:800;
+}
+
+.progress{
+    height:10px;
+    border-radius:20px;
+    background:rgba(255,255,255,.08);
+    overflow:hidden;
+    margin-top:12px;
+}
+
+.progress div{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,#8b5cf6,#22d3ee);
+    transition:.5s;
+}
+
+/* RESUME SCANNER */
+
+.scanner{
+    position:relative;
+    overflow:hidden;
+}
+
+.scanner::before{
+    content:"";
+    position:absolute;
+    width:180px;
+    height:180px;
+    background:#7c3aed;
+    filter:blur(90px);
+    opacity:.2;
+    right:-50px;
+    top:-60px;
+}
+
+.upload-box{
+    border:2px dashed rgba(139,92,246,.45);
+    border-radius:20px;
+    padding:35px 20px;
+    text-align:center;
+    background:rgba(139,92,246,.05);
+    cursor:pointer;
+}
+
+.upload-box:hover{
+    border-color:#22d3ee;
+    background:rgba(34,211,238,.05);
+}
+
+.upload-icon{
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+.upload-box h3{
+    margin-bottom:7px;
+}
+
+.upload-box p{
+    color:#94a3b8;
+    font-size:13px;
+}
+
+#resumeFile{
+    display:none;
+}
+
+.file-name{
+    margin-top:12px;
+    color:#67e8f9;
+    font-size:14px;
+}
+
+.scan-button{
+    width:100%;
+    font-size:15px;
+    padding:14px;
+}
+
+.scan-result{
+    display:none;
+    margin-top:25px;
+}
+
+.scan-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin-top:15px;
+}
+
+.metric{
+    padding:18px;
+    border-radius:16px;
+    background:rgba(255,255,255,.055);
+    border:1px solid rgba(255,255,255,.08);
+    text-align:center;
+}
+
+.metric strong{
+    display:block;
+    font-size:25px;
+    margin-bottom:5px;
+}
+
+.metric span{
+    font-size:12px;
+    color:#94a3b8;
+}
+
+.result-section{
+    margin-top:18px;
+}
+
+.result-section h3{
+    margin-bottom:9px;
+}
+
+.tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.tag{
+    padding:7px 11px;
+    border-radius:20px;
+    font-size:12px;
+    background:rgba(34,211,238,.1);
+    border:1px solid rgba(34,211,238,.2);
+    color:#a5f3fc;
+}
+
+.warning-tag{
+    background:rgba(245,158,11,.1);
+    border-color:rgba(245,158,11,.25);
+    color:#fcd34d;
+}
+
+.tip{
+    padding:14px;
+    border-radius:14px;
+    background:rgba(139,92,246,.08);
+    border:1px solid rgba(139,92,246,.18);
+    color:#cbd5e1;
+    margin-top:8px;
+    line-height:1.6;
+    font-size:14px;
+}
+
+/* QUICK LINKS */
+
+.quick{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+}
+
+.quick a{
+    text-decoration:none;
+    color:white;
+    padding:18px;
+    border-radius:16px;
+    background:rgba(255,255,255,.055);
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.quick a:hover{
+    background:rgba(139,92,246,.12);
+}
+
+@media(max-width:800px){
+    .grid,
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .card.full,
+    .field.full{
+        grid-column:auto;
+    }
+
+    .scan-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .quick{
+        grid-template-columns:1fr;
+    }
+
+    nav{
+        padding:0 4%;
+    }
+
+    nav a{
+        margin-left:8px;
+    }
+
+    h1{
+        font-size:30px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">CareerConnect</div>
+    <div>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="jobs.html">Jobs</a>
+        <a href="applications.html">Applications</a>
+        <a href="index.html">Home</a>
+    </div>
+</nav>
+
+<div class="container">
+
+<section class="hero">
+    <span class="badge">✨ Your Career Profile</span>
+    <h1>Build your professional profile</h1>
+    <p>
+        Add your qualification, skills, experience and preferences.
+        CareerConnect uses this information to find suitable jobs and
+        improve your career opportunities.
+    </p>
+</section>
+
+<div class="grid">
+
+<!-- PROFILE COMPLETION -->
+
+<div class="card">
+    <h2>📊 Profile Completion</h2>
+    <p class="card-sub">Complete your profile to improve job matching.</p>
+
+    <div class="score-wrap">
+        <div class="circle">
+            <span id="completionCircle">0%</span>
+        </div>
+
+        <div style="flex:1">
+            <h3 id="completionText">0% Complete</h3>
+            <p class="card-sub">
+                More profile information helps CareerConnect
+                provide better recommendations.
+            </p>
+
+            <div class="progress">
+                <div id="progressBar"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- RESUME STATUS -->
+
+<div class="card">
+    <h2>📄 Resume</h2>
+    <p class="card-sub">
+        Upload your resume and scan it for career insights.
+    </p>
+
+    <p id="resumeStatus" class="info">No resume uploaded yet.</p>
+
+    <button onclick="document.getElementById('resumeFile').click()">
+        📤 Upload Resume
+    </button>
+
+    <button class="secondary" onclick="viewResume()">
+        👁 View Resume
+    </button>
+</div>
+
+<!-- PROFILE FORM -->
+
+<div class="card full">
+    <h2>👤 Personal & Career Details</h2>
+    <p class="card-sub">
+        Keep your details updated so jobs can be matched accurately.
+    </p>
+
+    <div class="form-grid">
+
+        <div class="field">
+            <label>Full Name</label>
+            <input id="full_name" type="text" placeholder="Your full name">
+        </div>
+
+        <div class="field">
+            <label>Email</label>
+            <input id="email" type="email" placeholder="Your email">
+        </div>
+
+        <div class="field">
+            <label>Mobile</label>
+            <input id="mobile" type="text" placeholder="Mobile number">
+        </div>
+
+        <div class="field">
+            <label>Qualification</label>
+            <input id="qualification" type="text"
+                   placeholder="Example: B.E Computer Science">
+        </div>
+
+        <div class="field full">
+            <label>Skills</label>
+            <textarea id="skills"
+                      placeholder="Example: Python, Java, Excel, Communication"></textarea>
+        </div>
+
+        <div class="field">
+            <label>Experience</label>
+            <input id="experience" type="text"
+                   placeholder="Example: 2 years">
+        </div>
+
+        <div class="field">
+            <label>Expected Salary</label>
+            <input id="salary" type="text"
+                   placeholder="Example: ₹25,000">
+        </div>
+
+        <div class="field">
+            <label>State</label>
+            <input id="state" type="text"
+                   placeholder="Example: Tamil Nadu">
+        </div>
+
+        <div class="field">
+            <label>City / Location</label>
+            <input id="location" type="text"
+                   placeholder="Example: Chennai / Ranipet">
+        </div>
+
+        <div class="field full">
+            <label>Preferred Job Categories</label>
+            <input id="job_categories" type="text"
+                   placeholder="Example: IT, Sales, Accounting, Driver">
+        </div>
+
+    </div>
+
+    <button onclick="saveProfile()">💾 Save Profile</button>
+    <div id="profileStatus" class="status"></div>
+</div>
+
+<!-- RESUME SCANNER -->
+
+<div class="card full scanner">
+
+    <h2>🤖 AI Resume Scanner</h2>
+
+    <p class="card-sub">
+        Upload your resume and let CareerConnect analyze your
+        skills, qualification, experience and job readiness.
+    </p>
+
+    <label for="resumeFile" class="upload-box">
+
+        <div class="upload-icon">📄</div>
+
+        <h3>Upload your Resume</h3>
+
+        <p>
+            Click here to select PDF or DOCX
+        </p>
+
+        <p class="file-name" id="selectedFile">
+            No file selected
+        </p>
+
+    </label>
+
+    <input
+        id="resumeFile"
+        type="file"
+        accept=".pdf,.doc,.docx"
+        onchange="showSelectedFile()"
+    >
+
+    <button class="scan-button" onclick="scanResume()">
+        🚀 Scan My Resume
+    </button>
+
+    <div id="scannerStatus" class="status"></div>
+
+    <div id="scanResult" class="scan-result">
+
+        <h3>📊 Resume Analysis</h3>
+
+        <div class="scan-grid">
+
+            <div class="metric">
+                <strong id="resumeScore">--</strong>
+                <span>Resume Score</span>
+            </div>
+
+            <div class="metric">
+                <strong id="skillCount">--</strong>
+                <span>Skills Found</span>
+            </div>
+
+            <div class="metric">
+                <strong id="qualificationResult">--</strong>
+                <span>Qualification</span>
+            </div>
+
+            <div class="metric">
+                <strong id="experienceResult">--</strong>
+                <span>Experience</span>
+            </div>
+
+        </div>
+
+        <div class="result-section">
+            <h3>🧠 Detected Skills</h3>
+            <div id="detectedSkills" class="tags"></div>
+        </div>
+
+        <div class="result-section">
+            <h3>⚠️ Skills You Can Improve</h3>
+            <div id="missingSkills" class="tags"></div>
+        </div>
+
+        <div class="result-section">
+            <h3>💡 Resume Suggestions</h3>
+            <div id="resumeTips"></div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- CAREER GROWTH -->
+
+<div class="card">
+    <h2>🚀 Career Growth</h2>
+    <p class="card-sub">
+        Get suggestions based on your current profile.
+    </p>
+
+    <button onclick="careerGrowth()">
+        Get Career Suggestions
+    </button>
+
+    <div id="careerResult" class="status"></div>
+</div>
+
+<!-- RECOMMENDED JOBS -->
+
+<div class="card">
+    <h2>🎯 Recommended Jobs</h2>
+    <p class="card-sub">
+        Find jobs matching your profile.
+    </p>
+
+    <button onclick="findJobs()">
+        Find Matching Jobs
+    </button>
+</div>
+
+<!-- QUICK LINKS -->
+
+<div class="card full">
+    <h2>⚡ Quick Access</h2>
+
+    <div class="quick">
+
+        <a href="jobs.html">
+            🔎<br><br>
+            <strong>Find Jobs</strong>
+        </a>
+
+        <a href="applications.html">
+            📋<br><br>
+            <strong>My Applications</strong>
+        </a>
+
+        <a href="government.html">
+            🏛️<br><br>
+            <strong>Government Jobs</strong>
+        </a>
+
+    </div>
+</div>
+
+</div>
+</div>
+
+<script>
+
+const API = "";
+let currentUser = null;
+
+/* GET USER */
+
+function getUser(){
+    try{
+        currentUser =
+            JSON.parse(localStorage.getItem("careerconnect_user"));
+    }catch(e){
+        currentUser = null;
+    }
+
+    return currentUser;
+}
+
+/* LOAD PROFILE */
+
+async function loadProfile(){
+
+    const user = getUser();
+
+    if(!user){
+        window.location.href = "login.html";
+        return;
+    }
+
+    try{
+
+        let response = await fetch(
+            `/profile/${user.id}`
+        );
+
+        if(!response.ok){
+            response = await fetch(
+                `/profile?email=${encodeURIComponent(user.email)}`
+            );
+        }
+
+        if(!response.ok) return;
+
+        const data = await response.json();
+
+        setValue("full_name",data.full_name);
+        setValue("email",data.email);
+        setValue("mobile",data.mobile);
+        setValue("qualification",data.qualification);
+        setValue("skills",data.skills);
+        setValue("experience",data.experience);
+        setValue("salary",data.salary);
+        setValue("state",data.state);
+        setValue("location",data.location);
+        setValue("job_categories",data.job_categories);
+
+        calculateCompletion(data);
+
+        if(data.resume_filename){
+            document.getElementById("resumeStatus").innerHTML =
+                `📄 Resume uploaded: <b>${data.resume_filename}</b>`;
+        }
+
+    }catch(error){
+        console.log(error);
+    }
+}
+
+function setValue(id,value){
+    const el = document.getElementById(id);
+    if(el && value !== null && value !== undefined){
+        el.value = value;
+    }
+}
+
+/* COMPLETION */
+
+function calculateCompletion(data){
+
+    const fields = [
+        data.full_name,
+        data.email,
+        data.mobile,
+        data.qualification,
+        data.skills,
+        data.experience,
+        data.salary,
+        data.state,
+        data.location,
+        data.job_categories
+    ];
+
+    const completed =
+        fields.filter(x =>
+            x !== null &&
+            x !== undefined &&
+            String(x).trim() !== ""
+        ).length;
+
+    const percent = Math.round(
+        (completed / fields.length) * 100
+    );
+
+    document.getElementById("completionCircle")
+        .textContent = percent + "%";
+
+    document.getElementById("completionText")
+        .textContent = percent + "% Complete";
+
+    document.getElementById("progressBar")
+        .style.width = percent + "%";
+}
+
+/* SAVE PROFILE */
+
+async function saveProfile(){
+
+    const user = getUser();
+
+    if(!user){
+        window.location.href="login.html";
+        return;
+    }
+
+    const data = {
+        full_name:document.getElementById("full_name").value,
+        email:document.getElementById("email").value,
+        mobile:document.getElementById("mobile").value,
+        qualification:document.getElementById("qualification").value,
+        skills:document.getElementById("skills").value,
+        experience:document.getElementById("experience").value,
+        salary:document.getElementById("salary").value,
+        state:document.getElementById("state").value,
+        location:document.getElementById("location").value,
+        job_categories:document.getElementById("job_categories").value
+    };
+
+    try{
+
+        let response = await fetch(
+            `/profile/${user.id}`,
+            {
+                method:"PUT",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify(data)
+            }
+        );
+
+        if(!response.ok){
+
+            response = await fetch(
+                `/profile`,
+                {
+                    method:"PUT",
+                    headers:{
+                        "Content-Type":"application/json"
+                    },
+                    body:JSON.stringify(data)
+                }
+            );
+
+        }
+
+        if(response.ok){
+
+            document.getElementById("profileStatus").innerHTML =
+                `<span class="success">✅ Profile saved successfully!</span>`;
+
+            calculateCompletion(data);
+
+            const updatedUser = {
+                ...user,
+                ...data
+            };
+
+            localStorage.setItem(
+                "careerconnect_user",
+                JSON.stringify(updatedUser)
+            );
+
+        }else{
+
+            document.getElementById("profileStatus").innerHTML =
+                `<span class="error">❌ Unable to save profile.</span>`;
+        }
+
+    }catch(error){
+
+        document.getElementById("profileStatus").innerHTML =
+            `<span class="error">❌ Server connection error.</span>`;
+    }
+}
+
+/* FILE SELECT */
+
+function showSelectedFile(){
+
+    const input =
+        document.getElementById("resumeFile");
+
+    const output =
+        document.getElementById("selectedFile");
+
+    if(input.files.length){
+
+        output.textContent =
+            "📎 " + input.files[0].name;
+
+    }else{
+
+        output.textContent =
+            "No file selected";
+    }
+}
+
+/* UPLOAD RESUME */
+
+async function uploadResume(){
+
+    const user = getUser();
+    const input = document.getElementById("resumeFile");
+
+    if(!user){
+        window.location.href="login.html";
+        return false;
+    }
+
+    if(!input.files.length){
+        return false;
+    }
+
+    const formData = new FormData();
+
+    formData.append(
+        "file",
+        input.files[0]
+    );
+
+    try{
+
+        const response = await fetch(
+            `/profile/${user.id}/resume`,
+            {
+                method:"POST",
+                body:formData
+            }
+        );
+
+        if(response.ok){
+
+            document.getElementById("resumeStatus").innerHTML =
+                `<span class="success">✅ Resume uploaded successfully!</span>`;
+
+            return true;
+        }
+
+        document.getElementById("resumeStatus").innerHTML =
+            `<span class="error">❌ Resume upload failed.</span>`;
+
+        return false;
+
+    }catch(error){
+
+        document.getElementById("resumeStatus").innerHTML =
+            `<span class="error">❌ Server connection error.</span>`;
+
+        return false;
+    }
+}
+
+/* RESUME SCANNER */
+
+async function scanResume(){
+
+    const user = getUser();
+    const input = document.getElementById("resumeFile");
+    const status = document.getElementById("scannerStatus");
+
+    if(!user){
+        window.location.href="login.html";
+        return;
+    }
+
+    if(!input.files.length){
+
+        status.innerHTML =
+            `<span class="error">⚠️ Please select your resume first.</span>`;
+
+        return;
+    }
+
+    status.innerHTML =
+        `<span class="info">🔄 Uploading and scanning your resume...</span>`;
+
+    try{
+
+        const uploaded = await uploadResume();
+
+        if(!uploaded){
+            return;
+        }
+
+        const response = await fetch(
+            `/profile/${user.id}/resume-analysis`
+        );
+
+        if(!response.ok){
+
+            status.innerHTML =
+                `<span class="error">
+                ❌ Resume uploaded, but analysis could not be completed.
+                </span>`;
+
+            return;
+        }
+
+        const data = await response.json();
+
+        displayScanResult(data);
+
+        status.innerHTML =
+            `<span class="success">
+            ✅ Resume scan completed!
+            </span>`;
+
+    }catch(error){
+
+        console.error(error);
+
+        status.innerHTML =
+            `<span class="error">
+            ❌ Unable to connect to resume scanner.
+            </span>`;
+    }
+}
+
+/* DISPLAY SCAN RESULT */
+
+function displayScanResult(data){
+
+    document.getElementById("scanResult").style.display = "block";
+
+    const score =
+        data.resume_score ??
+        data.score ??
+        data.ats_score ??
+        "--";
+
+    document.getElementById("resumeScore")
+        .textContent =
+        score === "--" ? "--" : score + "%";
+
+    let skills =
+        data.skills ||
+        data.detected_skills ||
+        data.matching_skills ||
+        [];
+
+    if(typeof skills === "string"){
+        skills = skills
+            .split(",")
+            .map(x=>x.trim())
+            .filter(Boolean);
+    }
+
+    document.getElementById("skillCount")
+        .textContent = skills.length;
+
+    document.getElementById("detectedSkills").innerHTML =
+        skills.length
+        ? skills.map(skill =>
+            `<span class="tag">${escapeHtml(skill)}</span>`
+          ).join("")
+        : `<span class="tag">No skills detected</span>`;
+
+    let missing =
+        data.missing_skills ||
+        data.recommended_skills ||
+        [];
+
+    if(typeof missing === "string"){
+        missing = missing
+            .split(",")
+            .map(x=>x.trim())
+            .filter(Boolean);
+    }
+
+    document.getElementById("missingSkills").innerHTML =
+        missing.length
+        ? missing.map(skill =>
+            `<span class="tag warning-tag">${escapeHtml(skill)}</span>`
+          ).join("")
+        : `<span class="tag">No major missing skills identified</span>`;
+
+    document.getElementById("qualificationResult")
+        .textContent =
+        data.qualification ||
+        data.detected_qualification ||
+        "Detected";
+
+    document.getElementById("experienceResult")
+        .textContent =
+        data.experience ||
+        data.detected_experience ||
+        "Detected";
+
+    let tips =
+        data.suggestions ||
+        data.recommendations ||
+        data.tips ||
+        [];
+
+    if(typeof tips === "string"){
+        tips = [tips];
+    }
+
+    if(!tips.length){
+        tips = [
+            "Keep your resume focused on relevant skills.",
+            "Use clear job titles and measurable achievements.",
+            "Keep your contact information updated."
+        ];
+    }
+
+    document.getElementById("resumeTips").innerHTML =
+        tips.map(tip =>
+            `<div class="tip">💡 ${escapeHtml(tip)}</div>`
+        ).join("");
+}
+
+/* HTML SAFETY */
+
+function escapeHtml(value){
+
+    return String(value)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+}
+
+/* VIEW RESUME */
+
+function viewResume(){
+
+    const user = getUser();
+
+    if(!user) return;
+
+    window.open(
+        `/resumes/${user.id}`,
+        "_blank"
+    );
+}
+
+/* CAREER GROWTH */
+
+async function careerGrowth(){
+
+    const user = getUser();
+
+    if(!user) return;
+
+    const result =
+        document.getElementById("careerResult");
+
+    result.innerHTML =
+        `<span class="info">🔄 Generating career suggestions...</span>`;
+
+    try{
+
+        const response = await fetch(
+            `/profile/${user.id}/career-growth`
+        );
+
+        if(!response.ok){
+            result.innerHTML =
+                `<span class="error">Unable to generate suggestions.</span>`;
+            return;
+        }
+
+        const data = await response.json();
+
+        let suggestions =
+            data.suggestions ||
+            data.recommendations ||
+            [];
+
+        if(typeof suggestions === "string"){
+            suggestions = [suggestions];
+        }
+
+        result.innerHTML =
+            suggestions.length
+            ? suggestions.map(x =>
+                `<div class="tip">🚀 ${escapeHtml(x)}</div>`
+              ).join("")
+            : `<span class="success">
+                Profile looks good. Keep improving your skills!
+               </span>`;
+
+    }catch(error){
+
+        result.innerHTML =
+            `<span class="error">
+            Server connection error.
+            </span>`;
+    }
+}
+
+/* FIND JOBS */
+
+function findJobs(){
+
+    window.location.href =
+        "jobs.html?match=true";
+}
+
+/* START */
+
+loadProfile();
+
+</script>
+
+</body>
+</html>

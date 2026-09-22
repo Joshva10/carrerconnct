@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Government Jobs - CareerConnect</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #172033;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        /* NAVBAR */
+        .nav {
+            background: white;
+            min-height: 72px;
+            display: flex;
+            align-items: center;
+            padding: 0 6%;
+            gap: 28px;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: #2563eb;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 22px;
+            align-items: center;
+            flex: 1;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            color: #334155;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #2563eb;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .lang {
+            padding: 9px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 9px;
+            background: white;
+        }
+
+        /* BUTTONS */
+        .btn {
+            border: none;
+            border-radius: 9px;
+            padding: 11px 18px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-light {
+            background: #eef2ff;
+            color: #1e40af;
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #334155;
+        }
+
+        .btn-success {
+            background: #059669;
+            color: white;
+        }
+
+        /* PAGE */
+        .page {
+            width: 88%;
+            max-width: 1250px;
+            margin: 35px auto 60px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            color: white;
+            border-radius: 22px;
+            padding: 42px;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            max-width: 800px;
+            opacity: 0.95;
+        }
+
+        /* SEARCH */
+        .search-card {
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+            box-shadow: 0 5px 22px rgba(15, 23, 42, 0.07);
+            margin-bottom: 30px;
+        }
+
+        .search-card h2 {
+            margin-bottom: 18px;
+        }
+
+        .filters {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr auto auto;
+            gap: 12px;
+            align-items: end;
+        }
+
+        .field label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: #475569;
+        }
+
+        .field input,
+        .field select {
+            width: 100%;
+            padding: 12px 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 9px;
+            outline: none;
+            background: white;
+        }
+
+        .field input:focus,
+        .field select:focus {
+            border-color: #2563eb;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* RESULTS HEADER */
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+
+        .results-header h2 {
+            font-size: 25px;
+        }
+
+        .result-count {
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        /* JOB GRID */
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .job-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 18px;
+            padding: 23px;
+            box-shadow: 0 5px 20px rgba(15, 23, 42, 0.05);
+        }
+
+        .job-card:hover {
+            box-shadow: 0 9px 28px rgba(15, 23, 42, 0.10);
+            transform: translateY(-2px);
+            transition: 0.2s;
+        }
+
+        .job-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+
+        .job-title {
+            font-size: 21px;
+            font-weight: 800;
+            color: #172033;
+        }
+
+        .org {
+            color: #2563eb;
+            font-weight: 700;
+            margin-top: 3px;
+        }
+
+        .badge {
+            background: #eff6ff;
+            color: #1d4ed8;
+            padding: 5px 9px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 9px;
+            margin: 17px 0;
+        }
+
+        .meta-item {
+            background: #f8fafc;
+            border-radius: 9px;
+            padding: 9px;
+            font-size: 13px;
+        }
+
+        .meta-item strong {
+            display: block;
+            color: #475569;
+            font-size: 12px;
+            margin-bottom: 2px;
+        }
+
+        .description {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 17px;
+        }
+
+        .source {
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 15px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 9px;
+            flex-wrap: wrap;
+        }
+
+        /* EMPTY / LOADING */
+        .empty {
+            background: white;
+            border: 1px dashed #cbd5e1;
+            border-radius: 18px;
+            padding: 55px 20px;
+            text-align: center;
+            color: #64748b;
+            grid-column: 1 / -1;
+        }
+
+        .empty h3 {
+            color: #334155;
+            margin-bottom: 8px;
+        }
+
+        /* ALERT */
+        .alert-box {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .alert-box h3 {
+            color: #1e40af;
+            margin-bottom: 4px;
+        }
+
+        .alert-box p {
+            color: #475569;
+            font-size: 14px;
+        }
+
+        /* SAFETY */
+        .safety {
+            margin-top: 35px;
+        }
+
+        .safety h2 {
+            margin-bottom: 16px;
+        }
+
+        .safety-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .safety-card {
+            background: white;
+            border-radius: 16px;
+            padding: 22px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .safety-card h3 {
+            margin-bottom: 7px;
+        }
+
+        .safety-card p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* TOAST */
+        #toast {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            background: #172033;
+            color: white;
+            padding: 13px 18px;
+            border-radius: 10px;
+            display: none;
+            z-index: 999;
+        }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.55);
+            z-index: 500;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-box {
+            background: white;
+            width: 100%;
+            max-width: 520px;
+            border-radius: 18px;
+            padding: 25px;
+        }
+
+        .modal-box h2 {
+            margin-bottom: 15px;
+        }
+
+        .modal-box label {
+            display: block;
+            font-weight: 700;
+            font-size: 13px;
+            margin: 12px 0 6px;
+        }
+
+        .modal-box input,
+        .modal-box select {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #cbd5e1;
+            border-radius: 9px;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #111827;
+            color: #cbd5e1;
+            padding: 30px 6%;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1000px) {
+            .filters {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .jobs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .safety-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .nav {
+                flex-wrap: wrap;
+                padding: 14px 5%;
+            }
+
+            .nav-links {
+                order: 3;
+                width: 100%;
+                overflow-x: auto;
+                padding-bottom: 5px;
+            }
+
+            .nav-right {
+                margin-left: auto;
+            }
+
+            .page {
+                width: 92%;
+            }
+
+            .hero {
+                padding: 28px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .filters {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-buttons {
+                width: 100%;
+            }
+
+            .filter-buttons .btn {
+                flex: 1;
+            }
+
+            .safety-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .alert-box {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .nav-links {
+                gap: 14px;
+            }
+
+            .nav-links a {
+                font-size: 14px;
+            }
+
+            .nav-right .lang {
+                max-width: 105px;
+            }
+
+            .job-top {
+                flex-direction: column;
+            }
+
+            .meta {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="nav">
+
+    <a href="/" class="logo">
+        CareerConnect
+    </a>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/jobs.html">Jobs</a>
+        <a href="/government.html" class="active">Government</a>
+        <a href="/support.html">Support</a>
+    </div>
+
+    <div class="nav-right">
+
+        <select id="languageSelect" class="lang">
+            <option value="English">English</option>
+            <option value="Tamil">தமிழ்</option>
+            <option value="Hindi">हिन्दी</option>
+            <option value="Telugu">తెలుగు</option>
+            <option value="Kannada">ಕನ್ನಡ</option>
+            <option value="Malayalam">മലയാളം</option>
+            <option value="Marathi">मराठी</option>
+            <option value="Bengali">বাংলা</option>
+            <option value="Gujarati">ગુજરાતી</option>
+            <option value="Punjabi">ਪੰਜਾਬੀ</option>
+            <option value="Odia">ଓଡ଼ିଆ</option>
+            <option value="Urdu">اردو</option>
+        </select>
+
+        <a href="/login.html" class="btn btn-primary">
+            Login
+        </a>
+
+    </div>
+
+</nav>
+
+
+<main class="page">
+
+    <!-- HERO -->
+    <section class="hero">
+
+        <h1>Government Jobs & Exam Notifications</h1>
+
+        <p>
+            Find government recruitment opportunities and examination
+            notifications in one place. Always verify the latest details
+            using the official recruitment notification before applying.
+        </p>
+
+    </section>
+
+
+    <!-- SEARCH / FILTERS -->
+    <section class="search-card">
+
+        <h2>🔎 Search Government Opportunities</h2>
+
+        <div class="filters">
+
+            <div class="field">
+
+                <label for="searchInput">
+                    Search
+                </label>
+
+                <input
+                    id="searchInput"
+                    type="text"
+                    placeholder="Job title, organization..."
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label for="stateInput">
+                    State
+                </label>
+
+                <select id="stateInput">
+
+                    <option value="">
+                        All States
+                    </option>
+
+                    <option value="All India">
+                        All India
+                    </option>
+
+                    <option value="Tamil Nadu">
+                        Tamil Nadu
+                    </option>
+
+                    <option value="Andhra Pradesh">
+                        Andhra Pradesh
+                    </option>
+
+                    <option value="Karnataka">
+                        Karnataka
+                    </option>
+
+                    <option value="Kerala">
+                        Kerala
+                    </option>
+
+                    <option value="Telangana">
+                        Telangana
+                    </option>
+
+                    <option value="Maharashtra">
+                        Maharashtra
+                    </option>
+
+                    <option value="Delhi">
+                        Delhi
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="field">
+
+                <label for="qualificationInput">
+                    Qualification
+                </label>
+
+                <select id="qualificationInput">
+
+                    <option value="">
+                        Any Qualification
+                    </option>
+
+                    <option value="10th">
+                        10th
+                    </option>
+
+                    <option value="12th">
+                        12th
+                    </option>
+
+                    <option value="Diploma">
+                        Diploma
+                    </option>
+
+                    <option value="Graduate">
+                        Graduate
+                    </option>
+
+                    <option value="Post Graduate">
+                        Post Graduate
+                    </option>
+
+                    <option value="Engineering">
+                        Engineering
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="filter-buttons">
+
+                <button
+                    class="btn btn-primary"
+                    onclick="searchGovernmentJobs()"
+                >
+                    Search
+                </button>
+
+                <button
+                    class="btn btn-secondary"
+                    onclick="resetFilters()"
+                >
+                    Reset
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- RESULTS -->
+    <section>
+
+        <div class="results-header">
+
+            <div>
+                <h2>
+                    Available Government Opportunities
+                </h2>
+
+                <div
+                    id="jobCount"
+                    class="result-count"
+                >
+                    Loading...
+                </div>
+            </div>
+
+            <button
+                class="btn btn-secondary"
+                onclick="loadGovernmentJobs()"
+            >
+                ↻ Refresh
+            </button>
+
+        </div>
+
+
+        <div
+            id="jobsContainer"
+            class="jobs-grid"
+        >
+
+            <div class="empty">
+
+                <h3>
+                    Loading government opportunities...
+                </h3>
+
+                <p>
+                    Please wait.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- JOB ALERT -->
+    <section class="alert-box">
+
+        <div>
+
+            <h3>
+                🔔 Government Job Alerts
+            </h3>
+
+            <p>
+                Save your preference and use CareerConnect to keep track
+                of government opportunities.
+            </p>
+
+        </div>
+
+        <button
+            class="btn btn-primary"
+            onclick="openAlertModal()"
+        >
+            Set Job Alert
+        </button>
+
+    </section>
+
+
+    <!-- SAFETY -->
+    <section class="safety">
+
+        <h2>
+            🛡️ Government Job Safety Tips
+        </h2>
+
+        <div class="safety-grid">
+
+            <div class="safety-card">
+
+                <h3>
+                    Verify Official Notification
+                </h3>
+
+                <p>
+                    Check the recruitment notice from the official
+                    government department or recruitment board.
+                </p>
+
+            </div>
+
+
+            <div class="safety-card">
+
+                <h3>
+                    Don't Pay Unverified Agents
+                </h3>
+
+                <p>
+                    Avoid unofficial agents or websites asking for
+                    money in exchange for a government job.
+                </p>
+
+            </div>
+
+
+            <div class="safety-card">
+
+                <h3>
+                    Check Important Dates
+                </h3>
+
+                <p>
+                    Always confirm the application deadline and other
+                    important dates from the official notification.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+    © 2026 CareerConnect • Smart Jobs. Better Careers.
+</footer>
+
+
+<!-- ALERT MODAL -->
+<div
+    id="alertModal"
+    class="modal"
+>
+
+    <div class="modal-box">
+
+        <h2>
+            🔔 Set Government Job Alert
+        </h2>
+
+        <label>
+            State
+        </label>
+
+        <select id="alertState">
+
+            <option value="All India">
+                All India
+            </option>
+
+            <option value="Tamil Nadu">
+                Tamil Nadu
+            </option>
+
+            <option value="Karnataka">
+                Karnataka
+            </option>
+
+            <option value="Kerala">
+                Kerala
+            </option>
+
+            <option value="Telangana">
+                Telangana
+            </option>
+
+        </select>
+
+
+        <label>
+            Qualification
+        </label>
+
+        <select id="alertQualification">
+
+            <option value="Any">
+                Any
+            </option>
+
+            <option value="10th">
+                10th
+            </option>
+
+            <option value="12th">
+                12th
+            </option>
+
+            <option value="Diploma">
+                Diploma
+            </option>
+
+            <option value="Graduate">
+                Graduate
+            </option>
+
+            <option value="Post Graduate">
+                Post Graduate
+            </option>
+
+        </select>
+
+
+        <div class="modal-actions">
+
+            <button
+                class="btn btn-secondary"
+                onclick="closeAlertModal()"
+            >
+                Cancel
+            </button>
+
+            <button
+                class="btn btn-success"
+                onclick="saveAlert()"
+            >
+                Save Alert
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div id="toast"></div>
+
+
+<script>
+
+    const API = "";
+
+    let allGovernmentJobs = [];
+
+
+    /* =========================
+       LANGUAGE
+    ========================= */
+
+    const languageSelect =
+        document.getElementById("languageSelect");
+
+    const savedLanguage =
+        localStorage.getItem("careerconnect_language");
+
+    if (savedLanguage) {
+        languageSelect.value = savedLanguage;
+    }
+
+    languageSelect.addEventListener(
+        "change",
+        function () {
+
+            localStorage.setItem(
+                "careerconnect_language",
+                this.value
+            );
+
+            showToast(
+                "Language preference saved"
+            );
+        }
+    );
+
+
+    /* =========================
+       LOAD GOVERNMENT JOBS
+    ========================= */
+
+    async function loadGovernmentJobs() {
+
+        const container =
+            document.getElementById(
+                "jobsContainer"
+            );
+
+        const count =
+            document.getElementById(
+                "jobCount"
+            );
+
+        container.innerHTML = `
+            <div class="empty">
+                <h3>Loading government opportunities...</h3>
+                <p>Please wait.</p>
+            </div>
+        `;
+
+        count.textContent =
+            "Loading...";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API}/government-jobs`
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Government jobs API failed"
+                );
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            /*
+                IMPORTANT FIX:
+
+                Backend returns:
+
+                {
+                    "jobs": [...],
+                    "total": 7
+                }
+
+                Older frontend may expect:
+
+                [...]
+
+                This code supports BOTH formats.
+            */
+
+            if (Array.isArray(data)) {
+
+                allGovernmentJobs = data;
+
+            } else if (
+                data &&
+                Array.isArray(data.jobs)
+            ) {
+
+                allGovernmentJobs =
+                    data.jobs;
+
+            } else {
+
+                allGovernmentJobs = [];
+
+            }
+
+
+            renderGovernmentJobs(
+                allGovernmentJobs
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Government jobs error:",
+                error
+            );
+
+
+            count.textContent =
+                "0 opportunities found";
+
+
+            container.innerHTML = `
+                <div class="empty">
+
+                    <h3>
+                        Unable to load government jobs
+                    </h3>
+
+                    <p>
+                        Please make sure the CareerConnect
+                        server is running.
+                    </p>
+
+                    <button
+                        class="btn btn-primary"
+                        style="margin-top:15px"
+                        onclick="loadGovernmentJobs()"
+                    >
+                        Try Again
+                    </button>
+
+                </div>
+            `;
+
+        }
+
+    }
+
+
+    /* =========================
+       RENDER JOBS
+    ========================= */
+
+    function renderGovernmentJobs(
+        jobs
+    ) {
+
+        const container =
+            document.getElementById(
+                "jobsContainer"
+            );
+
+        const count =
+            document.getElementById(
+                "jobCount"
+            );
+
+
+        count.textContent =
+            `${jobs.length} opportunities found`;
+
+
+        if (!jobs.length) {
+
+            container.innerHTML = `
+                <div class="empty">
+
+                    <h3>
+                        No government jobs found
+                    </h3>
+
+                    <p>
+                        Try changing the search or
+                        filter options.
+                    </p>
+
+                </div>
+            `;
+
+            return;
+
+        }
+
+
+        container.innerHTML =
+            jobs.map(
+                job => createJobCard(job)
+            ).join("");
+
+    }
+
+
+    /* =========================
+       JOB CARD
+    ========================= */
+
+    function createJobCard(
+        job
+    ) {
+
+        const title =
+            escapeHtml(
+                job.title ||
+                "Government Opportunity"
+            );
+
+
+        const organization =
+            escapeHtml(
+                job.organization ||
+                "Government Organization"
+            );
+
+
+        const state =
+            escapeHtml(
+                job.state ||
+                "Not specified"
+            );
+
+
+        const qualification =
+            escapeHtml(
+                job.qualification ||
+                "See official notification"
+            );
+
+
+        const description =
+            escapeHtml(
+                job.description ||
+                "Please check the official notification for complete details."
+            );
+
+
+        const source =
+            escapeHtml(
+                job.source ||
+                "Official source"
+            );
+
+
+        const examDate =
+            formatDate(
+                job.exam_date
+            );
+
+
+        const lastDate =
+            formatDate(
+                job.last_date
+            );
+
+
+        const officialUrl =
+            job.notification_url ||
+            "#";
+
+
+        return `
+
+            <article class="job-card">
+
+                <div class="job-top">
+
+                    <div>
+
+                        <div class="job-title">
+                            ${title}
+                        </div>
+
+                        <div class="org">
+                            ${organization}
+                        </div>
+
+                    </div>
+
+                    <span class="badge">
+                        Government
+                    </span>
+
+                </div>
+
+
+                <div class="meta">
+
+                    <div class="meta-item">
+
+                        <strong>
+                            📍 State
+                        </strong>
+
+                        ${state}
+
+                    </div>
+
+
+                    <div class="meta-item">
+
+                        <strong>
+                            🎓 Qualification
+                        </strong>
+
+                        ${qualification}
+
+                    </div>
+
+
+                    <div class="meta-item">
+
+                        <strong>
+                            📝 Exam Date
+                        </strong>
+
+                        ${examDate}
+
+                    </div>
+
+
+                    <div class="meta-item">
+
+                        <strong>
+                            ⏰ Last Date
+                        </strong>
+
+                        ${lastDate}
+
+                    </div>
+
+                </div>
+
+
+                <p class="description">
+                    ${description}
+                </p>
+
+
+                <div class="source">
+                    Source:
+                    <strong>
+                        ${source}
+                    </strong>
+                </div>
+
+
+                <div class="actions">
+
+                    ${
+                        officialUrl !== "#"
+                        ?
+                        `
+                        <a
+                            href="${escapeAttribute(officialUrl)}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="btn btn-primary"
+                        >
+                            Official Notification ↗
+                        </a>
+                        `
+                        :
+                        `
+                        <button
+                            class="btn btn-secondary"
+                            disabled
+                        >
+                            Notification unavailable
+                        </button>
+                        `
+                    }
+
+
+                    <button
+                        class="btn btn-secondary"
+                        onclick="saveGovernmentJob(${Number(job.id)})"
+                    >
+                        ⭐ Save
+                    </button>
+
+                </div>
+
+            </article>
+
+        `;
+
+    }
+
+
+    /* =========================
+       SEARCH
+    ========================= */
+
+    function searchGovernmentJobs() {
+
+        const search =
+            document.getElementById(
+                "searchInput"
+            ).value
+            .trim()
+            .toLowerCase();
+
+
+        const state =
+            document.getElementById(
+                "stateInput"
+            ).value
+            .trim()
+            .toLowerCase();
+
+
+        const qualification =
+            document.getElementById(
+                "qualificationInput"
+            ).value
+            .trim()
+            .toLowerCase();
+
+
+        const filtered =
+            allGovernmentJobs.filter(
+                job => {
+
+                    const searchable = [
+
+                        job.title,
+                        job.organization,
+                        job.description,
+                        job.state,
+                        job.qualification,
+                        job.source
+
+                    ]
+                    .filter(Boolean)
+                    .join(" ")
+                    .toLowerCase();
+
+
+                    const jobState =
+                        String(
+                            job.state || ""
+                        ).toLowerCase();
+
+
+                    const jobQualification =
+                        String(
+                            job.qualification || ""
+                        ).toLowerCase();
+
+
+                    const matchesSearch =
+                        !search ||
+                        searchable.includes(
+                            search
+                        );
+
+
+                    const matchesState =
+                        !state ||
+                        jobState.includes(
+                            state
+                        );
+
+
+                    const matchesQualification =
+                        !qualification ||
+                        jobQualification.includes(
+                            qualification
+                        ) ||
+                        jobQualification.includes(
+                            "any"
+                        ) ||
+                        jobQualification.includes(
+                            "see official"
+                        );
+
+
+                    return (
+                        matchesSearch &&
+                        matchesState &&
+                        matchesQualification
+                    );
+
+                }
+            );
+
+
+        renderGovernmentJobs(
+            filtered
+        );
+
+    }
+
+
+    /* =========================
+       RESET
+    ========================= */
+
+    function resetFilters() {
+
+        document.getElementById(
+            "searchInput"
+        ).value = "";
+
+
+        document.getElementById(
+            "stateInput"
+        ).value = "";
+
+
+        document.getElementById(
+            "qualificationInput"
+        ).value = "";
+
+
+        renderGovernmentJobs(
+            allGovernmentJobs
+        );
+
+
+        showToast(
+            "All government job filters cleared"
+        );
+
+    }
+
+
+    /* =========================
+       SAVE JOB
+    ========================= */
+
+    function saveGovernmentJob(
+        jobId
+    ) {
+
+        if (!jobId) {
+
+            showToast(
+                "Job ID unavailable"
+            );
+
+            return;
+
+        }
+
+
+        let saved =
+            JSON.parse(
+                localStorage.getItem(
+                    "careerconnect_saved_government_jobs"
+                ) || "[]"
+            );
+
+
+        if (!saved.includes(jobId)) {
+
+            saved.push(jobId);
+
+            localStorage.setItem(
+                "careerconnect_saved_government_jobs",
+                JSON.stringify(saved)
+            );
+
+            showToast(
+                "Government job saved ⭐"
+            );
+
+        } else {
+
+            showToast(
+                "This government job is already saved"
+            );
+
+        }
+
+    }
+
+
+    /* =========================
+       ALERT MODAL
+    ========================= */
+
+    function openAlertModal() {
+
+        document
+            .getElementById("alertModal")
+            .classList.add("show");
+
+    }
+
+
+    function closeAlertModal() {
+
+        document
+            .getElementById("alertModal")
+            .classList.remove("show");
+
+    }
+
+
+    function saveAlert() {
+
+        const state =
+            document.getElementById(
+                "alertState"
+            ).value;
+
+
+        const qualification =
+            document.getElementById(
+                "alertQualification"
+            ).value;
+
+
+        localStorage.setItem(
+            "careerconnect_government_alert",
+            JSON.stringify({
+                state,
+                qualification
+            })
+        );
+
+
+        closeAlertModal();
+
+
+        showToast(
+            `Government job alert saved: ${state}`
+        );
+
+    }
+
+
+    /* =========================
+       DATE
+    ========================= */
+
+    function formatDate(
+        value
+    ) {
+
+        if (!value) {
+
+            return "See official notification";
+
+        }
+
+
+        const date =
+            new Date(value);
+
+
+        if (isNaN(date.getTime())) {
+
+            return String(value);
+
+        }
+
+
+        return date.toLocaleDateString(
+            "en-IN",
+            {
+                day: "2-digit",
+                month: "short",
+                year: "numeric"
+            }
+        );
+
+    }
+
+
+    /* =========================
+       SECURITY HELPERS
+    ========================= */
+
+    function escapeHtml(
+        value
+    ) {
+
+        return String(value)
+            .replaceAll("&", "&amp;")
+            .replaceAll("<", "&lt;")
+            .replaceAll(">", "&gt;")
+            .replaceAll('"', "&quot;")
+            .replaceAll("'", "&#039;");
+
+    }
+
+
+    function escapeAttribute(
+        value
+    ) {
+
+        return String(value)
+            .replaceAll("&", "&amp;")
+            .replaceAll('"', "&quot;")
+            .replaceAll("<", "&lt;")
+            .replaceAll(">", "&gt;");
+
+    }
+
+
+    /* =========================
+       TOAST
+    ========================= */
+
+    function showToast(
+        message
+    ) {
+
+        const toast =
+            document.getElementById(
+                "toast"
+            );
+
+
+        toast.textContent =
+            message;
+
+
+        toast.style.display =
+            "block";
+
+
+        setTimeout(
+            function () {
+
+                toast.style.display =
+                    "none";
+
+            },
+            2500
+        );
+
+    }
+
+
+    /* =========================
+       START
+    ========================= */
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+            loadGovernmentJobs();
+
+        }
+    );
+
+
+    /* Close modal outside box */
+
+    document
+        .getElementById("alertModal")
+        .addEventListener(
+            "click",
+            function (event) {
+
+                if (
+                    event.target === this
+                ) {
+
+                    closeAlertModal();
+
+                }
+
+            }
+        );
+
+</script>
+
+</body>
+</html>
