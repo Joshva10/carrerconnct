@@ -3,702 +3,890 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CareerConnect | Your Career Starts Here</title>
+
+<title>CareerConnect - Find Your Dream Job</title>
 
 <style>
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Inter,Arial,sans-serif;
 }
 
-html{scroll-behavior:smooth}
+html{
+    scroll-behavior:smooth;
+}
 
 body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#07111f;
     color:#fff;
-    background:#070b1a;
     overflow-x:hidden;
 }
 
-/* ===== ANIMATED BACKGROUND ===== */
+/* =========================
+   BACKGROUND
+========================= */
 
-body::before,
+body::before{
+    content:"";
+    position:fixed;
+    width:500px;
+    height:500px;
+    background:#6c3cff;
+    filter:blur(150px);
+    opacity:.20;
+    top:-180px;
+    left:-150px;
+    z-index:-2;
+}
+
 body::after{
     content:"";
     position:fixed;
     width:500px;
     height:500px;
-    border-radius:50%;
-    filter:blur(100px);
-    opacity:.35;
-    z-index:-5;
-    animation:float 10s ease-in-out infinite alternate;
-}
-
-body::before{
-    background:#7c3aed;
-    top:-220px;
-    left:-180px;
-}
-
-body::after{
-    background:#06b6d4;
+    background:#00c8ff;
+    filter:blur(160px);
+    opacity:.16;
     right:-180px;
-    bottom:-200px;
-    animation-delay:2s;
+    bottom:-150px;
+    z-index:-2;
 }
 
-@keyframes float{
-    from{transform:translate(0,0) scale(1)}
-    to{transform:translate(80px,60px) scale(1.2)}
-}
+/* =========================
+   NAVBAR
+========================= */
 
-/* ===== NAVBAR ===== */
-
-nav{
-    position:sticky;
-    top:0;
-    z-index:1000;
-    background:rgba(7,11,26,.72);
-    backdrop-filter:blur(20px);
-    border-bottom:1px solid rgba(255,255,255,.08);
-}
-
-.nav{
-    max-width:1250px;
-    height:76px;
-    margin:auto;
-    padding:0 25px;
+.navbar{
+    width:100%;
+    padding:18px 6%;
     display:flex;
     align-items:center;
     justify-content:space-between;
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    background:rgba(7,17,31,.82);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(255,255,255,.08);
 }
 
 .logo{
-    color:#fff;
+    display:flex;
+    align-items:center;
+    gap:10px;
     text-decoration:none;
-    font-size:27px;
-    font-weight:900;
+    color:white;
 }
 
-.logo span{
-    background:linear-gradient(90deg,#a78bfa,#22d3ee);
-    -webkit-background-clip:text;
-    color:transparent;
+.logo-icon{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:21px;
+    font-weight:bold;
+
+    background:linear-gradient(135deg,#7c3aed,#06b6d4);
+    box-shadow:0 8px 25px rgba(124,58,237,.35);
 }
 
-.links{
+.logo-text{
+    font-size:21px;
+    font-weight:800;
+    letter-spacing:.2px;
+}
+
+.nav-links{
     display:flex;
     align-items:center;
     gap:25px;
 }
 
-.links a{
-    color:#dbeafe;
+.nav-links a{
+    color:#cbd5e1;
     text-decoration:none;
     font-size:14px;
     font-weight:600;
-    transition:.3s;
+    transition:.25s;
 }
 
-.links a:hover{
-    color:#67e8f9;
+.nav-links a:hover{
+    color:#fff;
 }
 
-.language{
-    background:#111827;
-    color:white;
-    border:1px solid #334155;
-    border-radius:9px;
-    padding:9px;
+.nav-admin{
+    color:#c4b5fd !important;
 }
 
-.login{
-    padding:10px 16px;
-    border:1px solid #8b5cf6;
+.nav-login{
+    padding:10px 17px;
+    border:1px solid rgba(255,255,255,.18);
     border-radius:10px;
 }
 
-.signup{
+.nav-register{
     padding:11px 18px;
     border-radius:10px;
-    background:linear-gradient(135deg,#7c3aed,#0891b2);
-    box-shadow:0 0 25px rgba(124,58,237,.4);
+
+    color:white !important;
+
+    background:linear-gradient(
+        135deg,
+        #7c3aed,
+        #2563eb
+    );
+
+    box-shadow:0 7px 20px rgba(76,29,149,.35);
 }
 
-/* ===== HERO ===== */
+/* =========================
+   HERO
+========================= */
 
 .hero{
-    min-height:700px;
-    position:relative;
-    overflow:hidden;
-    display:flex;
-    align-items:center;
-    background:
-        radial-gradient(circle at 15% 30%,rgba(124,58,237,.32),transparent 30%),
-        radial-gradient(circle at 85% 25%,rgba(6,182,212,.25),transparent 30%),
-        linear-gradient(135deg,#080b1c,#101936 55%,#071b2d);
-}
+    min-height:680px;
+    padding:90px 6% 70px;
 
-.hero-grid{
-    width:min(1200px,92%);
-    margin:auto;
     display:grid;
-    grid-template-columns:1.1fr .9fr;
-    gap:70px;
+    grid-template-columns:1.15fr .85fr;
+    gap:50px;
     align-items:center;
 }
 
-.tag{
-    display:inline-block;
-    padding:10px 17px;
+.hero-left{
+    max-width:720px;
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+
+    padding:9px 15px;
     border-radius:30px;
-    border:1px solid rgba(167,139,250,.4);
-    background:rgba(124,58,237,.13);
+
+    background:rgba(124,58,237,.12);
+    border:1px solid rgba(167,139,250,.25);
+
     color:#c4b5fd;
     font-size:13px;
     font-weight:700;
+
     margin-bottom:25px;
-    box-shadow:0 0 25px rgba(124,58,237,.15);
+}
+
+.badge span{
+    width:8px;
+    height:8px;
+    background:#22c55e;
+    border-radius:50%;
+    box-shadow:0 0 12px #22c55e;
 }
 
 .hero h1{
     font-size:clamp(45px,6vw,76px);
-    line-height:1;
-    letter-spacing:-4px;
+    line-height:1.03;
+    letter-spacing:-3px;
     margin-bottom:25px;
 }
 
-.gradient{
-    background:linear-gradient(90deg,#c084fc,#818cf8,#22d3ee);
+.gradient-text{
+    background:linear-gradient(
+        90deg,
+        #a78bfa,
+        #60a5fa,
+        #22d3ee
+    );
+
     -webkit-background-clip:text;
+    background-clip:text;
     color:transparent;
 }
 
-.hero p{
-    color:#b8c3d9;
+.hero-description{
+    color:#a9b7ca;
     font-size:18px;
-    line-height:1.75;
+    line-height:1.7;
     max-width:650px;
-    margin-bottom:32px;
+    margin-bottom:35px;
 }
 
-.buttons{
+.hero-buttons{
     display:flex;
-    gap:15px;
     flex-wrap:wrap;
+    gap:15px;
 }
 
 .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:14px 23px;
+    border-radius:12px;
+
     text-decoration:none;
-    padding:15px 23px;
-    border-radius:13px;
-    font-weight:800;
-    transition:.3s;
+    font-size:15px;
+    font-weight:700;
+
+    transition:.25s;
 }
 
 .btn:hover{
-    transform:translateY(-4px);
+    transform:translateY(-2px);
 }
 
-.primary{
+.btn-primary{
     color:white;
-    background:linear-gradient(135deg,#7c3aed,#2563eb,#0891b2);
-    box-shadow:0 12px 35px rgba(37,99,235,.3);
+
+    background:linear-gradient(
+        135deg,
+        #7c3aed,
+        #2563eb
+    );
+
+    box-shadow:0 12px 30px rgba(79,70,229,.30);
 }
 
-.secondary{
-    color:white;
-    background:rgba(255,255,255,.07);
-    border:1px solid rgba(255,255,255,.18);
+.btn-secondary{
+    color:#e2e8f0;
+
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.12);
 }
 
-/* ===== HERO VISUAL ===== */
+/* =========================
+   AI MATCH CARD
+========================= */
 
-.visual{
+.hero-card{
     position:relative;
 }
 
-.glass{
-    padding:25px;
-    border-radius:28px;
-    background:rgba(255,255,255,.075);
-    border:1px solid rgba(255,255,255,.15);
-    backdrop-filter:blur(22px);
+.ai-card{
+    padding:27px;
+    border-radius:25px;
+
+    background:linear-gradient(
+        145deg,
+        rgba(255,255,255,.10),
+        rgba(255,255,255,.035)
+    );
+
+    border:1px solid rgba(255,255,255,.12);
+
+    backdrop-filter:blur(20px);
+
     box-shadow:
-        0 30px 80px rgba(0,0,0,.35),
-        inset 0 1px rgba(255,255,255,.12);
-    transform:rotate(2deg);
+        0 30px 80px rgba(0,0,0,.35);
+
+    animation:float 5s ease-in-out infinite;
 }
 
-.glass-title{
+@keyframes float{
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-10px);
+    }
+}
+
+.card-top{
     display:flex;
     justify-content:space-between;
-    margin-bottom:20px;
+    align-items:center;
+    margin-bottom:25px;
 }
 
-.live{
-    color:#4ade80;
+.card-title{
+    font-size:18px;
+    font-weight:800;
+}
+
+.ai-label{
     font-size:12px;
+    color:#67e8f9;
+
+    padding:7px 10px;
+    border-radius:20px;
+
+    background:rgba(34,211,238,.10);
 }
 
-.job-card{
-    padding:19px;
-    margin-bottom:13px;
-    border-radius:17px;
-    background:rgba(15,23,42,.72);
+.match-job{
+    padding:20px;
+    border-radius:18px;
+
+    background:rgba(0,0,0,.20);
     border:1px solid rgba(255,255,255,.08);
 }
 
-.job-top{
+.job-title{
+    font-size:21px;
+    font-weight:800;
+    margin-bottom:7px;
+}
+
+.company{
+    color:#94a3b8;
+    font-size:14px;
+    margin-bottom:18px;
+}
+
+.match-row{
     display:flex;
     justify-content:space-between;
-    gap:10px;
+    align-items:center;
+    margin-bottom:9px;
 }
 
-.job-top strong{
-    font-size:15px;
-}
-
-.percent{
-    color:#4ade80;
-    font-weight:900;
-}
-
-.job-card small{
+.match-row span:first-child{
     color:#94a3b8;
-    display:block;
-    margin-top:8px;
+    font-size:13px;
 }
 
-.bar{
-    height:7px;
+.match-percent{
+    font-size:24px;
+    font-weight:900;
+    color:#67e8f9;
+}
+
+.progress{
+    width:100%;
+    height:9px;
     background:#1e293b;
     border-radius:20px;
-    margin-top:14px;
     overflow:hidden;
 }
 
-.bar span{
-    display:block;
+.progress-bar{
+    width:92%;
     height:100%;
     border-radius:20px;
-    background:linear-gradient(90deg,#8b5cf6,#06b6d4);
+
+    background:linear-gradient(
+        90deg,
+        #7c3aed,
+        #06b6d4
+    );
 }
 
-/* ===== SEARCH ===== */
+.card-location{
+    margin-top:18px;
+    color:#94a3b8;
+    font-size:13px;
+}
 
-.search{
-    width:min(1100px,92%);
-    margin:-45px auto 0;
-    position:relative;
-    z-index:5;
-    padding:17px;
+/* =========================
+   SEARCH
+========================= */
+
+.search-section{
+    padding:0 6% 70px;
+}
+
+.search-box{
+    max-width:1100px;
+    margin:auto;
+
+    padding:14px;
+
     display:grid;
     grid-template-columns:1fr 1fr auto;
-    gap:12px;
-    border-radius:20px;
-    background:rgba(17,24,39,.88);
+    gap:10px;
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.10);
+
     backdrop-filter:blur(20px);
-    border:1px solid rgba(255,255,255,.1);
-    box-shadow:0 25px 60px rgba(0,0,0,.35);
 }
 
-.search input{
+.search-input{
     width:100%;
-    padding:15px;
-    border-radius:11px;
-    border:1px solid #334155;
-    background:#0f172a;
-    color:white;
-    outline:none;
-}
+    padding:15px 17px;
 
-.search button{
     border:0;
-    padding:0 25px;
+    outline:none;
+
+    color:white;
+    background:rgba(255,255,255,.06);
+
     border-radius:11px;
+
+    font-size:14px;
+}
+
+.search-input::placeholder{
+    color:#7f8da3;
+}
+
+.search-button{
+    border:0;
+    cursor:pointer;
+
+    padding:0 25px;
+
     color:white;
     font-weight:800;
-    cursor:pointer;
-    background:linear-gradient(135deg,#7c3aed,#0891b2);
+    border-radius:11px;
+
+    background:linear-gradient(
+        135deg,
+        #7c3aed,
+        #2563eb
+    );
 }
 
-/* ===== GENERAL ===== */
+/* =========================
+   STATS
+========================= */
 
-section{
-    padding:100px 20px;
+.stats{
+    padding:20px 6% 70px;
+
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
 }
 
-.container{
-    max-width:1200px;
-    margin:auto;
-}
-
-.heading{
+.stat-card{
+    padding:25px;
     text-align:center;
-    margin-bottom:50px;
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.08);
 }
 
-.heading small{
-    color:#67e8f9;
-    font-weight:800;
-    letter-spacing:2px;
-    text-transform:uppercase;
+.stat-number{
+    font-size:30px;
+    font-weight:900;
+
+    background:linear-gradient(
+        90deg,
+        #a78bfa,
+        #67e8f9
+    );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+
+    margin-bottom:6px;
 }
 
-.heading h2{
-    font-size:42px;
-    margin:12px 0;
-}
-
-.heading p{
+.stat-text{
     color:#94a3b8;
-    max-width:650px;
-    margin:auto;
+    font-size:13px;
+}
+
+/* =========================
+   SECTION
+========================= */
+
+.section{
+    padding:80px 6%;
+}
+
+.section-header{
+    max-width:700px;
+    margin-bottom:45px;
+}
+
+.section-label{
+    color:#67e8f9;
+    font-size:13px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    margin-bottom:12px;
+}
+
+.section h2{
+    font-size:40px;
+    margin-bottom:15px;
+}
+
+.section-description{
+    color:#94a3b8;
     line-height:1.7;
 }
 
-/* ===== STATS ===== */
-
-.stats{
-    background:linear-gradient(90deg,#111827,#172554,#111827);
-    border-top:1px solid rgba(255,255,255,.06);
-    border-bottom:1px solid rgba(255,255,255,.06);
-}
-
-.stat-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-}
-
-.stat{
-    text-align:center;
-    padding:25px;
-    border-right:1px solid rgba(255,255,255,.08);
-}
-
-.stat:last-child{border:0}
-
-.stat h2{
-    font-size:35px;
-    background:linear-gradient(90deg,#c084fc,#22d3ee);
-    -webkit-background-clip:text;
-    color:transparent;
-}
-
-.stat p{
-    color:#94a3b8;
-    margin-top:7px;
-}
-
-/* ===== CATEGORIES ===== */
+/* =========================
+   CATEGORIES
+========================= */
 
 .categories{
-    background:
-        radial-gradient(circle at 20% 30%,rgba(124,58,237,.12),transparent 25%),
-        #080c1d;
-}
-
-.category-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
     gap:18px;
 }
 
 .category{
-    padding:27px;
-    border-radius:20px;
-    background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.025));
-    border:1px solid rgba(255,255,255,.09);
-    transition:.35s;
+    padding:25px;
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.08);
+
+    transition:.25s;
 }
 
 .category:hover{
-    transform:translateY(-8px);
-    border-color:#8b5cf6;
-    box-shadow:0 20px 45px rgba(124,58,237,.2);
+    transform:translateY(-5px);
+
+    background:rgba(255,255,255,.075);
+    border-color:rgba(124,58,237,.35);
 }
 
-.icon{
-    width:55px;
-    height:55px;
-    display:grid;
-    place-items:center;
-    border-radius:16px;
-    font-size:26px;
-    margin-bottom:18px;
-    background:linear-gradient(135deg,rgba(124,58,237,.25),rgba(6,182,212,.2));
+.category-icon{
+    font-size:28px;
+    margin-bottom:15px;
 }
 
 .category h3{
+    font-size:17px;
     margin-bottom:8px;
 }
 
 .category p{
-    color:#94a3b8;
-    font-size:14px;
-    line-height:1.5;
+    color:#8290a4;
+    font-size:13px;
 }
 
-/* ===== FEATURES ===== */
+/* =========================
+   FEATURES
+========================= */
 
-.feature-grid{
+.features{
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:20px;
 }
 
 .feature{
-    padding:30px;
-    border-radius:22px;
-    background:rgba(255,255,255,.055);
-    border:1px solid rgba(255,255,255,.08);
-    transition:.3s;
-}
+    padding:28px;
 
-.feature:hover{
-    transform:translateY(-6px);
-    background:rgba(124,58,237,.09);
-    border-color:rgba(167,139,250,.45);
+    border-radius:20px;
+
+    background:linear-gradient(
+        145deg,
+        rgba(255,255,255,.07),
+        rgba(255,255,255,.025)
+    );
+
+    border:1px solid rgba(255,255,255,.08);
 }
 
 .feature-icon{
-    font-size:28px;
-    margin-bottom:17px;
+    width:48px;
+    height:48px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:13px;
+
+    background:rgba(124,58,237,.15);
+
+    font-size:22px;
+
+    margin-bottom:20px;
+}
+
+.feature h3{
+    font-size:18px;
+    margin-bottom:10px;
 }
 
 .feature p{
-    color:#94a3b8;
-    line-height:1.6;
-    margin-top:10px;
+    color:#8c9aaf;
+    line-height:1.65;
+    font-size:14px;
 }
 
-/* ===== SPECIAL CTA ===== */
-
-.special{
-    background:
-        radial-gradient(circle at 10% 50%,rgba(124,58,237,.35),transparent 30%),
-        radial-gradient(circle at 90% 50%,rgba(6,182,212,.25),transparent 30%),
-        #0b1125;
-}
-
-.cta-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:25px;
-}
-
-.cta{
-    padding:42px;
-    border-radius:28px;
-    border:1px solid rgba(255,255,255,.12);
-    background:rgba(255,255,255,.06);
-    backdrop-filter:blur(20px);
-}
-
-.cta h2{
-    font-size:30px;
-    margin-bottom:13px;
-}
-
-.cta p{
-    color:#aab6cb;
-    line-height:1.7;
-    margin-bottom:25px;
-}
-
-.white-btn{
-    display:inline-block;
-    padding:13px 18px;
-    border-radius:11px;
-    background:white;
-    color:#111827;
-    text-decoration:none;
-    font-weight:800;
-}
-
-/* ===== STEPS ===== */
+/* =========================
+   HOW IT WORKS
+========================= */
 
 .steps{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:30px;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
 }
 
 .step{
-    text-align:center;
+    position:relative;
+    padding:28px;
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
 }
 
-.number{
-    width:65px;
-    height:65px;
-    margin:0 auto 20px;
-    display:grid;
-    place-items:center;
+.step-number{
+    width:38px;
+    height:38px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
     border-radius:50%;
-    font-size:22px;
+
+    background:linear-gradient(
+        135deg,
+        #7c3aed,
+        #2563eb
+    );
+
     font-weight:900;
-    background:linear-gradient(135deg,#7c3aed,#0891b2);
-    box-shadow:0 0 30px rgba(124,58,237,.35);
+
+    margin-bottom:20px;
+}
+
+.step h3{
+    margin-bottom:10px;
 }
 
 .step p{
-    color:#94a3b8;
+    color:#8c9aaf;
     line-height:1.6;
-    margin-top:10px;
+    font-size:14px;
 }
 
-/* ===== FOOTER ===== */
+/* =========================
+   CTA
+========================= */
 
-footer{
-    padding:60px 20px 25px;
-    background:#040711;
-    border-top:1px solid rgba(255,255,255,.08);
+.cta{
+    margin:40px 6% 80px;
+    padding:60px 45px;
+
+    text-align:center;
+
+    border-radius:28px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(124,58,237,.25),
+            rgba(6,182,212,.13)
+        );
+
+    border:1px solid rgba(167,139,250,.20);
 }
 
-.footer-grid{
-    max-width:1200px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:2fr 1fr 1fr 1fr;
-    gap:35px;
+.cta h2{
+    font-size:42px;
+    margin-bottom:15px;
 }
 
-.footer-grid h2 span{
-    color:#22d3ee;
-}
+.cta p{
+    max-width:650px;
+    margin:0 auto 28px;
 
-.footer-grid h3{
-    margin-bottom:18px;
-}
-
-.footer-grid p{
-    color:#64748b;
+    color:#aab7c9;
     line-height:1.7;
 }
 
-.footer-grid a{
-    display:block;
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    padding:45px 6% 30px;
+
+    border-top:1px solid rgba(255,255,255,.08);
+
+    background:rgba(0,0,0,.18);
+}
+
+.footer-content{
+    display:flex;
+    justify-content:space-between;
+    gap:30px;
+    flex-wrap:wrap;
+}
+
+.footer-brand{
+    max-width:350px;
+}
+
+.footer-brand p{
+    color:#8290a4;
+    line-height:1.6;
+    font-size:13px;
+    margin-top:12px;
+}
+
+.footer-links{
+    display:flex;
+    gap:25px;
+    flex-wrap:wrap;
+}
+
+.footer-links a{
     color:#94a3b8;
     text-decoration:none;
-    margin-bottom:12px;
+    font-size:13px;
 }
 
-.footer-grid a:hover{
-    color:#67e8f9;
+.footer-links a:hover{
+    color:white;
 }
 
-.copy{
-    max-width:1200px;
-    margin:40px auto 0;
+.copyright{
+    margin-top:35px;
     padding-top:20px;
-    text-align:center;
-    border-top:1px solid #1e293b;
+
+    border-top:1px solid rgba(255,255,255,.07);
+
     color:#64748b;
+    font-size:12px;
+    text-align:center;
 }
 
-/* ===== MOBILE ===== */
+/* =========================
+   MOBILE
+========================= */
 
-@media(max-width:900px){
+@media(max-width:1000px){
 
-    .links a:not(.login):not(.signup){
-        display:none;
+    .nav-links{
+        gap:13px;
     }
 
-    .hero-grid{
-        grid-template-columns:1fr;
-        text-align:center;
-    }
-
-    .hero p{
-        margin-left:auto;
-        margin-right:auto;
-    }
-
-    .buttons{
-        justify-content:center;
-    }
-
-    .visual{
-        max-width:550px;
-        margin:auto;
-    }
-
-    .category-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .feature-grid{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .stat-grid{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .footer-grid{
-        grid-template-columns:1fr 1fr;
-    }
-}
-
-@media(max-width:600px){
-
-    .nav{
-        padding:0 12px;
-    }
-
-    .logo{
-        font-size:21px;
-    }
-
-    .language{
-        display:none;
+    .nav-links a{
+        font-size:12px;
     }
 
     .hero{
-        min-height:650px;
+        grid-template-columns:1fr;
+        padding-top:65px;
+    }
+
+    .hero-card{
+        max-width:600px;
+        width:100%;
+        margin:auto;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .categories{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .features{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .steps{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:700px){
+
+    .navbar{
+        padding:14px 4%;
+    }
+
+    .logo-text{
+        font-size:17px;
+    }
+
+    .logo-icon{
+        width:36px;
+        height:36px;
+        font-size:17px;
+    }
+
+    .nav-links{
+        gap:7px;
+        overflow-x:auto;
+        max-width:70%;
+    }
+
+    .nav-links a{
+        white-space:nowrap;
+        font-size:11px;
+    }
+
+    .nav-login,
+    .nav-register{
+        padding:8px 10px;
+    }
+
+    .hero{
+        padding:55px 5% 45px;
     }
 
     .hero h1{
+        font-size:46px;
         letter-spacing:-2px;
     }
 
-    .glass{
-        transform:none;
+    .hero-description{
+        font-size:15px;
     }
 
-    .search{
+    .search-section{
+        padding:0 5% 50px;
+    }
+
+    .search-box{
         grid-template-columns:1fr;
-        margin-top:-25px;
     }
 
-    .search button{
+    .search-button{
         padding:14px;
     }
 
-    section{
-        padding:70px 16px;
+    .stats{
+        padding:10px 5% 50px;
+        grid-template-columns:1fr 1fr;
     }
 
-    .heading h2{
-        font-size:32px;
+    .section{
+        padding:55px 5%;
     }
 
-    .category-grid,
-    .feature-grid,
-    .cta-grid,
+    .section h2{
+        font-size:31px;
+    }
+
+    .categories,
+    .features,
     .steps{
         grid-template-columns:1fr;
     }
 
-    .stat-grid{
-        grid-template-columns:1fr 1fr;
+    .cta{
+        margin:20px 5% 55px;
+        padding:45px 25px;
     }
 
-    .footer-grid{
-        grid-template-columns:1fr;
+    .cta h2{
+        font-size:31px;
     }
 }
 </style>
@@ -706,546 +894,803 @@ footer{
 
 <body>
 
-<!-- NAVBAR -->
+<!-- =========================
+     NAVBAR
+========================= -->
 
-<nav>
-<div class="nav">
+<nav class="navbar">
 
-<a href="index.html" class="logo">
-Career<span>Connect</span>
-</a>
+    <a href="index.html" class="logo">
 
-<div class="links">
+        <div class="logo-icon">
+            C
+        </div>
 
-<a href="index.html">Home</a>
-<a href="jobs.html">Jobs</a>
-<a href="government.html">Government</a>
-<a href="support.html">Support</a>
+        <div class="logo-text">
+            CareerConnect
+        </div>
 
-<select id="language" class="language">
-<option value="en">English</option>
-<option value="ta">தமிழ்</option>
-<option value="hi">हिन्दी</option>
-<option value="te">తెలుగు</option>
-<option value="kn">ಕನ್ನಡ</option>
-<option value="ml">മലയാളം</option>
-</select>
+    </a>
 
-<a href="login.html" class="login">Login</a>
-<a href="register.html" class="signup">Get Started</a>
+    <div class="nav-links">
 
-</div>
-</div>
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="jobs.html">
+            Jobs
+        </a>
+
+        <a href="government.html">
+            Government
+        </a>
+
+        <a href="support.html">
+            Support
+        </a>
+
+        <!-- ADMIN BUTTON -->
+        <a href="admin.html" class="nav-admin">
+            Admin
+        </a>
+
+        <a href="login.html" class="nav-login">
+            Login
+        </a>
+
+        <a href="create-account.html" class="nav-register">
+            Get Started
+        </a>
+
+    </div>
+
 </nav>
 
 
-<!-- HERO -->
+<!-- =========================
+     HERO
+========================= -->
 
 <section class="hero">
 
-<div class="hero-grid">
+    <div class="hero-left">
 
-<div>
+        <div class="badge">
+            <span></span>
+            AI-Powered Job Search
+        </div>
 
-<div class="tag">
-✦ AI-POWERED CAREER PLATFORM
-</div>
+        <h1>
+            Find the
+            <span class="gradient-text">
+                right job
+            </span>
+            for your skills.
+        </h1>
 
-<h1>
-Your Skills.<br>
-Your <span class="gradient">Future.</span>
-</h1>
+        <p class="hero-description">
+            CareerConnect connects job seekers with relevant
+            opportunities using AI-powered matching based on
+            your qualification, skills, experience, location
+            and career preferences.
+        </p>
 
-<p>
-Discover opportunities that match your qualification, skills,
-experience and location. CareerConnect connects job seekers,
-employers and government opportunities in one smart platform.
-</p>
+        <div class="hero-buttons">
 
-<div class="buttons">
+            <a href="jobs.html" class="btn btn-primary">
+                🔎 Find Jobs
+            </a>
 
-<a href="jobs.html" class="btn primary">
-🔎 Explore Jobs
-</a>
+            <a href="create-account.html" class="btn btn-secondary">
+                🚀 Create Account
+            </a>
 
-<a href="register.html" class="btn secondary">
-🚀 Build My Profile
-</a>
+        </div>
 
-</div>
-
-</div>
-
-
-<div class="visual">
-
-<div class="glass">
-
-<div class="glass-title">
-<strong>🤖 AI Match Center</strong>
-<span class="live">● LIVE</span>
-</div>
-
-<div class="job-card">
-
-<div class="job-top">
-<strong>Software Developer</strong>
-<span class="percent">92%</span>
-</div>
-
-<small>📍 Chennai • Full Time</small>
-
-<div class="bar">
-<span style="width:92%"></span>
-</div>
-
-</div>
+    </div>
 
 
-<div class="job-card">
+    <!-- AI MATCH PREVIEW -->
 
-<div class="job-top">
-<strong>Data Analyst</strong>
-<span class="percent">87%</span>
-</div>
+    <div class="hero-card">
 
-<small>📍 Tamil Nadu • Private</small>
+        <div class="ai-card">
 
-<div class="bar">
-<span style="width:87%"></span>
-</div>
+            <div class="card-top">
 
-</div>
+                <div class="card-title">
+                    🤖 AI Match Center
+                </div>
+
+                <div class="ai-label">
+                    AI MATCH
+                </div>
+
+            </div>
 
 
-<div class="job-card">
+            <div class="match-job">
 
-<div class="job-top">
-<strong>Government Opportunity</strong>
-<span class="percent">81%</span>
-</div>
+                <div class="job-title">
+                    Software Developer
+                </div>
 
-<small>🇮🇳 Recruitment Opportunity</small>
+                <div class="company">
+                    Career Opportunity • Chennai
+                </div>
 
-<div class="bar">
-<span style="width:81%"></span>
-</div>
+                <div class="match-row">
 
-</div>
+                    <span>
+                        AI Match Percentage
+                    </span>
 
-</div>
-</div>
+                    <span class="match-percent">
+                        92%
+                    </span>
 
-</div>
+                </div>
+
+                <div class="progress">
+
+                    <div class="progress-bar"></div>
+
+                </div>
+
+                <div class="card-location">
+                    📍 Chennai, Tamil Nadu
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </section>
 
 
-<!-- SEARCH -->
+<!-- =========================
+     SEARCH
+========================= -->
 
-<div class="search">
+<section class="search-section">
 
-<input id="jobSearch"
-placeholder="🔎 Job title, skill or keyword">
+    <form
+        class="search-box"
+        id="searchForm"
+    >
 
-<input id="locationSearch"
-placeholder="📍 City, district or state">
+        <input
+            type="text"
+            id="keyword"
+            class="search-input"
+            placeholder="🔎 Job title, skill or category"
+        >
 
-<button onclick="searchJobs()">
-Search Jobs
-</button>
+        <input
+            type="text"
+            id="location"
+            class="search-input"
+            placeholder="📍 City, district or state"
+        >
 
-</div>
+        <button
+            type="submit"
+            class="search-button"
+        >
+            Search Jobs
+        </button>
+
+    </form>
+
+</section>
 
 
-<!-- STATS -->
+<!-- =========================
+     STATS
+========================= -->
 
 <section class="stats">
 
-<div class="container">
+    <div class="stat-card">
 
-<div class="stat-grid">
+        <div class="stat-number">
+            AI
+        </div>
 
-<div class="stat">
-<h2>100+</h2>
-<p>Job Opportunities</p>
-</div>
+        <div class="stat-text">
+            Smart Job Matching
+        </div>
 
-<div class="stat">
-<h2>AI</h2>
-<p>Smart Matching</p>
-</div>
+    </div>
 
-<div class="stat">
-<h2>All India</h2>
-<p>Location Search</p>
-</div>
 
-<div class="stat">
-<h2>24/7</h2>
-<p>Career Access</p>
-</div>
+    <div class="stat-card">
 
-</div>
+        <div class="stat-number">
+            100+
+        </div>
 
-</div>
+        <div class="stat-text">
+            Job Opportunities
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-number">
+            All
+        </div>
+
+        <div class="stat-text">
+            Major Job Categories
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-number">
+            🇮🇳
+        </div>
+
+        <div class="stat-text">
+            India Job Search
+        </div>
+
+    </div>
+
 </section>
 
 
-<!-- CATEGORIES -->
+<!-- =========================
+     CATEGORIES
+========================= -->
 
-<section class="categories">
+<section class="section">
 
-<div class="container">
+    <div class="section-header">
 
-<div class="heading">
-<small>Explore Careers</small>
-<h2>Opportunities for Every Skill</h2>
-<p>
-From technology to skilled trades, hospitality to government,
-find opportunities across different industries.
-</p>
-</div>
+        <div class="section-label">
+            Explore Opportunities
+        </div>
+
+        <h2>
+            Jobs for every career path
+        </h2>
+
+        <p class="section-description">
+            From technology and finance to construction,
+            catering, driving, healthcare and skilled work,
+            CareerConnect helps you discover opportunities
+            across different industries.
+        </p>
+
+    </div>
 
 
-<div class="category-grid">
+    <div class="categories">
 
-<div class="category">
-<div class="icon">💻</div>
-<h3>IT & Software</h3>
-<p>Developers, analysts, testers and technology careers.</p>
-</div>
+        <div class="category">
+            <div class="category-icon">💻</div>
+            <h3>IT / Software</h3>
+            <p>Developers, programmers and technology roles.</p>
+        </div>
 
-<div class="category">
-<div class="icon">🏗️</div>
-<h3>Construction</h3>
-<p>Engineers, painters, workers and construction roles.</p>
-</div>
+        <div class="category">
+            <div class="category-icon">📊</div>
+            <h3>Data / Analytics</h3>
+            <p>Data analyst, data science and analytics roles.</p>
+        </div>
 
-<div class="category">
-<div class="icon">🍽️</div>
-<h3>Hospitality</h3>
-<p>Hotel, catering, kitchen and service opportunities.</p>
-</div>
+        <div class="category">
+            <div class="category-icon">💰</div>
+            <h3>Finance</h3>
+            <p>Accounting, banking and finance opportunities.</p>
+        </div>
 
-<div class="category">
-<div class="icon">🚚</div>
-<h3>Delivery & Driving</h3>
-<p>Drivers, logistics and delivery opportunities.</p>
-</div>
+        <div class="category">
+            <div class="category-icon">🎓</div>
+            <h3>Education</h3>
+            <p>Teaching and education-related opportunities.</p>
+        </div>
 
-<div class="category">
-<div class="icon">🏥</div>
-<h3>Healthcare</h3>
-<p>Healthcare and medical support careers.</p>
-</div>
+        <div class="category">
+            <div class="category-icon">🏥</div>
+            <h3>Healthcare</h3>
+            <p>Healthcare and medical sector opportunities.</p>
+        </div>
 
-<div class="category">
-<div class="icon">🔧</div>
-<h3>Skilled Trades</h3>
-<p>Electricians, plumbers, mechanics and technicians.</p>
-</div>
+        <div class="category">
+            <div class="category-icon">🎨</div>
+            <h3>Painter</h3>
+            <p>Painting and skilled trade opportunities.</p>
+        </div>
 
-<div class="category">
-<div class="icon">📊</div>
-<h3>Business & Finance</h3>
-<p>Sales, accounting, administration and finance jobs.</p>
-</div>
+        <div class="category">
+            <div class="category-icon">🍽️</div>
+            <h3>Catering</h3>
+            <p>Catering, kitchen and hospitality jobs.</p>
+        </div>
 
-<div class="category">
-<div class="icon">🇮🇳</div>
-<h3>Government Jobs</h3>
-<p>Recruitment notifications and government opportunities.</p>
-</div>
+        <div class="category">
+            <div class="category-icon">🚚</div>
+            <h3>Driver & Delivery</h3>
+            <p>Driving, delivery and logistics opportunities.</p>
+        </div>
 
-</div>
+    </div>
 
-</div>
 </section>
 
 
-<!-- FEATURES -->
+<!-- =========================
+     FEATURES
+========================= -->
 
-<section>
+<section class="section">
 
-<div class="container">
+    <div class="section-header">
 
-<div class="heading">
-<small>Powerful Features</small>
-<h2>Everything You Need to Grow</h2>
-<p>
-CareerConnect combines smart matching, job discovery,
-applications and career management.
-</p>
-</div>
+        <div class="section-label">
+            CareerConnect Features
+        </div>
+
+        <h2>
+            Everything you need to find work
+        </h2>
+
+        <p class="section-description">
+            A complete platform for job seekers and employers.
+        </p>
+
+    </div>
 
 
-<div class="feature-grid">
+    <div class="features">
 
-<div class="feature">
-<div class="feature-icon">🤖</div>
-<h3>AI Job Matching</h3>
-<p>
-Find opportunities based on your qualification, skills,
-experience and preferred location.
-</p>
-</div>
+        <div class="feature">
 
-<div class="feature">
-<div class="feature-icon">📄</div>
-<h3>Career Profile</h3>
-<p>
-Create a professional profile and showcase your skills,
-experience and qualifications.
-</p>
-</div>
+            <div class="feature-icon">
+                🤖
+            </div>
 
-<div class="feature">
-<div class="feature-icon">🎯</div>
-<h3>Match Percentage</h3>
-<p>
-Understand how closely each opportunity matches your profile.
-</p>
-</div>
+            <h3>
+                AI Job Matching
+            </h3>
 
-<div class="feature">
-<div class="feature-icon">📍</div>
-<h3>Location Search</h3>
-<p>
-Search opportunities by city, district and state.
-</p>
-</div>
+            <p>
+                Match jobs with your qualification, skills,
+                experience, location and preferred categories.
+            </p>
 
-<div class="feature">
-<div class="feature-icon">📋</div>
-<h3>Application Tracker</h3>
-<p>
-Track your applications from Applied to Selected.
-</p>
-</div>
+        </div>
 
-<div class="feature">
-<div class="feature-icon">🔔</div>
-<h3>Career Notifications</h3>
-<p>
-Stay updated with relevant job and recruitment opportunities.
-</p>
-</div>
 
-</div>
-</div>
+        <div class="feature">
+
+            <div class="feature-icon">
+                📄
+            </div>
+
+            <h3>
+                Resume Analysis
+            </h3>
+
+            <p>
+                Upload your resume and analyse your skills,
+                qualification and career opportunities.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                🎯
+            </div>
+
+            <h3>
+                Match Percentage
+            </h3>
+
+            <p>
+                See how closely a job matches your profile
+                before applying.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                🔔
+            </div>
+
+            <h3>
+                Job Notifications
+            </h3>
+
+            <p>
+                Receive notifications for job opportunities
+                matching your selected preferences.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                🏛️
+            </div>
+
+            <h3>
+                Government Jobs
+            </h3>
+
+            <p>
+                Find government recruitment notifications,
+                exam dates and official notification links.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                🏢
+            </div>
+
+            <h3>
+                Employer Platform
+            </h3>
+
+            <p>
+                Employers can post jobs, review applicants
+                and discover suitable candidates.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                💾
+            </div>
+
+            <h3>
+                Save Jobs
+            </h3>
+
+            <p>
+                Save interesting opportunities and return
+                to them later.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                📈
+            </div>
+
+            <h3>
+                Career Growth
+            </h3>
+
+            <p>
+                Get career suggestions and identify skills
+                that can improve your opportunities.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                💬
+            </div>
+
+            <h3>
+                Support
+            </h3>
+
+            <p>
+                Get help through CareerConnect support and
+                report platform problems.
+            </p>
+
+        </div>
+
+    </div>
+
 </section>
 
 
-<!-- HOW IT WORKS -->
+<!-- =========================
+     HOW IT WORKS
+========================= -->
 
-<section class="special">
+<section class="section">
 
-<div class="container">
+    <div class="section-header">
 
-<div class="heading">
-<small>Simple & Smart</small>
-<h2>How CareerConnect Works</h2>
-</div>
+        <div class="section-label">
+            Simple Process
+        </div>
 
+        <h2>
+            How CareerConnect works
+        </h2>
 
-<div class="steps">
-
-<div class="step">
-
-<div class="number">1</div>
-
-<h3>Create Your Profile</h3>
-
-<p>
-Add qualification, skills, experience and preferred location.
-</p>
-
-</div>
+    </div>
 
 
-<div class="step">
+    <div class="steps">
 
-<div class="number">2</div>
+        <div class="step">
 
-<h3>Discover Opportunities</h3>
+            <div class="step-number">
+                1
+            </div>
 
-<p>
-Explore jobs and see how closely they match your profile.
-</p>
+            <h3>
+                Create your account
+            </h3>
 
-</div>
+            <p>
+                Register as a job seeker or employer.
+            </p>
+
+        </div>
 
 
-<div class="step">
+        <div class="step">
 
-<div class="number">3</div>
+            <div class="step-number">
+                2
+            </div>
 
-<h3>Apply & Track</h3>
+            <h3>
+                Build your profile
+            </h3>
 
-<p>
-Apply for jobs and track your application progress.
-</p>
+            <p>
+                Add your qualification, skills,
+                experience and location.
+            </p>
 
-</div>
+        </div>
 
-</div>
 
-</div>
+        <div class="step">
+
+            <div class="step-number">
+                3
+            </div>
+
+            <h3>
+                Discover jobs
+            </h3>
+
+            <p>
+                Search jobs or receive AI-based
+                matching opportunities.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                4
+            </div>
+
+            <h3>
+                Apply & track
+            </h3>
+
+            <p>
+                Apply for jobs and track your
+                applications from your dashboard.
+            </p>
+
+        </div>
+
+    </div>
+
 </section>
 
 
-<!-- CTA -->
+<!-- =========================
+     CTA
+========================= -->
 
-<section>
+<section class="cta">
 
-<div class="container">
+    <h2>
+        Ready to find your next opportunity?
+    </h2>
 
-<div class="cta-grid">
+    <p>
+        Create your CareerConnect profile and start
+        exploring job opportunities matched to your
+        career goals.
+    </p>
 
-<div class="cta">
+    <div class="hero-buttons" style="justify-content:center;">
 
-<h2>🚀 Looking for Your Next Job?</h2>
+        <a
+            href="create-account.html"
+            class="btn btn-primary"
+        >
+            🚀 Get Started
+        </a>
 
-<p>
-Build your CareerConnect profile and discover opportunities
-that match your skills and career goals.
-</p>
+        <a
+            href="jobs.html"
+            class="btn btn-secondary"
+        >
+            🔎 Browse Jobs
+        </a>
 
-<a href="register.html" class="white-btn">
-Create Job Seeker Account →
-</a>
+    </div>
 
-</div>
-
-
-<div class="cta">
-
-<h2>🏢 Hiring Talent?</h2>
-
-<p>
-Post your vacancies and connect with suitable candidates
-through CareerConnect.
-</p>
-
-<a href="register.html" class="white-btn">
-Register as Employer →
-</a>
-
-</div>
-
-</div>
-
-</div>
 </section>
 
 
-<!-- FOOTER -->
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
 
-<div class="footer-grid">
+    <div class="footer-content">
 
-<div>
+        <div class="footer-brand">
 
-<h2>
-Career<span>Connect</span>
-</h2>
+            <a href="index.html" class="logo">
 
-<p>
-An AI-powered career platform connecting job seekers,
-employers and opportunities.
-</p>
+                <div class="logo-icon">
+                    C
+                </div>
 
-</div>
+                <div class="logo-text">
+                    CareerConnect
+                </div>
 
+            </a>
 
-<div>
+            <p>
+                AI-powered job search and career platform
+                connecting job seekers and employers.
+            </p>
 
-<h3>Explore</h3>
-
-<a href="jobs.html">Find Jobs</a>
-<a href="government.html">Government Jobs</a>
-<a href="register.html">Create Profile</a>
-
-</div>
+        </div>
 
 
-<div>
+        <div class="footer-links">
 
-<h3>Account</h3>
+            <a href="index.html">
+                Home
+            </a>
 
-<a href="login.html">Login</a>
-<a href="register.html">Register</a>
-<a href="dashboard.html">Dashboard</a>
-<a href="applications.html">Applications</a>
+            <a href="jobs.html">
+                Jobs
+            </a>
 
-</div>
+            <a href="government.html">
+                Government Jobs
+            </a>
+
+            <a href="support.html">
+                Support
+            </a>
+
+            <a href="admin.html">
+                Admin
+            </a>
+
+            <a href="login.html">
+                Login
+            </a>
+
+        </div>
+
+    </div>
 
 
-<div>
+    <div class="copyright">
 
-<h3>Support</h3>
+        © 2026 CareerConnect. All rights reserved.
 
-<a href="support.html">Support Center</a>
-<a href="support.html">Report Problem</a>
-<a href="support.html">FAQs</a>
-
-</div>
-
-</div>
-
-
-<div class="copy">
-© 2026 CareerConnect • Smart Careers. Better Opportunities.
-</div>
+    </div>
 
 </footer>
 
 
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
 <script>
 
-function searchJobs(){
+const searchForm = document.getElementById("searchForm");
 
-    const job =
-        document.getElementById("jobSearch").value.trim();
+searchForm.addEventListener("submit", function(event){
+
+    event.preventDefault();
+
+    const keyword =
+        document.getElementById("keyword").value.trim();
 
     const location =
-        document.getElementById("locationSearch").value.trim();
+        document.getElementById("location").value.trim();
 
-    let url = "jobs.html?";
+    const params = new URLSearchParams();
 
-    if(job){
-        url += "search=" + encodeURIComponent(job) + "&";
+    if(keyword){
+        params.set("search", keyword);
     }
 
     if(location){
-        url += "location=" + encodeURIComponent(location);
+        params.set("location", location);
     }
 
-    window.location.href = url;
-}
+    if(params.toString()){
 
+        window.location.href =
+            "jobs.html?" + params.toString();
 
-/* Language persistence */
+    }else{
 
-const language =
-    document.getElementById("language");
+        window.location.href =
+            "jobs.html";
 
-const saved =
-    localStorage.getItem("careerconnect_language");
-
-if(saved){
-    language.value = saved;
-}
-
-language.addEventListener("change",function(){
-
-    localStorage.setItem(
-        "careerconnect_language",
-        this.value
-    );
+    }
 
 });
+
+
+/* =========================
+   LANGUAGE STORAGE
+========================= */
+
+try{
+
+    const savedLanguage =
+        localStorage.getItem("careerconnect_language");
+
+    if(!savedLanguage){
+
+        localStorage.setItem(
+            "careerconnect_language",
+            "en"
+        );
+
+    }
+
+}catch(error){
+
+    console.log(
+        "Language storage unavailable."
+    );
+
+}
 
 </script>
 

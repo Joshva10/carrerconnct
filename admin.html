@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Dashboard - CareerConnect</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    min-height:100vh;
+    background:
+        radial-gradient(circle at 10% 10%,rgba(124,58,237,.25),transparent 30%),
+        radial-gradient(circle at 90% 80%,rgba(6,182,212,.18),transparent 30%),
+        #07111f;
+    color:#fff;
+}
+
+/* NAVBAR */
+.navbar{
+    height:72px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 6%;
+    background:rgba(7,17,31,.85);
+    border-bottom:1px solid rgba(255,255,255,.1);
+    backdrop-filter:blur(18px);
+}
+
+.logo{
+    color:white;
+    text-decoration:none;
+    font-size:25px;
+    font-weight:800;
+}
+
+.logo span{
+    color:#8b5cf6;
+}
+
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.admin-label{
+    color:#cbd5e1;
+    font-size:13px;
+}
+
+.logout-btn{
+    border:1px solid rgba(239,68,68,.5);
+    background:rgba(239,68,68,.1);
+    color:#fca5a5;
+    padding:10px 17px;
+    border-radius:9px;
+    cursor:pointer;
+}
+
+.logout-btn:hover{
+    background:rgba(239,68,68,.2);
+}
+
+/* PAGE */
+.container{
+    max-width:1250px;
+    margin:auto;
+    padding:40px 25px;
+}
+
+.header{
+    margin-bottom:30px;
+}
+
+.badge{
+    display:inline-block;
+    padding:7px 14px;
+    border-radius:20px;
+    background:rgba(139,92,246,.13);
+    border:1px solid rgba(139,92,246,.3);
+    color:#c4b5fd;
+    font-size:12px;
+    margin-bottom:14px;
+}
+
+h1{
+    font-size:35px;
+    margin-bottom:8px;
+}
+
+.header p{
+    color:#94a3b8;
+}
+
+/* STATS */
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    margin-bottom:30px;
+}
+
+.stat{
+    padding:24px;
+    border-radius:18px;
+    background:rgba(15,23,42,.75);
+    border:1px solid rgba(255,255,255,.1);
+    box-shadow:0 15px 40px rgba(0,0,0,.2);
+}
+
+.stat-icon{
+    font-size:25px;
+    margin-bottom:12px;
+}
+
+.stat-title{
+    color:#94a3b8;
+    font-size:13px;
+    margin-bottom:8px;
+}
+
+.stat-value{
+    font-size:30px;
+    font-weight:800;
+}
+
+/* CARDS */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.card{
+    padding:25px;
+    border-radius:20px;
+    background:rgba(15,23,42,.75);
+    border:1px solid rgba(255,255,255,.1);
+    box-shadow:0 15px 40px rgba(0,0,0,.2);
+}
+
+.card h2{
+    font-size:19px;
+    margin-bottom:8px;
+}
+
+.card p{
+    color:#94a3b8;
+    font-size:13px;
+    line-height:1.6;
+    margin-bottom:20px;
+}
+
+.actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.action-btn{
+    padding:11px 16px;
+    border:none;
+    border-radius:9px;
+    background:linear-gradient(135deg,#7c3aed,#2563eb);
+    color:white;
+    cursor:pointer;
+    font-size:13px;
+}
+
+.action-btn:hover{
+    transform:translateY(-1px);
+}
+
+/* INFO */
+.info{
+    margin-top:25px;
+    padding:20px;
+    border-radius:15px;
+    background:rgba(245,158,11,.08);
+    border:1px solid rgba(245,158,11,.2);
+    color:#fcd34d;
+    font-size:13px;
+    line-height:1.6;
+}
+
+/* STATUS */
+#status{
+    display:none;
+    margin-bottom:20px;
+    padding:13px 16px;
+    border-radius:10px;
+    background:rgba(16,185,129,.1);
+    border:1px solid rgba(16,185,129,.25);
+    color:#6ee7b7;
+}
+
+/* MOBILE */
+@media(max-width:850px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:550px){
+
+    .navbar{
+        padding:0 18px;
+    }
+
+    .admin-label{
+        display:none;
+    }
+
+    .container{
+        padding:30px 16px;
+    }
+
+    h1{
+        font-size:28px;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .stat-value{
+        font-size:26px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+
+    <a href="index.html" class="logo">
+        Career<span>Connect</span>
+    </a>
+
+    <div class="nav-right">
+
+        <span class="admin-label">
+            🛡️ Administrator
+        </span>
+
+        <button
+            class="logout-btn"
+            onclick="logout()">
+            Logout
+        </button>
+
+    </div>
+
+</nav>
+
+
+<main class="container">
+
+    <div class="header">
+
+        <div class="badge">
+            🛡️ ADMIN CONTROL CENTER
+        </div>
+
+        <h1>CareerConnect Admin Dashboard</h1>
+
+        <p>
+            Manage users, jobs, applications, government
+            notifications and platform support.
+        </p>
+
+    </div>
+
+
+    <div id="status"></div>
+
+
+    <!-- STATISTICS -->
+    <section class="stats">
+
+        <div class="stat">
+
+            <div class="stat-icon">👥</div>
+
+            <div class="stat-title">
+                Total Users
+            </div>
+
+            <div class="stat-value" id="usersCount">
+                --
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-icon">💼</div>
+
+            <div class="stat-title">
+                Total Jobs
+            </div>
+
+            <div class="stat-value" id="jobsCount">
+                --
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-icon">📄</div>
+
+            <div class="stat-title">
+                Applications
+            </div>
+
+            <div class="stat-value" id="applicationsCount">
+                --
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-icon">🏛️</div>
+
+            <div class="stat-title">
+                Government Jobs
+            </div>
+
+            <div class="stat-value" id="governmentCount">
+                --
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- MANAGEMENT -->
+    <section class="grid">
+
+
+        <!-- USERS -->
+        <div class="card">
+
+            <h2>👥 User Management</h2>
+
+            <p>
+                Manage CareerConnect job seekers and
+                employers.
+            </p>
+
+            <div class="actions">
+
+                <button
+                    class="action-btn"
+                    onclick="showMessage('User management is ready to connect to the admin API.')">
+                    Manage Users
+                </button>
+
+                <button
+                    class="action-btn"
+                    onclick="showMessage('Job seeker management selected.')">
+                    Job Seekers
+                </button>
+
+                <button
+                    class="action-btn"
+                    onclick="showMessage('Employer management selected.')">
+                    Employers
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- JOBS -->
+        <div class="card">
+
+            <h2>💼 Job Management</h2>
+
+            <p>
+                Review job postings and manage employer
+                vacancies.
+            </p>
+
+            <div class="actions">
+
+                <button
+                    class="action-btn"
+                    onclick="window.location.href='jobs.html'">
+                    View Jobs
+                </button>
+
+                <button
+                    class="action-btn"
+                    onclick="showMessage('Job approval management selected.')">
+                    Job Approvals
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- APPLICATIONS -->
+        <div class="card">
+
+            <h2>📄 Applications</h2>
+
+            <p>
+                Monitor applications submitted by job
+                seekers.
+            </p>
+
+            <div class="actions">
+
+                <button
+                    class="action-btn"
+                    onclick="window.location.href='applications.html'">
+                    View Applications
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- GOVERNMENT -->
+        <div class="card">
+
+            <h2>🏛️ Government Jobs</h2>
+
+            <p>
+                Manage government job and examination
+                notifications.
+            </p>
+
+            <div class="actions">
+
+                <button
+                    class="action-btn"
+                    onclick="window.location.href='government.html'">
+                    View Government Jobs
+                </button>
+
+                <button
+                    class="action-btn"
+                    onclick="showMessage('Government notification management selected.')">
+                    Manage Notifications
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- SUPPORT -->
+        <div class="card">
+
+            <h2>🎧 Support</h2>
+
+            <p>
+                Review user support requests and help
+                CareerConnect users.
+            </p>
+
+            <div class="actions">
+
+                <button
+                    class="action-btn"
+                    onclick="window.location.href='support.html'">
+                    Open Support
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PLATFORM -->
+        <div class="card">
+
+            <h2>⚙️ Platform</h2>
+
+            <p>
+                Quick access to important CareerConnect
+                platform pages.
+            </p>
+
+            <div class="actions">
+
+                <button
+                    class="action-btn"
+                    onclick="window.location.href='index.html'">
+                    Home
+                </button>
+
+                <button
+                    class="action-btn"
+                    onclick="window.location.href='dashboard.html'">
+                    User Dashboard
+                </button>
+
+                <button
+                    class="action-btn"
+                    onclick="window.location.href='employer.html'">
+                    Employer Dashboard
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <div class="info">
+        ⚠️ <strong>Admin security:</strong>
+        This page is currently a frontend admin dashboard.
+        A production system should protect admin access with
+        server-side authentication and role verification.
+    </div>
+
+</main>
+
+
+<script>
+
+/* API */
+const API = "";
+
+
+/* MESSAGE */
+function showMessage(message){
+
+    const status =
+        document.getElementById("status");
+
+    status.textContent = message;
+
+    status.style.display = "block";
+
+    setTimeout(function(){
+
+        status.style.display = "none";
+
+    },3000);
+}
+
+
+/* LOGOUT */
+function logout(){
+
+    localStorage.removeItem(
+        "careerconnect_user"
+    );
+
+    localStorage.removeItem(
+        "careerconnect_token"
+    );
+
+    window.location.href =
+        "login.html";
+}
+
+
+/*
+ * Load basic statistics.
+ *
+ * The existing backend does not currently
+ * provide a dedicated admin statistics endpoint,
+ * so the cards remain safe placeholders until
+ * that endpoint is added.
+ */
+async function loadStats(){
+
+    try{
+
+        const jobsResponse =
+            await fetch(`${API}/jobs`);
+
+        if(jobsResponse.ok){
+
+            const jobsData =
+                await jobsResponse.json();
+
+            const jobs =
+                Array.isArray(jobsData)
+                ? jobsData
+                : jobsData.jobs || [];
+
+            document.getElementById(
+                "jobsCount"
+            ).textContent = jobs.length;
+
+        }
+
+    }catch(error){
+
+        console.log(
+            "Jobs statistics unavailable"
+        );
+
+    }
+
+
+    try{
+
+        const governmentResponse =
+            await fetch(`${API}/government-jobs`);
+
+        if(governmentResponse.ok){
+
+            const governmentData =
+                await governmentResponse.json();
+
+            const governmentJobs =
+                Array.isArray(governmentData)
+                ? governmentData
+                : governmentData.jobs || [];
+
+            document.getElementById(
+                "governmentCount"
+            ).textContent =
+                governmentJobs.length;
+
+        }
+
+    }catch(error){
+
+        console.log(
+            "Government statistics unavailable"
+        );
+
+    }
+
+}
+
+
+/* START */
+loadStats();
+
+</script>
+
+</body>
+</html>
