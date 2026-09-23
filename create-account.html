@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Create Account - CareerConnect</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    min-height:100vh;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(124,58,237,.35), transparent 35%),
+        radial-gradient(circle at 85% 80%, rgba(6,182,212,.25), transparent 35%),
+        #07111f;
+    color:white;
+}
+
+/* NAVBAR */
+.navbar{
+    height:72px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 7%;
+    border-bottom:1px solid rgba(255,255,255,.1);
+    background:rgba(7,17,31,.75);
+    backdrop-filter:blur(15px);
+}
+
+.logo{
+    font-size:25px;
+    font-weight:800;
+    color:white;
+    text-decoration:none;
+}
+
+.logo span{
+    color:#8b5cf6;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:25px;
+}
+
+.nav-links a{
+    color:#cbd5e1;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.nav-links a:hover{
+    color:white;
+}
+
+.login-btn{
+    padding:10px 20px;
+    border:1px solid rgba(139,92,246,.6);
+    border-radius:10px;
+    color:white !important;
+}
+
+/* MAIN */
+.container{
+    min-height:calc(100vh - 72px);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:45px 20px;
+}
+
+.card{
+    width:100%;
+    max-width:620px;
+    padding:38px;
+    border-radius:24px;
+    background:rgba(15,23,42,.82);
+    border:1px solid rgba(255,255,255,.12);
+    box-shadow:0 25px 70px rgba(0,0,0,.45);
+    backdrop-filter:blur(20px);
+}
+
+.badge{
+    display:inline-block;
+    padding:7px 14px;
+    border-radius:30px;
+    background:rgba(139,92,246,.15);
+    border:1px solid rgba(139,92,246,.35);
+    color:#c4b5fd;
+    font-size:12px;
+    margin-bottom:15px;
+}
+
+h1{
+    font-size:34px;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    color:#94a3b8;
+    margin-bottom:28px;
+    line-height:1.6;
+}
+
+/* ACCOUNT TYPE */
+.account-types{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.account-type{
+    padding:18px;
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:15px;
+    background:rgba(255,255,255,.04);
+    cursor:pointer;
+    transition:.2s;
+}
+
+.account-type:hover{
+    border-color:#8b5cf6;
+}
+
+.account-type.active{
+    border-color:#8b5cf6;
+    background:rgba(139,92,246,.14);
+}
+
+.account-type input{
+    display:none;
+}
+
+.account-title{
+    font-weight:700;
+    margin-bottom:6px;
+}
+
+.account-desc{
+    color:#94a3b8;
+    font-size:12px;
+    line-height:1.4;
+}
+
+/* FORM */
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:17px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.full{
+    grid-column:1 / -1;
+}
+
+label{
+    font-size:13px;
+    color:#cbd5e1;
+    margin-bottom:8px;
+}
+
+input{
+    width:100%;
+    padding:14px 15px;
+    border-radius:11px;
+    border:1px solid rgba(255,255,255,.12);
+    background:rgba(2,6,23,.65);
+    color:white;
+    outline:none;
+    font-size:14px;
+}
+
+input:focus{
+    border-color:#8b5cf6;
+    box-shadow:0 0 0 3px rgba(139,92,246,.12);
+}
+
+.password-box{
+    position:relative;
+}
+
+.password-box input{
+    padding-right:65px;
+}
+
+.show-password{
+    position:absolute;
+    right:12px;
+    top:50%;
+    transform:translateY(-50%);
+    border:none;
+    background:none;
+    color:#a78bfa;
+    cursor:pointer;
+    font-size:12px;
+}
+
+/* TERMS */
+.terms{
+    margin:20px 0;
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    color:#94a3b8;
+    font-size:12px;
+    line-height:1.5;
+}
+
+.terms input{
+    width:16px;
+    height:16px;
+    margin-top:2px;
+}
+
+.terms a{
+    color:#a78bfa;
+}
+
+/* BUTTON */
+.create-btn{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(135deg,#7c3aed,#2563eb);
+    color:white;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+    box-shadow:0 10px 30px rgba(79,70,229,.3);
+    transition:.2s;
+}
+
+.create-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 15px 35px rgba(79,70,229,.4);
+}
+
+.create-btn:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+    transform:none;
+}
+
+/* STATUS */
+.status{
+    display:none;
+    padding:13px;
+    border-radius:10px;
+    margin-bottom:18px;
+    font-size:13px;
+    line-height:1.5;
+}
+
+.status.success{
+    display:block;
+    background:rgba(16,185,129,.12);
+    border:1px solid rgba(16,185,129,.3);
+    color:#6ee7b7;
+}
+
+.status.error{
+    display:block;
+    background:rgba(239,68,68,.12);
+    border:1px solid rgba(239,68,68,.3);
+    color:#fca5a5;
+}
+
+/* LOGIN LINK */
+.login-text{
+    text-align:center;
+    margin-top:23px;
+    color:#94a3b8;
+    font-size:13px;
+}
+
+.login-text a{
+    color:#a78bfa;
+    font-weight:700;
+    text-decoration:none;
+}
+
+.login-text a:hover{
+    text-decoration:underline;
+}
+
+/* RESPONSIVE */
+@media(max-width:650px){
+    .navbar{
+        padding:0 20px;
+    }
+
+    .nav-links a:not(.login-btn){
+        display:none;
+    }
+
+    .card{
+        padding:25px 20px;
+    }
+
+    h1{
+        font-size:28px;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .full{
+        grid-column:auto;
+    }
+
+    .account-types{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+
+    <a href="index.html" class="logo">
+        Career<span>Connect</span>
+    </a>
+
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="jobs.html">Jobs</a>
+        <a href="government.html">Government Jobs</a>
+        <a href="login.html" class="login-btn">Login</a>
+    </div>
+
+</nav>
+
+
+<!-- CREATE ACCOUNT -->
+<main class="container">
+
+<div class="card">
+
+    <div class="badge">🚀 Join CareerConnect</div>
+
+    <h1>Create your account</h1>
+
+    <p class="subtitle">
+        Create your CareerConnect account and start discovering
+        jobs that match your skills, qualification and experience.
+    </p>
+
+
+    <!-- STATUS -->
+    <div id="status" class="status"></div>
+
+
+    <!-- ACCOUNT TYPE -->
+    <div class="account-types">
+
+        <label class="account-type active" id="seekerCard">
+
+            <input
+                type="radio"
+                name="accountType"
+                value="job_seeker"
+                checked
+                onchange="selectAccount('job_seeker')"
+            >
+
+            <div class="account-title">
+                👤 Job Seeker
+            </div>
+
+            <div class="account-desc">
+                Find jobs, apply for opportunities,
+                upload your resume and track applications.
+            </div>
+
+        </label>
+
+
+        <label class="account-type" id="employerCard">
+
+            <input
+                type="radio"
+                name="accountType"
+                value="employer"
+                onchange="selectAccount('employer')"
+            >
+
+            <div class="account-title">
+                🏢 Employer
+            </div>
+
+            <div class="account-desc">
+                Post jobs, find candidates and
+                manage applications.
+            </div>
+
+        </label>
+
+    </div>
+
+
+    <form onsubmit="registerUser(event)">
+
+        <div class="form-grid">
+
+            <!-- NAME -->
+            <div class="form-group full">
+
+                <label>Full Name</label>
+
+                <input
+                    type="text"
+                    id="fullName"
+                    placeholder="Enter your full name"
+                    required
+                >
+
+            </div>
+
+
+            <!-- EMAIL -->
+            <div class="form-group">
+
+                <label>Email Address</label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="you@example.com"
+                    required
+                >
+
+            </div>
+
+
+            <!-- MOBILE -->
+            <div class="form-group">
+
+                <label>Mobile Number</label>
+
+                <input
+                    type="tel"
+                    id="mobile"
+                    placeholder="Enter mobile number"
+                >
+
+            </div>
+
+
+            <!-- PASSWORD -->
+            <div class="form-group">
+
+                <label>Password</label>
+
+                <div class="password-box">
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Create password"
+                        minlength="6"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="show-password"
+                        onclick="togglePassword('password',this)"
+                    >
+                        Show
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONFIRM PASSWORD -->
+            <div class="form-group">
+
+                <label>Confirm Password</label>
+
+                <div class="password-box">
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Confirm password"
+                        minlength="6"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="show-password"
+                        onclick="togglePassword('confirmPassword',this)"
+                    >
+                        Show
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- TERMS -->
+        <label class="terms">
+
+            <input type="checkbox" id="terms" required>
+
+            <span>
+                I agree to the CareerConnect
+                <a href="#">Terms of Service</a>
+                and
+                <a href="#">Privacy Policy</a>.
+            </span>
+
+        </label>
+
+
+        <!-- CREATE BUTTON -->
+        <button
+            type="submit"
+            class="create-btn"
+            id="createBtn"
+        >
+            Create Account
+        </button>
+
+    </form>
+
+
+    <!-- LOGIN -->
+    <div class="login-text">
+
+        Already have an account?
+
+        <a href="login.html">
+            Login here
+        </a>
+
+    </div>
+
+</div>
+
+</main>
+
+
+<script>
+
+let selectedAccountType = "job_seeker";
+
+
+/* ACCOUNT TYPE */
+function selectAccount(type){
+
+    selectedAccountType = type;
+
+    const seeker = document.getElementById("seekerCard");
+    const employer = document.getElementById("employerCard");
+
+    seeker.classList.remove("active");
+    employer.classList.remove("active");
+
+    if(type === "job_seeker"){
+        seeker.classList.add("active");
+    }else{
+        employer.classList.add("active");
+    }
+}
+
+
+/* PASSWORD SHOW/HIDE */
+function togglePassword(id,button){
+
+    const input = document.getElementById(id);
+
+    if(input.type === "password"){
+
+        input.type = "text";
+        button.textContent = "Hide";
+
+    }else{
+
+        input.type = "password";
+        button.textContent = "Show";
+
+    }
+}
+
+
+/* STATUS MESSAGE */
+function showStatus(message,type){
+
+    const status = document.getElementById("status");
+
+    status.textContent = message;
+    status.className = "status " + type;
+
+}
+
+
+/* REGISTER */
+async function registerUser(event){
+
+    event.preventDefault();
+
+    const fullName =
+        document.getElementById("fullName").value.trim();
+
+    const email =
+        document.getElementById("email").value.trim();
+
+    const mobile =
+        document.getElementById("mobile").value.trim();
+
+    const password =
+        document.getElementById("password").value;
+
+    const confirmPassword =
+        document.getElementById("confirmPassword").value;
+
+    const createBtn =
+        document.getElementById("createBtn");
+
+
+    /* PASSWORD CHECK */
+    if(password !== confirmPassword){
+
+        showStatus(
+            "Passwords do not match.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    /* LOADING */
+    createBtn.disabled = true;
+    createBtn.textContent = "Creating Account...";
+
+    showStatus(
+        "Creating your CareerConnect account...",
+        "success"
+    );
+
+
+    try{
+
+        /*
+         * IMPORTANT:
+         * Empty API means same website/server.
+         * This works both locally and on Render.
+         */
+        const API = "";
+
+
+        const response = await fetch(
+            `${API}/register`,
+            {
+                method:"POST",
+
+                headers:{
+                    "Content-Type":
+                        "application/json"
+                },
+
+                body:JSON.stringify({
+
+                    full_name:fullName,
+
+                    email:email,
+
+                    mobile:mobile || null,
+
+                    password:password,
+
+                    user_type:
+                        selectedAccountType
+
+                })
+            }
+        );
+
+
+        const responseText = await response.text();
+
+let data = {};
+
+try {
+    data = responseText ? JSON.parse(responseText) : {};
+} catch (e) {
+    throw new Error(
+        "Server returned an invalid response. Please try again."
+    );
+}
+
+
+        if(!response.ok){
+
+            throw new Error(
+                data.detail ||
+                data.message ||
+                "Registration failed."
+            );
+
+        }
+
+
+        /* SAVE USER */
+        if(data.user){
+
+            localStorage.setItem(
+                "careerconnect_user",
+                JSON.stringify(data.user)
+            );
+
+        }
+
+
+        showStatus(
+            "Account created successfully! Redirecting to Login...",
+            "success"
+        );
+
+
+        /*
+         * GO TO SEPARATE LOGIN PAGE
+         */
+        setTimeout(function(){
+
+            window.location.href =
+                "login.html";
+
+        },1500);
+
+
+    }catch(error){
+
+        console.error(error);
+
+        showStatus(
+            error.message ||
+            "Unable to create account. Please try again.",
+            "error"
+        );
+
+        createBtn.disabled = false;
+
+        createBtn.textContent =
+            "Create Account";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
