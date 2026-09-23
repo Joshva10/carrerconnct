@@ -941,11 +941,7 @@ def sync_live_jobs_from_api(limit=50):
 
 @app.get("/")
 def home():
-    return {
-        "message": "CareerConnect API is working!",
-        "status": "ok",
-        "version": "2.0.0",
-    }
+    return FileResponse("index.html")
 
 
 @app.get("/api-info")
